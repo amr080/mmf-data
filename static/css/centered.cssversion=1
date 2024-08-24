@@ -1,0 +1,46 @@
+#wrapper #content_left_side.centered {
+	margin-left:180px;
+
+}
+#wrapper #content_left_side.centered h1{
+	margin-left:0px;
+	width:515px;
+	text-align:center;
+	margin-bottom:20px;
+	padding-bottom:10px;
+}
+#wrapper #content_left_side.centered h3{
+	text-align:center;
+	margin-bottom:5px;
+}
+#wrapper #content_left_side.centered form fieldset{
+	width:515px;
+	text-align:center;
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	padding:5px 0;
+
+
+}
+#wrapper #content_left_side.centered p{
+    width:515px;
+    margin-left:1px;
+}
+#wrapper #content_left_side.centered form fieldset#controls{
+	position:relative;
+	top:-5px;
+
+
+}
+#wrapper #content_left_side.centered table {
+	width:515px;
+}
+#wrapper #content_left_side.centered table#edit_recipients  input.vEmailField{
+	width:120px;
+	text-align:center;
+}
+#wrapper #content_left_side.centered table#edit_recipients  input.vCheckboxField{
+	width:40px;
+	text-align:center;
+}

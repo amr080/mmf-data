@@ -1,0 +1,100 @@
+span.crane_product, a.crane_product {
+       font-weight:bold;
+       font-style: italic; 
+       
+}
+span.bold, a.bold {
+       font-weight:bold;
+       
+}
+span.alert, a.alert {
+  font-weight:bold;
+  color:red;
+}
+span.warning, a.warning {
+  font-weight:bold;
+  color:#FFCC33;
+}
+
+span.title , a.title{
+       font-weight:bold;
+       font-style: italic;
+}
+span.well_known , a.well_known, span.institution, a.institution,
+.institution a.reference {
+       font-weight:bold;
+}
+
+#content_left_side span.date {
+         font-weight:bold;
+		 font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
+		 font-size:.9em;
+		 color:#666;
+         display:block;
+		 text-align:right;
+		 position:relative;		 
+		 padding:0px 2px 2px 10px;
+}
+
+
+
+.news span.date {
+       font-weight:bold;
+       color:#9999ff;
+       position:relative;
+       bottom:-.8em;
+}
+.continous span a {
+       margin-right:8px;
+}
+
+#content_left_side .links p {
+       margin:2px 0 10px 0;
+       text-align:left;
+}
+.links span.date {
+       font-weight:bold;
+       margin:2px 7px 2px 0;
+
+}
+span.adress_line {
+       display:block;
+}
+
+.fund_family, .person, .data {
+       font-weight:bold;
+}
+span.underline {
+       text-decoration:underline;
+}
+span.legend {
+       font-weight:bold;
+       color:#444;
+}
+.links span.breaking {
+       display:block;
+}
+.news {
+
+       padding-bottom:20px;       
+}
+.links {
+       padding-top:10px;
+       padding-bottom:10px;
+       position:relative;
+       top:-10px;
+}
+span.name, a.name {
+       font-weight:bold;
+       white-space: nowrap;
+}
+
+span.fund_name, a.fund_name {
+       font-weight:bolder;
+}
+span.italic{
+       font-style: italic;
+}
+sup {
+  font-size:9px;
+}

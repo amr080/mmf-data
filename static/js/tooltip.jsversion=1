@@ -1,0 +1,9 @@
+$(document).ready(function() {
+  var tooltip_style = { name: 'dark', tip: false, padding: 0 }
+
+  $( '.tooltip' ).qtip( { 
+    style :  tooltip_style 
+  } );
+  // removing alt prevents IE from displaying regular tooltips on top of ours
+  $( 'a.tooltip img' ).removeAttr( 'alt' );
+});

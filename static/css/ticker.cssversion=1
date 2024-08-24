@@ -1,0 +1,103 @@
+/* css for homepage ticker  
+
+from https://codepen.io/lewismcarey/pen/GJZVoG
+
+* { box-sizing: border-box; }
+
+$duration: 30s;
+*/
+
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+#news_ticker {
+  overflow: hidden;
+}
+
+.ticker-edge {
+  position: absolute;
+  height: 20px;
+  width: 40px;
+  z-index: 100;
+}
+.ticker-edge.edge-left {
+  left: 0;
+  background-image: linear-gradient(to right, rgba(125,125,125,1), rgba(125,125,125,0)); 
+}
+.ticker-edge.edge-right {
+  right: 0;
+  background-image: linear-gradient(to right, rgba(125,125,125,0), rgba(125,125,125,1)); 
+}
+.ticker-wrap {
+  
+  bottom: 0;
+  width: calc(100% - 10px);
+  margin: 0 5px;
+  overflow: hidden;
+  height: 20px;
+  background-color: rgba(#000, 0.9); 
+  padding-left: calc(100% - 10px);
+  box-sizing: content-box;
+}
+
+.ticker-wrap .ticker {
+
+  display: inline-block;
+  height: 20px;
+  line-height: 18px;
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding-right: 100%;
+  box-sizing: content-box;
+
+  -webkit-animation-iteration-count: infinite; 
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+ -webkit-animation-name: ticker;
+         animation-name: ticker;
+  -webkit-animation-duration: 45s;
+          animation-duration: 45s;
+
+}
+.ticker-wrap .ticker__item {
+
+  display: inline-block;
+
+  padding: 0 2rem;
+  font-size: 15px;
+  color: white;
+
+}
+.ticker-wrap .ticker__item a {
+  color: white;
+  text-decoration: none;
+  transition: color .2s;
+}
+.ticker-wrap .ticker__item a:hover:not(.disabled) {
+  color:#fced98;
+  cursor: pointer;
+}

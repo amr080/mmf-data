@@ -1,0 +1,2265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  
+    <!-- default meta definitions (block 'metas') for base.html template -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2" />
+    <meta name="author" content="ProjectKaitsch.com 2006" />
+    <meta name="description" content="Crane Data brings you money market mutual fund news, information, intelligence and data." />
+    <meta name="keywords" content="Crane Data Cranedata Money Market Mutual Fund News Info Intelligence Data Cash Rates" />
+    <meta name="robots" content="index,follow" />
+    <meta name="verify-v1" content="MTKgAmiCqb38AX9b0tPD3A+dYGcJJdrm21tMLHVhamk=" />
+    <meta name="verify-v1" content="t+YJ6cewyfc9Qzu3Uq5m3PpTbSUa7WU5m9v5EbTxH8I=" />
+    <meta name="google-site-verification" content="qNOHZCaTcUcu2A4qDKn4K0qolutrhyeIsqR-j-DriNE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  
+
+  
+    <!-- stylesheet definitions: for inclusion in block "stylesheets" in base.html -->
+    
+    <link rel="stylesheet" type="text/css" href="/static/css/base_layout.css?v=4?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base_layout_left.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base_layout_right.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/text_classes.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/navigation.css?version=1?v=2"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery.tooltip.css?version=1"/>
+
+    <!--[if IE 6]>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_ie.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_left_ie.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_right_ie.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/navigation_ie6.css?version=1"/>
+    <script type="text/javascript" src="/static/hover.js"></script>
+    <![endif]-->
+
+    <!--[if IE 7]>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_ie7.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/navigation_ie7.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_right_ie7.css?version=1"/>
+    <![endif]-->
+
+
+<!-- favion -->
+    <link rel="shortcut icon" href="/static/assets/favicon.ico?version=1" />
+
+<!-- ticker css -->
+    <link rel="stylesheet" type="text/css" href='/static/css/ticker.css?version=1'/>
+
+<!-- Function to clear form field -->
+
+    <script type="text/javascript" src="/static/base/vendor/jquery/js/jquery-1.4.4.min.js?version=1"></script>
+    <script type="text/javascript" src="/static/base/vendor/jquery/js/jquery-ui-1.8.6.custom.min.js?version=1"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/cranedata-theme/jquery-ui-1.8.6.custom.css?version=1"/>
+    <script type="text/javascript" src="/static/base/vendor/jquery-plugins/qtip/js/jquery.qtip-1.0.0-rc3.min.js?version=1"></script>
+    <script type="text/javascript" src="/static/base/vendor/jquery-plugins/cookie/js/jquery.cookie.js?version=1"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" media="(max-width: 600px)" type="text/css" href='/static/css/base_mobile.css?version=1'>
+    <style type="text/css">
+      .mobile {
+        display: none;
+      }
+    </style>
+    <script type="text/javascript" src="/static/js/tooltip.js?version=1"></script>
+
+
+    <script type="text/javascript">
+    //<![CDATA[
+        $.cookie("js_test_cookie", "welcome to Crane Data");
+    //]]>
+    </script>
+
+    <script type="text/javascript">
+    //<![CDATA[
+    //usage info
+    //
+    // <input type".." id="theFieldID" value="Search our website..."onfocus="clearField('theFieldID',true/false,'Search our website...')"
+    //
+    // middle parameter:
+    // true: field is only cleared if the current value==default
+    // false: field is always cleared
+    var selectedText;
+
+    document.onmouseup = function () {
+        if (document.getSelection) {
+            selectedText = document.getSelection();
+        } else if (document.selection && document.selection.createRange) {
+            var range = document.selection.createRange();
+            selectedText = range.text;
+            }
+
+    }
+
+
+    function clearOnDrag(fieldId) {
+        field=document.getElementById(fieldId);
+        if (navigator.appName != 'Opera') // disable in Opera due to strange behavior
+                if (selectedText != undefined && selectedText != '') //if we didn't select anything or reset the variable don't verwrite field.
+                            {
+                            field.value=selectedText;
+                            selectedText=''; //flag-like usage
+                            }
+
+
+
+    }
+
+
+    function clearField(fieldId, clearOnlyIfDefault, defaultValue) {
+        field=document.getElementById(fieldId);
+        if (clearOnlyIfDefault)
+            {//clear the field only if the current value=default
+                if (field.value==defaultValue)
+                    {
+                        field.value='';
+                    }
+
+            }
+        else
+            {//always clear the field
+                field.value='';
+            }
+
+    }
+    // -- mobile collapse button --
+    $(document).ready(function() {
+      // setup collapse/reveal of mfi news
+
+      var btnSelectors = ["#mfi_news .btn-mfi", "#mfi_news .btn-xls"]
+      var colSelectors = ['td:first-of-type', 'td:last-of-type']
+      $(btnSelectors[0]).click(function(event) {
+        var btn = $(event.target)
+        var csel = [0, 1]
+        toggleMfi(btn, csel)
+      })
+      $(btnSelectors[1]).click(function(event) {
+        var btn = $(event.target)
+        var csel = [1, 0]
+        toggleMfi(btn, csel)
+      })
+
+      function toggleMfi(btn, csel) {
+        var tbl = $("#mfi_news table.mfi_news")
+        var col = tbl.find(colSelectors[csel[0]])
+        var active = btn.hasClass('active')
+        if (active) {
+          btn.removeClass('active')
+          tbl.removeClass('active')
+          col.removeClass('active')
+        } else {
+          btn.addClass('active')
+          tbl.addClass('active')
+          col.addClass('active')
+          var ucol = tbl.find(colSelectors[csel[1]])
+          ucol.removeClass('active')
+          var ubtn = $(btnSelectors[csel[1]])
+          ubtn.removeClass('active')
+        }
+      }
+      $("#subscribers .btn-login").click(function(event) {
+        var btn = $(event.target)
+        var form = $("#subscribers #short-login-form")
+        if (form.hasClass("authenticated")) {
+          var submit = $("input#logout")
+          submit.click()
+          return
+        }
+        if (form.hasClass("active")) {
+          var submit = $("input#login")
+          alert('here ' + $("input#id_username").val() + " " + $("input#id_password").val())
+          submit.click()
+          return
+        } else {
+          // var username = $("input#id_username")
+          // username.focus()
+        }
+        form.toggleClass("active")
+      })
+    })
+    //]]>
+    </script>
+
+   <!-- end stylesheets -->
+  
+    
+    <link rel="stylesheet" type="text/css" href="/static/css/news.css?version=1"/>
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="/static/css/news_ie.css?version=1"/>
+    <![endif]-->
+
+
+  
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-45587515-1', 'cranedata.com');
+        ga('send', 'pageview');
+
+    </script>
+  
+
+  <title>
+     Crane Data Press Releases 
+  </title>
+
+</head>
+<body>
+<div id="wrapper">
+
+  
+      <div id="above_content">
+        
+          
+               
+               
+               <!-- cd banner for inclusion in block "cd_banner" in base.html -->
+  <!--
+    <div id="slogan">--<span>Measuring money... faster, cheaper, cleaner</span></div>
+  -->
+    <div id="logo"><a class="logo" href="/"><img src="/static/assets/full_logo.png" alt="Crane Data logo"/></a>
+          <div id="social">
+              <a href="https://twitter.com/cranedata" target="_blank">
+                  <img src="/static/images/icon-twitter.png" />
+              </a>
+              <a href="https://www.linkedin.com/in/pete-crane-a1822b2?trk=hp-identity-name" target="_blank">
+                  <img src="/static/images/icon-linkedin.png" />
+              </a>
+              <a href="https://www.facebook.com/cranedata/" target="_blank" class="last-child">
+                  <img src="/static/images/icon-facebook.png" />
+              </a>
+          </div>
+
+          <div id="navigation">
+            
+              <div id="nav_wrapper">
+              <ul id="nav" class="nav">
+                <!-- navigation menus, for inclusion in block "navigation" in base.html -->
+
+<!-- load filter for user types -->
+
+
+  <li class="first"><a href="/">Home</a></li>
+  <li id="news_menu"><a href="/news/">News</a>
+      <div class="submenu">
+          <div class="spacer"></div>
+      <ul
+      ><li><a href="/news/">News</a></li
+      ><li><a href="/resources/link-of-the-day/">Link of the Day</a></li
+      ><li><a href="/news/press/">Press</a></li
+      ><li class="last"><a href="/news/people/">People</a></li
+      ></ul>
+      </div>
+   </li>
+  <li id="resources_menu"><a href="/resources/">Resources</a>
+      <div class="submenu">
+      <ul
+      ><li><a href="/resources/resources/">Resources</a></li
+      ><li><a href="/resources/basics/">Basics</a></li
+      ><li><a href="/resources/browse-funds/">Browse Funds</a></li
+      ><li class="last"><a href="/resources/link-of-the-day/">Link of the Day</a></li
+      ></ul>
+      </div>
+   </li>
+   <li id="products_menu"><a href="/products/">Products</a>
+      <div class="submenu">
+      <ul>
+        <li><a href="/products/overview/">Overview</a></li>
+        <li><a href="/products/money-fund-intelligence/">Money Fund Intelligence</a></li>
+        <li><a href="/products/money-fund-intelligence-xls/">Money Fund Intelligence XLS</a></li>
+        <li><a href="/products/money-fund-wisdom/">Money Fund Wisdom</a></li>
+        <li><a href="http://moneyfundsymposium.com">Money Fund Symposium</a></li>
+        <li><a href="http://moneyfunduniversity.com">Money Fund University</a></li>
+        <li class="last"><a href="/products/overview/#additional_services">Additional Services</a></li>
+      </ul>
+      </div>
+   </li>
+   
+   <li id="subscribers_menu"><a href="/subscribers/sign-up/">Subscribers</a>
+      <div class="submenu">
+      <ul>
+          <li><a href="/subscribers/sign-up/">New&nbsp;Sign&nbsp;Up</a></li>
+          <li class="last"><a href="/subscribers/content/">Content</a></li>
+      </ul>
+      </div>
+    </li>
+   
+      <li id="conferences_menu"><a href="#">Conferences</a>
+      <div class="submenu">
+      <ul>
+        <li><a href="https://www.cranesmfsymposium.com/">Money Fund Symposium</a></li>
+        <li><a href="https://www.cranesmfuniversity.com/">Money Fund University</a></li>
+        <li><a href="https://www.craneeurosymposium.com/">European Money Fund Symposium</a></li>
+        <li><a href="https://www.cranesbfsymposium.com/">Bond Fund Symposium</a></li>
+        <li class="last"><a href="/subscribers/webinars/">Webinars</a></li>
+      </ul>
+      </div>
+   </li>
+   <li><a href="/contact/">Contact</a></li>
+   <li id="wisdom_menu"  class="last" >
+
+
+        <a href="https://k8.cranedata.com/wisdom">Wisdom</a>
+        <div class="submenu">
+            <ul>
+                <li><a href="https://k8.cranedata.com/wisdom">Wisdom</a></li>
+            </ul>
+        </div>
+   </li>
+    
+      
+      
+   
+
+                 
+              </ul>
+              </div>
+             <!-- navigation -->
+          </div>
+
+
+      </div>
+      <div id="right_crane_ad"><a
+              href="/products/money-fund-intelligence/">
+              <img src="/static/assets/mfi_publisher.png" 
+                   alt="Publisher of Moeny Fund Intelligence"/></a></div>
+    <!--<div id="right_crane_ad"><a href="http://www.moneyfundsymposium.com" target="_blank"><img src="/static/images/producer_of_symposium.png" alt="Producer of Money Fund Symposium"/></a></div>-->
+    
+      <div id="subscribers">
+        <div id="header">Crane Data Subscribers</div>
+        <div id="form">
+             <!-- logon form rendered as a subview -->
+             <!-- base_login.html  template to render login form -->
+<div id="short-login-form" class="">
+  
+      <div class="mobile">
+        <button class="btn-collapse btn-login">Login</button>
+      </div>
+      <form  action="" method="post" >
+         <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='4e06e1a5561ecee59d8dd68b13e0223a' /></div>
+        <fieldset id="inputs">
+              <label for="id_username">User ID:</label>
+              <input type="text" id="id_username" name="username"/>
+              <label for="id_password">Password:</label>
+              <input type="password" id="id_password" name="password" />
+        </fieldset>
+        <fieldset id="login-controls">
+          
+            <input type="hidden" name="next" value="/news/press/" />
+          
+          <input type="submit" name="login" value="Login"  id="login"/>
+          <input type="submit" name="signup" value="New User"  id="signup"/>
+
+        </fieldset>
+      </form>
+
+      
+  
+</div>
+
+<script type="text/javascript">
+sfFocus = function() {
+    var sfEls = document.getElementsByTagName("input");
+    for (var i=0; i<sfEls.length; i++) {
+        sfEls[i].onfocus=function() {
+                this.className+=" sffocus";
+        }
+        sfEls[i].onblur=function() {
+                this.className=this.className.replace(new RegExp(" sffocus\\b"), "");
+        }
+    }}
+sfFocus();
+</script>
+
+       </div>
+      </div>
+    
+
+           <!-- cd_banner -->
+          
+           
+            
+          <div id="ad_cd_wrapper">        
+            <div id="ad_wrapper">
+              
+                <!-- default_ad.html -->
+
+<div id="ad" ><div id="flashcontent" style="z-index: 1;">
+
+        <script type="text/javascript" src="/static/swfobject.js"></script>
+
+
+    <a href="https://www.dreyfus.com" target="_blank">
+        <img src="/static/images/dreyfus-crane-468x60.jpg?v=4" alt="Dreyfus"/>
+    </a>
+
+</div></div>
+
+                      
+            </div>
+          
+          
+          <div id="cd_index_wrapper">            
+             
+                  <!-- base_crane100.html -->
+
+
+      <div id="crane_index">
+          <span id="cd_index_title">Crane 100 Money Fund Index</span>
+          <div id="index">
+            
+            
+
+              <span class="big">5.10%</span> <span class="small">unch.</span>
+            
+          </div>
+          <span id="cd_index_footer">
+            annualized 7-day current yield as of  8/23 
+          </span>
+          <div id="cd_index_link_wrapper"><a id="cd_index_link" href="/subscribers/content/"></a></div>
+      </div>
+
+                    
+           </div>
+           </div>
+           
+              
+            <div id="newsbar_search_wrapper"> <!-- news ticker and search form container-->
+      	    
+                
+
+<div id="newsbar">
+   <div id="news_ticker">
+      <div class="ticker-edge edge-left"></div>
+      <div class="ticker-edge edge-right"></div>
+      <div class="ticker-wrap">
+         <div class="ticker">
+            
+              <div class="ticker__item">
+                 <a href='https://www.craneeurosymposium.com/'
+                     >
+                   Register ASAP! European Money Fund Symposium, Sept. 19-20, London
+                  </a>
+               </div>
+            
+              <div class="ticker__item">
+                 <a href='https://www.cranesmfsymposium.com/'
+                     >
+                   Mark Your Calendars! Money Fund Symposium 2025, Boston, June 23-25
+                  </a>
+               </div>
+            
+              <div class="ticker__item">
+                 <a href='https://cranedata.com/archives/all-articles/10436/'
+                     >
+                   August Money Fund Portfolio Holdings: TDs, TBills Up; Repo Slides
+                  </a>
+               </div>
+            
+         </div>
+      </div>
+   </div>
+</div>
+
+      	    
+      	    
+                <!-- base_newsbar_area_search.html -->
+
+
+
+<div id="search_area">
+                    <form id="search_form" action="/search/" method="post">
+                        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='4e06e1a5561ecee59d8dd68b13e0223a' /></div>
+                        <fieldset>                
+                            <span><input type="text" id="search_phrase" name="search-query" value="Search our website ..." onmousedown="clearField('search_phrase',true,'Search our website ...')" onmousemove="clearOnDrag('search_phrase');"/></span>
+                            <input type="hidden" name="submit-search" value="Search" />
+                            <input type="submit" id="search_button" name="search_button" value="Search" />
+                        </fieldset>
+                    </form>
+</div>
+
+<!-- end base_newsbar_area_search.html -->
+
+            
+      	    
+      	    </div> <!-- end news ticker and search form container-->
+            
+
+            
+            
+            
+            
+           <!-- end below_navigation -->
+        <!-- end upper_wrapper -->
+      </div>
+
+      
+        <div id="middle_preamble" >
+         
+        </div>
+        <div id="content_left_side" class="clearfix">
+          
+            <!-- left side of middle -->
+            
+            
+            
+
+        <h1>Press Releases &amp; Quotes</h1>
+        <div style="text-align:right;margin-top:-15px;">
+        <a href="/archives/press/2024/8/" style="position:relative; z-index:1000;">Archives &raquo;</a>
+        </div>
+        <div id="news">
+          
+            
+
+
+
+
+     <a name="item-9373">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/9373/"
+              >
+        
+          <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/">Money Fund University, Dec. 15-<span class="word_wrap">&#8203;</span>16, '<span class="word_wrap">&#8203;</span>22</a></span>
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Aug 01</span>            <span class="date_year">22</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              <span class="bold">While Crane Data is gearing up for its next live event</span>, <span class="institution"><a class="websnapr" href="https://www.craneeurosymposium.com/">European Money Fund Symposium</a></span>, which will take place <span class="bold">Sept. 27-<span class="word_wrap">&#8203;</span>28 in Paris, France</span>, <span class="bold">we'<span class="word_wrap">&#8203;</span>re also starting to make plans</span> for our next <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/">Money Fund University</a></span> <span class="bold">educational conference</span>. Our 12th annual <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/">MFU</a></span> will change slightly from its previous &quot;<span class="bold">basic training</span>&quot; format to a more advanced &quot;<span class="bold">Master'<span class="word_wrap">&#8203;</span>s in Money Markets</span>&quot; program this year. It will take place at the <span class="bold">Hyatt Regency in Boston, Mass., December 15-<span class="word_wrap">&#8203;</span>16, 2022</span>. (<span class="word_wrap">&#8203;</span>We cancelled MFU last January and hosted a virtual event, but this year we'<span class="word_wrap">&#8203;</span>ll be back live and in person.) <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/">Crane'<span class="word_wrap">&#8203;</span>s Money Fund University</a></span> is designed for those <span class="bold">relatively new to the money market fund industry or those in need of a concentrated refresher on a broad core curriculum</span>. The event also focuses on hot topics like <span class="bold">money market fund regulations, money fund alternatives, offshore markets, and other recent industry trends</span>. Our educational conference features <span class="bold">a faculty of the money fund industry'<span class="word_wrap">&#8203;</span>s top lawyers, strategists, and portfolio managers</span>, and <span class="bold">the Boston show will include an extended free training session (<span class="word_wrap">&#8203;</span>and lunch) for Crane Data clients, as well as a Holiday party where all are welcome</span>. <span class="bold">Money Fund University offers a 2-<span class="word_wrap">&#8203;</span>day crash course on money market mutual funds, educating attendees on the history of money funds, the Fed, interest rates, ratings, rankings, and money market instruments such as commercial paper, Treasury bills, CDs and repo</span>. We also cover <span class="bold">portfolio construction and credit analysis</span>. <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/register">Registrations ($<span class="word_wrap">&#8203;</span>750)</a></span> are now being taken, and the <span class="institution"><a class="websnapr" href="http://www.cranesmfuniversity.com/agenda">latest agenda is available here</a></span>. (<span class="institution"><a class="websnapr" href="mailto:info&#37;&#52;&#48;cranedata&#46;com">E-<span class="word_wrap">&#8203;</span>mail us</a></span> to request the latest brochure.) <span class="bold">New portfolio managers, analysts, investors, issuers, service providers, and anyone interested in expanding their knowledge of &quot;<span class="word_wrap">&#8203;</span>cash&quot; investing should benefit from our comprehensive program</span>. Even experienced professionals may enjoy a refresher course and the opportunity to interact with peers in an informal setting. Also, <span class="bold">please join us for the 8th Annual</span> <span class="institution"><a class="websnapr" href="http://www.craneeurosymposium.com/">Crane'<span class="word_wrap">&#8203;</span>s European Money Fund Symposium</a></span>. The <span class="institution"><a class="websnapr" href="http://www.craneeurosymposium.com/agenda">latest agenda</a></span> is available and <span class="institution"><a class="websnapr" href="https://www.craneeurosymposium.com/register">registrations are still being taken</a></span> for this year'<span class="word_wrap">&#8203;</span>s European event, which will take place <span class="bold">Sept. 27-<span class="word_wrap">&#8203;</span>28</span> at the <span class="institution"><a class="websnapr" href="https://www.craneeurosymposium.com/hotel-and-travel">Renaissance Paris La Defense</a></span> in <span class="bold">Paris, France</span>. <span class="institution"><a class="websnapr" href="http://www.craneeurosymposium.com/register">Registration for our 2022 Crane'<span class="word_wrap">&#8203;</span>s European Money Fund Symposium</a></span> is <span class="bold">$<span class="word_wrap">&#8203;</span>1,<span class="word_wrap">&#8203;</span>000 USD</span>. <span class="bold">Please make your hotel reservations soon</span>! Rooms <span class="bold">must be booked before August 5</span> to receive the <span class="institution"><a class="websnapr" href="http://www.craneeurosymposium.com/hotel-and-travel">discounted rate of E259</a></span>. Visit <span class="institution"><a class="websnapr" href="http://www.craneeurosymposium.com/register">www.<span class="word_wrap">&#8203;</span>euromfs.<span class="word_wrap">&#8203;</span>com to register</a></span>, and <span class="institution"><a class="websnapr" href="mailto:info&#37;&#52;&#48;cranedata&#46;com">contact us</a></span> to request the <span class="bold">PDF brochure</span>. (<span class="word_wrap">&#8203;</span>Let us know too if you'<span class="word_wrap">&#8203;</span>d like <span class="bold">information on speaking</span> or <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/sponsorship---exhibit-opportunities-">sponsorship pricing</a></span>.) <span class="bold">Mark your calendars</span> for our next <span class="institution"><a class="websnapr" href="https://www.cranesbfsymposium.com/">Bond Fund Symposium</a></span>, which be held in <span class="bold">Boston, Mass., on March 23-<span class="word_wrap">&#8203;</span>24, 2023</span>. (<span class="word_wrap">&#8203;</span>Click <span class="institution"><a class="websnapr" href="https://www.cranesbfsymposium.com/agenda">here to see last year'<span class="word_wrap">&#8203;</span>s agenda</a></span>.) <span class="bold">Bond Fund Symposium is the only conference devoted entirely to bond mutual funds, bringing together bond fund managers, marketers, and professionals with fixed-<span class="word_wrap">&#8203;</span>income issuers, investors and service providers</span>. The majority of the content is aimed at the growing <span class="bold">ultra-<span class="word_wrap">&#8203;</span>short and conservative ultra-<span class="word_wrap">&#8203;</span>short bond fund marketplace</span>. Finally, <span class="bold">mark your calendars too</span> for our next big show, <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Crane'<span class="word_wrap">&#8203;</span>s Money Fund Symposium</a></span>, which will be held in <span class="bold">Atlanta, Ga., June 21-<span class="word_wrap">&#8203;</span>23, 2023</span>. <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Money Fund Symposium</a></span> attracts money fund managers, marketers and servicers, cash investors, money market securities dealers, issuers, and regulators for 2 1/<span class="word_wrap">&#8203;</span>2 days of sessions, socializing and networking. Let us know if you'<span class="word_wrap">&#8203;</span>d like more details on any of our events, and <span class="bold">we hope to see you in Paris in September, Boston in December or in March 2023, and Atlanta in June 2023</span>. <span class="bold">Thanks to all of our speakers, sponsors and supporters for your patience and support over the past 2+ rough years</span>!
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/9373/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+            
+
+
+
+
+     <a name="item-8548">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/8548/"
+              >
+        
+          Money Fund Symposium Set for Philadelphia, June 23-<span class="word_wrap">&#8203;</span>25; Conferences
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Dec 28</span>            <span class="date_year">20</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              <p>With the coming of the <span class="bold">New Year</span>, <span class="bold">Crane Data is ramping up preparations for its 2021 conference calendar</span>. We'<span class="word_wrap">&#8203;</span>ll be doing <span class="bold">virtual events in January</span> (<span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/">Money Fund University</a></span> on <span class="bold">Jan. 21-<span class="word_wrap">&#8203;</span>22</span>) and <span class="bold">in March</span> (<span class="institution"><a class="websnapr" href="https://www.cranesbfsymposium.com/">Bond Fund Symposium</a></span>, <span class="bold">March 25-<span class="word_wrap">&#8203;</span>26</span>). <span class="bold">But we hope to return to live events by June</span>. <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Crane'<span class="word_wrap">&#8203;</span>s Money Fund Symposium</a></span>, the largest gathering of money market fund managers and cash investors in the world, will take place <span class="bold">June 23-<span class="word_wrap">&#8203;</span>25, 2021</span> at <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/hotel-and-travel">The Loews Philadelphia</a></span>, in <span class="bold">Philadelphia, Pa</span>. The <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/agenda">preliminary agenda</a></span> is now available and <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/register">registrations</a></span> are now being taken. Money Fund Symposium attracts money fund managers, marketers and servicers, cash investors, money market securities dealers, issuers, and regulators. <span class="bold">We review our preliminary agenda, as well as Crane Data'<span class="word_wrap">&#8203;</span>s other 2021 conferences, below</span>.</p>
+<p><span class="bold">Our MF Symposium</span> <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/agenda">Agenda</a></span> kicks off on Wednesday, June 23 with a keynote on &quot;<span class="bold">MMFs Adapting to Regulations, Tech &amp; ESG</span>&quot; with <span class="person">Tom Callahan</span> of <span class="bold">BlackRock</span>, <span class="bold">Deborah Cunningham</span> of <span class="bold">Federated Investors</span> and <span class="bold">Peter Crane</span> of <span class="bold">Crane Data</span>. The rest of the <span class="bold">Day 1 Agenda</span> includes: &quot;<span class="bold">Treasury Issuance &amp; Repo Update</span>,&quot; with <span class="person">Mark Cabana</span> of <span class="bold">BofA Securities</span>, <span class="bold">Dina Marchioni</span> of <span class="bold">Federal Reserve Bank of New York</span> and <span class="person">Tom Katzenbach</span> of the <span class="bold">U.<span class="word_wrap">&#8203;</span>S. Treasury</span>; a &quot;<span class="bold">Corporate Investor MF Discussion</span>&quot; with <span class="person">Tom Hunt</span> of <span class="bold">AFP</span>; and, a &quot;<span class="bold">Major Money Fund Issues 2021</span>&quot; panel with moderator <span class="bold">Ed Baldry</span> of <span class="bold">EPBComms</span>, <span class="person">Tracy Hopkins</span> of <span class="bold">Dreyfus/<span class="word_wrap">&#8203;</span>BNY Mellon CIS</span>, <span class="person">Rob Sabatino</span> of <span class="bold">UBS Asset Management</span>, <span class="person">Jeff Weaver</span> of <span class="bold">Wells Fargo Asset Management</span>. (<span class="word_wrap">&#8203;</span>The evening'<span class="word_wrap">&#8203;</span>s reception is sponsored by <span class="bold">Bank of America</span>.)</p>
+<p><span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Day 2 of Money Fund Symposium 2021</a></span> begins with &quot;<span class="bold">The State of the Money Fund Industry</span>,&quot; which features Peter Crane, <span class="bold">Michael Morin</span> of <span class="bold">Fidelity Investments</span> and <span class="person">Peter Yi</span> of <span class="bold">Northern Trust Asset Management</span>; followed by a &quot;<span class="bold">Senior Portfolio Manager Perspectives</span>&quot; panel, including <span class="person">Linda Klingman</span> of <span class="bold">Charles Schwab I.<span class="word_wrap">&#8203;</span>M.</span> and <span class="person">Nafis Smith</span> of <span class="bold">Vanguard</span>. Next up is &quot;<span class="bold">Government &amp; Treasury Money Fund Issues</span>,&quot; with <span class="bold">Joseph Abate</span> of <span class="bold">Barclays</span> as moderator, <span class="bold">Adam Ackermann</span> of <span class="bold">J.<span class="word_wrap">&#8203;</span>P. Morgan Asset Management</span> and <span class="person">Geoff Gibbs</span> of <span class="bold">DWS</span>. The morning concludes with a &quot;<span class="bold">Muni &amp; Tax Exempt Money Fund Update</span>,&quot; featuring <span class="person">Colleen Meehan</span> of <span class="bold">Dreyfus</span>, <span class="person">John Vetter</span> of <span class="bold">Fidelity</span> and <span class="person">Sean Saroya</span> of <span class="bold">J.<span class="word_wrap">&#8203;</span>P. Morgan Securities</span>.</p>
+<p>The <span class="bold">Afternoon of Day 2</span> (<span class="word_wrap">&#8203;</span>after a Dreyfus-<span class="word_wrap">&#8203;</span>sponsored lunch) features the segments: &quot;<span class="bold">Dealer'<span class="word_wrap">&#8203;</span>s Choice: Supply, New Securities &amp; CP</span>&quot; with moderator, <span class="person">Jeff Plotnik</span> of <span class="bold">U.<span class="word_wrap">&#8203;</span>S. Bancorp Asset Mgmt</span>, <span class="person">Robe Crowe</span> of <span class="bold">Citi Global Markets</span>, <span class="person">John Kodweis</span> of <span class="bold">J.<span class="word_wrap">&#8203;</span>P. Morgan</span> and <span class="person">Stewart Cutler</span> of <span class="bold">Barclays</span>; &quot;<span class="bold">Ratings Focus: Governance, Global &amp; LGIPs</span>&quot; with <span class="person">Robert Callagy</span> of <span class="bold">Moody'<span class="word_wrap">&#8203;</span>s Investors Service</span>, <span class="person">Greg Fayvilevich</span> of <span class="bold">Fitch Ratings</span>, and <span class="person">Michael Masih</span> of <span class="bold">S&amp;<span class="word_wrap">&#8203;</span>P Global Ratings</span>; &quot;<span class="bold">Ultra-<span class="word_wrap">&#8203;</span>Short, ETFs &amp; Alt-<span class="word_wrap">&#8203;</span>Cash Update</span>,&quot; with <span class="person">Alex Roever</span> of <span class="bold">JPM</span> and <span class="person">Laurie Brignac</span> of <span class="bold">Invesco</span>. The day'<span class="word_wrap">&#8203;</span>s wrap-<span class="word_wrap">&#8203;</span>up presentation is &quot;<span class="bold">Brokerage Sweeps, Bank Deposits &amp; Fin-<span class="word_wrap">&#8203;</span>Tech</span>&quot; involving <span class="person">Chris Melin</span> of <span class="bold">Ameriprise Financial</span> and <span class="bold">Kevin Bannerton</span> of <span class="bold">Total Bank Solutions</span>. (<span class="word_wrap">&#8203;</span>The <span class="bold">Day 2 reception is sponsored by Barclays</span>.)</p>
+<p>The third day of the Symposium features the sessions: &quot;<span class="bold">Strategists Speak '<span class="word_wrap">&#8203;</span>20: Fed &amp; Rates, Repo &amp; SOFR</span>&quot; with <span class="person">Priya Misra</span> of <span class="bold">TD Securities</span> and <span class="person">Garret Sloan</span> of <span class="bold">Wells Fargo Securities</span>; &quot;<span class="bold">European, ESG &amp; ETF Issues</span>,&quot; with <span class="person">Brenden Carroll</span> of <span class="bold">Dechert LLP</span> and <span class="person">Jonathan Curry</span> of <span class="bold">HSBC Global A.<span class="word_wrap">&#8203;</span>M</span>.; &quot;<span class="bold">FICC Repo &amp; Agency Roundtable</span>&quot; with <span class="person">Kyle Lynch</span> of <span class="bold">FHLBanks Office of Finance</span>. <span class="bold">Peter Crane</span> wraps up the conference with the session &quot;<span class="bold">Money Fund Statistics &amp; Disclosures</span>.</p>
+<p>Visit the <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">MF Symposium website</a></span> at <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">www.<span class="word_wrap">&#8203;</span>moneyfundsymposium.<span class="word_wrap">&#8203;</span>com</a></span>) for more details. <span class="bold">Registration is $<span class="word_wrap">&#8203;</span>750</span>, and <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/hotel-and-travel">discounted hotel reservations</a></span> are available. <span class="bold">We hope you'<span class="word_wrap">&#8203;</span>ll join us in Philadelphia this June</span>! We'<span class="word_wrap">&#8203;</span>ll of course be watching the coronavirus and vaccine rollout, and will adjust plans if travel bans are still in place come late spring. Note that some of our speakers have yet to confirm their participation, and the agenda is still in the process of being finalized, so watch for tweaks in coming weeks. E-<span class="word_wrap">&#8203;</span>mail us at <span class="institution"><a class="websnapr" href="mailto:info&#37;&#52;&#48;cranedata&#46;com">info&#64;<span class="word_wrap">&#8203;</span>cranedata.<span class="word_wrap">&#8203;</span>com</a></span> to request the full brochure.)</p>
+<p>We'<span class="word_wrap">&#8203;</span>re also making final preparations for <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/">Crane'<span class="word_wrap">&#8203;</span>s Money Fund University</a></span>, which will be held online, <span class="bold">January 21-<span class="word_wrap">&#8203;</span>22, 2021</span>.  Our <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/">Money Fund University (<span class="word_wrap">&#8203;</span>Online)</a></span> will cover the history of money funds, interest rates, regulations (<span class="word_wrap">&#8203;</span>Rule 2a-<span class="word_wrap">&#8203;</span>7), ratings, rankings, money market instruments such as commercial paper, CDs and repo, and portfolio construction and credit analysis. We also include segments on offshore money funds and ultra-<span class="word_wrap">&#8203;</span>short bond funds.</p>
+<p><span class="bold">Money Fund University'<span class="word_wrap">&#8203;</span>s comprehensive program is good for both beginners and experienced professionals looking for a refresher</span>. The <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/agenda">latest agenda</a></span>  is available online and <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/register">we are still accepting registrations ($<span class="word_wrap">&#8203;</span>250)</a></span>. (<span class="word_wrap">&#8203;</span>We'<span class="word_wrap">&#8203;</span>re also willing to &quot;<span class="word_wrap">&#8203;</span>comp&quot; tickets for large Crane Data or sponsor clients, so let us know if you'<span class="word_wrap">&#8203;</span>re interested.)</p>
+<p>We'<span class="word_wrap">&#8203;</span>re also getting ready for our next <span class="institution"><a class="websnapr" href="https://www.cranesbfsymposium.com/">Crane'<span class="word_wrap">&#8203;</span>s Bond Fund Symposium (<span class="word_wrap">&#8203;</span>Online)</a></span>, which will be held March 25-<span class="word_wrap">&#8203;</span>26. (<span class="word_wrap">&#8203;</span>Click <span class="institution"><a class="websnapr" href="https://www.cranesbfsymposium.com/agenda">here to see the agenda</a></span>.) <span class="bold">Bond Fund Symposium is the only conference devoted entirely to bond mutual funds, bringing together bond fund managers, marketers, and professionals with fixed-<span class="word_wrap">&#8203;</span>income issuers, investors and service providers</span>. The majority of the content is aimed at the growing <span class="bold">ultra-<span class="word_wrap">&#8203;</span>short and conservative ultra-<span class="word_wrap">&#8203;</span>short bond fund marketplace</span>.</p>
+<p><span class="bold">Crane Data, which recently celebrated the sixth anniversary</span> of its <span class="crane_product">Bond Fund Intelligence</span> publication and <span class="crane_product">BFI XLS</span> <span class="bold">bond fund information service and benchmarks</span>, continues to expand its fixed income fund offerings with the recent launch of <span class="crane_product">Bond Fund Wisdom</span> product and <span class="crane_product">Bond Fund Portfolio Holdings</span> dataset. <span class="bold">Bond Fund Symposium offers attendees a concentrated and affordable educational experience, as well as an excellent networking venue</span>. Registration for Bond Fund Symposium is $<span class="word_wrap">&#8203;</span>250. <span class="bold">Our mission is to deliver the best possible conference content at an affordable price to bond fund professionals and investors</span>.</p>
+<p>Finally, we'<span class="word_wrap">&#8203;</span>ve also set the dates and location for our next <span class="institution"><a class="websnapr" href="https://www.craneeurosymposium.com/">European Money Fund Symposium</a></span>. It is scheduled for <span class="bold">Oct. 21-<span class="word_wrap">&#8203;</span>22, 2021</span>, in <span class="bold">Paris, France</span>. Let us know if you'<span class="word_wrap">&#8203;</span>d like more details on any of our events, and <span class="bold">we hope to see you virtually in Q1, and live in Philadelphia and Paris later in 2021</span>. Happy New Year!</p>
+
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/8548/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+            
+
+
+
+
+     <a name="item-8192">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/8192/"
+              >
+        
+          Money Fund Symposium Shifted to August; European MFS to November
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Apr 23</span>            <span class="date_year">20</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              <p><span class="bold">While the nationwide lockdown over the coronavirus pandemic continues, Crane Data remains hopeful that travel will resume later this summer and that we'<span class="word_wrap">&#8203;</span>ll be able to host our annual Money Fund Symposium and European Money Fund Symposium</span>. <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Crane'<span class="word_wrap">&#8203;</span>s Money Fund Symposium</a></span> has been shifted back from June to <span class="bold">August 24-<span class="word_wrap">&#8203;</span>26, 2020</span>, and the show remains at the <span class="bold">Hyatt Regency Minneapolis</span>. We'<span class="word_wrap">&#8203;</span>ll of course continue to monitor events carefully in coming weeks, and <span class="bold">we'<span class="word_wrap">&#8203;</span>ll be prepared to move again (<span class="word_wrap">&#8203;</span>perhaps to Nov. 18-<span class="word_wrap">&#8203;</span>20), to cancel, and/<span class="word_wrap">&#8203;</span>or to webcast if our client base deems it unsafe</span>. Meanwhile, we'<span class="word_wrap">&#8203;</span>ll be preparing for the show and taking steps to spread out and make the event safer. The <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/agenda">latest agenda</a></span> is available, though we'<span class="word_wrap">&#8203;</span>ll no doubt be tweaking this as we get closer to the summer, and <span class="bold">registrations are being taken</span> at <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">www.<span class="word_wrap">&#8203;</span>moneyfundsymposium.<span class="word_wrap">&#8203;</span>com</a></span>. (<span class="bold">Note: We'<span class="word_wrap">&#8203;</span>ll offer full refunds or credits for any cancellations</span>.)</p>
+<p><span class="bold">Our MF Symposium</span> <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/agenda">Agenda</a></span> is scheduled to kick off on Monday, August 24 with a keynote on &quot;<span class="bold">Money Funds through the Decades</span>&quot; from <span class="person">Paul Schott Stevens</span> of the <span class="bold">Investment Company Institute</span>. The rest of the Day 1 agenda includes: &quot;<span class="bold">Treasury Issuance &amp; Repo Update</span>,&quot; with <span class="person">Mark Cabana</span> of <span class="bold">Bank of America</span>, <span class="person">Dina Marchioni</span> of the <span class="bold">Federal Reserve Bank of New York</span> and <span class="person">Tom Katzenbach</span> of the <span class="bold">U.<span class="word_wrap">&#8203;</span>S. Department of the Treasury</span>; a &quot;<span class="bold">Corporate Investor, Portal &amp; ESG MMF Discussion</span>&quot; with <span class="person">Tom Callahan</span> of <span class="bold">BlackRock</span>, <span class="person">Tom Hunt</span> of <span class="bold">AFP</span>, and <span class="person">Mark Adamson</span> of <span class="bold">Wells Fargo Securities</span>; and, a &quot;<span class="bold">Major Money Fund Issues 2020</span>&quot; panel with <span class="person">Tracy Hopkins</span> of <span class="bold">Dreyfus/<span class="word_wrap">&#8203;</span>BNY Mellon Cash Investment Strategies</span>, <span class="person">Jeff Weaver</span> of <span class="bold">Wells Fargo Asset Management</span> and <span class="person">Peter Yi</span> of <span class="bold">Northern Trust Asset Management</span>. (<span class="word_wrap">&#8203;</span>The evening'<span class="word_wrap">&#8203;</span>s reception is sponsored by <span class="bold">BofA Securities</span>.)</p>
+<p><span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Day 2 of Money Fund Symposium 2020</a></span> will begin with &quot;<span class="bold">The State of the Money Fund Industry</span>,&quot; which features <span class="person">Peter Crane</span>, <span class="person">Deborah Cunningham</span> of <span class="bold">Federated Investors</span> and <span class="person">Michael Morin</span> of <span class="bold">Fidelity Investments</span>, followed by a &quot;<span class="bold">Senior Portfolio Manager Perspectives</span>&quot; panel, including <span class="person">Linda Klingman</span> of <span class="bold">Charles Schwab I.<span class="word_wrap">&#8203;</span>M.</span>, <span class="person">Nafis Smith</span> of <span class="bold">Vanguard</span> and <span class="person">John Tobin</span> of <span class="bold">J.<span class="word_wrap">&#8203;</span>P. Morgan Asset Mgmt</span>. Next up is &quot;<span class="bold">Government &amp; Treasury Money Fund Issues</span>,&quot; with <span class="person">Mike Bird</span> of <span class="bold">Wells Fargo Funds</span> and <span class="person">Geoff Gibbs</span> of <span class="bold">DWS</span>. The morning concludes with a &quot;<span class="bold">Muni &amp; Tax Exempt Money Fund Update</span>,&quot; featuring <span class="person">Colleen Meehan</span> of <span class="bold">Dreyfus</span>, <span class="person">John Vetter</span> of <span class="bold">Fidelity</span> and <span class="person">Sean Saroya</span> of <span class="bold">J.<span class="word_wrap">&#8203;</span>P. Morgan Securities</span>.</p>
+<p>The <span class="bold">Afternoon of Day 2</span> (<span class="word_wrap">&#8203;</span>after a Dreyfus-<span class="word_wrap">&#8203;</span>sponsored lunch) features the segments: &quot;<span class="bold">Dealer'<span class="word_wrap">&#8203;</span>s Choice: Supply, New Securities &amp; CP</span>&quot; with moderator, <span class="person">Jeff Plotnik</span> of <span class="bold">U.<span class="word_wrap">&#8203;</span>S. Bancorp Asset Mgmt</span>., <span class="person">Robe Crowe</span> of <span class="bold">Citi Global Markets</span>, <span class="person">John Kodweis</span> of <span class="bold">JPM</span> and <span class="person">Stewart Cutler</span> of <span class="bold">Barclays</span>; &quot;<span class="bold">Fund Ratings Focus: Governance, Global &amp; LGIPs</span>&quot; with <span class="person">Robert Callagy</span> of <span class="bold">Moody'<span class="word_wrap">&#8203;</span>s Investors Service</span>, <span class="person">Greg Fayvilevich</span> of <span class="bold">Fitch Ratings</span> and <span class="person">Michael Masih</span> of <span class="bold">S&amp;<span class="word_wrap">&#8203;</span>P Global Ratings</span>; &quot;<span class="bold">Ultra-<span class="word_wrap">&#8203;</span>Short, ETFs &amp; Alt-<span class="word_wrap">&#8203;</span>Cash Update</span>,&quot; with <span class="person">Alex Roever</span> of J.<span class="word_wrap">&#8203;</span>P. Morgan Securities and <span class="person">Laurie Brignac</span> of <span class="bold">Invesco</span>. The day'<span class="word_wrap">&#8203;</span>s wrap-<span class="word_wrap">&#8203;</span>up presentation is &quot;<span class="bold">Brokerage Sweeps, Bank Deposits &amp; Fin-<span class="word_wrap">&#8203;</span>Tech</span>&quot; involving <span class="person">Chris Melin</span> of <span class="bold">Ameriprise Financial</span> and <span class="person">Kevin Bannerton</span> of <span class="bold">Total Bank Solutions</span>. (<span class="word_wrap">&#8203;</span>The Day 2 reception is sponsored by Barclays.)</p>
+<p>The third day of the Symposium features the sessions: &quot;<span class="bold">Strategists Speak '<span class="word_wrap">&#8203;</span>20: Fed Rates, Repo &amp; SOFR</span>&quot; with <span class="person">Priya Misra</span> of  <span class="bold">TD Securities</span> and <span class="person">Garret Sloan</span> of <span class="bold">Wells Fargo Securities</span>; &quot;<span class="bold">Regulatory &amp; Misc. Issues: ESG, ETF, European</span>,&quot; with <span class="person">Brenden Carroll</span> of <span class="institution"><a class="websnapr" href="https://www.dechert.com/">Dechert LLP</a></span>, <span class="person">Rob Sabatino</span> of <span class="bold">UBS Asset Mgmt</span> and <span class="person">Jonathan Curry</span> of <span class="bold">HSBC Global A.<span class="word_wrap">&#8203;</span>M.</span>; &quot;<span class="bold">FICC Repo &amp; Agency Roundtable</span>,&quot; with <span class="person">Owen Nichols</span> of <span class="bold">State Street Global Markets</span> and <span class="person">Kyle Lynch</span> of <span class="bold">FHLBanks Office of Finance</span> and, &quot;<span class="bold">Money Fund Statistics &amp; Disclosures</span>&quot; with Peter Crane.</p>
+<p>Visit the <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">MF Symposium website</a></span> at <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">www.<span class="word_wrap">&#8203;</span>moneyfundsymposium.<span class="word_wrap">&#8203;</span>com</a></span> for more details. <span class="bold">Registration is $<span class="word_wrap">&#8203;</span>750</span>, and <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/hotel-and-travel">discounted hotel reservations</a></span> are available. <span class="bold">We hope you'<span class="word_wrap">&#8203;</span>ll it'<span class="word_wrap">&#8203;</span>ll be safe to travel and you'<span class="word_wrap">&#8203;</span>ll join us in Minneapolis this August</span>! When and if you'<span class="word_wrap">&#8203;</span>re ready, attendees, speakers and sponsors should <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/register">register here</a></span> and <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/hotel-and-travel">make hotel reservations here</a></span>. We'<span class="word_wrap">&#8203;</span>ll keep you posted on our plans, so watch for updates in coming months. E-<span class="word_wrap">&#8203;</span>mail us at <span class="institution"><a class="websnapr" href="mailto:info&#37;&#52;&#48;cranedata&#46;com">info&#64;<span class="word_wrap">&#8203;</span>cranedata.<span class="word_wrap">&#8203;</span>com</a></span> to request the full brochure, or <span class="institution"><a class="websnapr" href="https://aa712123-ef94-47d4-865c-22d77f1c863c.filesusr.com/ugd/45d34b_f1a2dffe8a4042eea70478f4467cd638.pdf">click here to see the latest</a></span>.</p>
+<p>We'<span class="word_wrap">&#8203;</span>ve also pushed back the dates for our next <span class="institution"><a class="websnapr" href="https://www.craneeurosymposium.com/">European Money Fund Symposium</a></span>, which is now scheduled for <span class="bold">Nov. 19-<span class="word_wrap">&#8203;</span>20, 2020</span> in <span class="bold">Paris, France</span>. (<span class="word_wrap">&#8203;</span>It had been scheduled for Sept. 17-<span class="word_wrap">&#8203;</span>18.) We'<span class="word_wrap">&#8203;</span>ll be watching travel restrictions to Europe closely in coming months (<span class="word_wrap">&#8203;</span>and may have to shift or cancel this too). Again, we'<span class="word_wrap">&#8203;</span>ll give full refunds or credits for any events that are cancelled or that registered attendees can'<span class="word_wrap">&#8203;</span>t travel to or want to cancel.</p>
+<p>&quot;<span class="bold">European Money Fund Symposium offers European, global and &quot;<span class="word_wrap">&#8203;</span>offshore&quot; money market portfolio managers, investors, issuers, dealers and service providers a concentrated and affordable educational experience, and an excellent and informal networking venue,</span>&quot; says Crane Data President, <span class="person">Peter Crane</span>. &quot;<span class="bold">Our mission is to deliver the best possible conference content at an affordable price to money market fund professionals</span>,&quot; he adds. Last year'<span class="word_wrap">&#8203;</span>s European Crane Symposium event in <span class="bold">Dublin</span> attracted 110 attendees, sponsors and speakers.</p>
+<p><span class="crane_product">EMFS</span> will be held at the <span class="institution"><a class="websnapr" href="http://www.craneeurosymposium.com/hotel-and-travel">Renaissance Paris La Defense</a></span>. Hotel rooms <span class="bold">must be booked before Thursday, October 1</span> to receive the <span class="institution"><a class="websnapr" href="http://www.craneeurosymposium.com/hotel-and-travel">discounted rate of E279 (<span class="word_wrap">&#8203;</span>single) or E289 (<span class="word_wrap">&#8203;</span>double)</a></span>. <span class="institution"><a class="websnapr" href="http://www.craneeurosymposium.com/register">Registration for our 2020 Crane'<span class="word_wrap">&#8203;</span>s European Money Fund Symposium</a></span> is <span class="bold">$<span class="word_wrap">&#8203;</span>1,<span class="word_wrap">&#8203;</span>000 USD</span>. Visit <span class="institution"><a class="websnapr" href="http://www.craneeurosymposium.com/register">www.<span class="word_wrap">&#8203;</span>euromfs.<span class="word_wrap">&#8203;</span>com to register</a></span>, or <span class="institution"><a class="websnapr" href="mailto:info&#37;&#52;&#48;cranedata&#46;com">contact us</a></span> to request the <span class="bold">PDF brochure</span> or for <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/sponsorship---exhibit-opportunities-">Sponsorship pricing and info</a></span>.</p>
+<p>Also, mark your calendars for next year'<span class="word_wrap">&#8203;</span>s <span class="institution"><a class="websnapr" href="https://www.cranesmfuniversity.com/">Money Fund University</a></span>, which is scheduled for <span class="bold">Jan. 21-<span class="word_wrap">&#8203;</span>22, 2021, in Pittsburgh, Pa</span>, and our next <span class="institution"><a class="websnapr" href="https://www.cranesbfsymposium.com/">Bond Fund Symposium</a></span>, which is scheduled for <span class="bold">March 25-<span class="word_wrap">&#8203;</span>26, 2021</span> in <span class="bold">Newport Beach, Calif</span>. Watch for details in coming months, and let us know if you'<span class="word_wrap">&#8203;</span>re interested in sponsoring or speaking. Contact us if you have any feedback or questions. <span class="bold">Attendees to Crane Conferences and Crane Data subscribers</span> may access the latest recordings, Powerpoints and binder materials at the bottom of our &quot;<span class="institution"><a class="websnapr" href="https://cranedata.com/subscribers/content/">Content page</a></span>.&quot; Let us know if you'<span class="word_wrap">&#8203;</span>d like more details on any of our events, and <span class="bold">we hope to see you in Minneapolis later this summer and Paris this fall</span>!</p>
+<p>Finally, <span class="bold">we'<span class="word_wrap">&#8203;</span>ll spending the next month or two upgrading our virtual event capabilities</span>, just in case, and <span class="bold">we'<span class="word_wrap">&#8203;</span>ll be launching a series of Webinars and online events</span> in coming weeks. Mark your calendars for our inaugural event, a &quot;<span class="bold">Money Fund Update &amp; Product Training</span>,&quot; which will take place on <span class="bold">May 21 at 2pm Eastern</span>. (<span class="crane_product">MFI</span> subscribers will be invited and we'<span class="word_wrap">&#8203;</span>ll put a notice on the website.)</p>
+
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/8192/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+            
+
+
+
+
+     <a name="item-8149">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/8149/"
+              >
+        
+          <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Money Fund Symposium Now August</a></span>
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Mar 24</span>            <span class="date_year">20</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              <span class="bold">Please note that due to the coronavirus pandemic and widespread corporate travel bans, Crane Data has moved the dates for its &quot;<span class="word_wrap">&#8203;</span>big show&quot; Money Fund Symposium from June to August</span>. <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Crane'<span class="word_wrap">&#8203;</span>s Money Fund Symposium</a></span> is now scheduled for <span class="bold">August 24-<span class="word_wrap">&#8203;</span>26, 2020</span>, at the <span class="bold">Hyatt Regency Minneapolis</span>. (<span class="word_wrap">&#8203;</span>It had been scheduled for June 24-<span class="word_wrap">&#8203;</span>26.) We'<span class="word_wrap">&#8203;</span>ll continue to watch events carefully in coming weeks, and <span class="bold">we'<span class="word_wrap">&#8203;</span>ll be prepared to move again (<span class="word_wrap">&#8203;</span>perhaps to Nov. 18-<span class="word_wrap">&#8203;</span>20), to cancel, and/<span class="word_wrap">&#8203;</span>or to webcast if the pandemic persists</span>. In the meantime, our planning goes on. The <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/agenda">latest agenda</a></span> is available and <span class="bold">registrations are still being taken</span> at: <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">www.<span class="word_wrap">&#8203;</span>moneyfundsymposium.<span class="word_wrap">&#8203;</span>com</a></span>. (<span class="word_wrap">&#8203;</span>Registrations for the June show will be transferred to the new August dates, and June hotel reservations will be cancelled if you'<span class="word_wrap">&#8203;</span>ve already made plans.) We'<span class="word_wrap">&#8203;</span>ve also set the dates and location for our next <span class="institution"><a class="websnapr" href="https://www.craneeurosymposium.com/">European Money Fund Symposium</a></span>, which is scheduled for <span class="bold">Sept. 17-<span class="word_wrap">&#8203;</span>18, 2020</span>, in <span class="bold">Paris, France</span>. But we'<span class="word_wrap">&#8203;</span>ll be watching travel restrictions to Europe closely in coming months (<span class="word_wrap">&#8203;</span>and may have to shift or cancel this too). (<span class="word_wrap">&#8203;</span>We'<span class="word_wrap">&#8203;</span>ll give full refunds or credits for any events that are cancelled or that registered attendees can'<span class="word_wrap">&#8203;</span>t make it to.) Let us know if you'<span class="word_wrap">&#8203;</span>d like more details on any of our events, and <span class="bold">we hope to see you in Minneapolis later this summer</span>! Finally, mark your calendars for <span class="bold">next year'<span class="word_wrap">&#8203;</span>s Money Fund University</span>, which will be <span class="bold">Jan. 21-<span class="word_wrap">&#8203;</span>22, 2021, in Pittsburgh, Pa</span>, and our next <span class="institution"><a class="websnapr" href="https://www.cranesbfsymposium.com/">Bond Fund Symposium</a></span>, which is scheduled for <span class="bold">March 25-<span class="word_wrap">&#8203;</span>26, 2021</span> in <span class="bold">Newport Beach, Calif</span>. Watch for details in coming months, and let us know if you'<span class="word_wrap">&#8203;</span>re interested in sponsoring or speaking, and contact us if you have any feedback or questions. <span class="bold">Attendees to MFU and Crane Data subscribers</span> may access the latest recordings, Powerpoints and binder materials here: <span class="institution"><a class="websnapr" href="https://cranedata.com/publications/mfuniversity-2020">https://<span class="word_wrap">&#8203;</span>cranedata.<span class="word_wrap">&#8203;</span>com/<span class="word_wrap">&#8203;</span>publications/<span class="word_wrap">&#8203;</span>mfuniversity-<span class="word_wrap">&#8203;</span>2020</a></span>.
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/8149/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+            
+
+
+
+
+     <a name="item-7457">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/7457/"
+              >
+        
+          <span class="institution"><a class="websnapr" href="http://www.ignites.com/c/2136993/256013/frustrated_bank_deposit_yields_investors_moving_money_funds?referrer_module=emailMorningNews&amp;module_order=51">ignites: Crane on Deposits Moving</a></span>
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Nov 27</span>            <span class="date_year">18</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              Mutual fund publication <span class="bold">ignites</span> features a video brief with <span class="bold">Crane Data'<span class="word_wrap">&#8203;</span>s Peter Crane</span> entitled, &quot;<span class="institution"><a class="websnapr" href="http://www.ignites.com/c/2136993/256013/frustrated_bank_deposit_yields_investors_moving_money_funds?referrer_module=emailMorningNews&amp;module_order=51">'<span class="word_wrap">&#8203;</span>Frustrated' by Low Bank Deposit Yields, Investors Moving to Money Funds</a></span>.&quot; The brief interview, which was posted last week, says, &quot;<span class="bold">The biggest competitors right now to money market funds are bank deposit accounts, which have lured significant market share from the funds, says Peter Crane, president and CEO of Crane Data</span>. But some investors who are frustrated by bank products' near-<span class="word_wrap">&#8203;</span>zero yields are growing more sensitive to rising interest rates and starting to move into money funds, he adds.&quot; When asked about competition, Crane comments, &quot;<span class="bold">There are potential threats from ultra-<span class="word_wrap">&#8203;</span>short bond funds, from a money market ETF being developed [<span class="word_wrap">&#8203;</span>or] from something new occurring, but the biggest competition and threat right now is from bank deposits, who have taken major slices of market share</span>. It'<span class="word_wrap">&#8203;</span>s unclear whether banks will aggressively push up deposit rates to protect that money if it starts leaving towards money market funds.... In the past they haven'<span class="word_wrap">&#8203;</span>t. Banks have been content to underpay. <span class="bold">But there are signs [<span class="word_wrap">&#8203;</span>that] banks are moving and tweaking [<span class="word_wrap">&#8203;</span>rates]</span>. Banks are trying to have it both ways, where they pay near zero on the vast majority of deposits, and then they run a special for new accounts where they'<span class="word_wrap">&#8203;</span>re paying 1.<span class="word_wrap">&#8203;</span>6% or something to try to get new money.&quot; He adds, &quot;<span class="bold">Investors really became desensitized to interest rates during the zero-<span class="word_wrap">&#8203;</span>yield environment</span>. Whether they become re-<span class="word_wrap">&#8203;</span>sensitized -- if that'<span class="word_wrap">&#8203;</span>s a word -- remains to be seen. <span class="bold">But there'<span class="word_wrap">&#8203;</span>s clearly indications that there are slices of cash that are frustrated by the zero yields and are starting to move</span>. Whether that spreads to the broad base of money out there remains to be seen. <span class="bold">But the longer we'<span class="word_wrap">&#8203;</span>re here at 1.<span class="word_wrap">&#8203;</span>75%, 2% yields, or the higher we go, or depending on what happens in the stock market, the more likely that is to happen</span>.&quot;
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/7457/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+            
+
+
+
+
+     <a name="item-7295">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/7295/"
+              >
+        
+          August MFI Features: Rising Yields, PGIM Profile, European MF Reforms
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Aug 07</span>            <span class="date_year">18</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              <p>The August issue of our flagship <span class="crane_product">Money Fund Intelligence</span> newsletter, which was sent out to subscribers Tuesday morning, features the articles: &quot;<span class="bold">Rising MF Yields Turn Up Heat on Sweeps, Bank Deposits</span>,&quot; which discusses the growing spread between money funds and other cash options; &quot;<span class="bold">PGIM Still Rocking in Cash: Q&amp;<span class="word_wrap">&#8203;</span>A w/<span class="word_wrap">&#8203;</span>D'<span class="word_wrap">&#8203;</span>Angelo, Nicholson</span>,&quot; which profiles the money funds formerly named Prudential; and, &quot;<span class="bold">European MMF Reforms Go Live; Ready for Symposium</span>,&quot; which reviews <span class="bold">the latest on European money fund regulations</span>. We'<span class="word_wrap">&#8203;</span>ve also updated our <span class="crane_product">Money Fund Wisdom</span> database with July 31, 2018, statistics, and sent out our <span class="crane_product">MFI XLS</span> spreadsheet Tuesday a.<span class="word_wrap">&#8203;</span>m. (<span class="crane_product">MFI</span>, MFI XLS and our <span class="crane_product">Crane Index</span> products are all available to subscribers via our <span class="institution"><a class="websnapr" href="http://cranedata.com/subscribers/content/">Content</a></span> center.) Our August <span class="crane_product">Money Fund Portfolio Holdings</span> are scheduled to ship on Thursday, August 9, and our August <span class="crane_product">Bond Fund Intelligence</span> is scheduled to go out Tuesday, August 14.</p>
+<p>MFI'<span class="word_wrap">&#8203;</span>s &quot;<span class="bold">Rising MF Yields</span>&quot; article says, &quot;<span class="bold">Money fund yields have risen from a near record-<span class="word_wrap">&#8203;</span>low average of 0.<span class="word_wrap">&#8203;</span>04% three years ago to 1.<span class="word_wrap">&#8203;</span>75% currently (<span class="word_wrap">&#8203;</span>as measured by our Crane 100 MF Index), while bank deposit rates, and in particular brokerage sweep rates, have lagged dramatically</span>. Brokerage sweep rates have risen from 0.<span class="word_wrap">&#8203;</span>01% to 0.<span class="word_wrap">&#8203;</span>22%, while bank money market deposit rates still average a ridiculously low 0.<span class="word_wrap">&#8203;</span>20% (<span class="word_wrap">&#8203;</span>according to the <span class="institution"><a class="websnapr" href="https://www.fdic.gov/regulations/resources/rates/">FDIC'<span class="word_wrap">&#8203;</span>s averages</a></span>). Even the highest-<span class="word_wrap">&#8203;</span>yielding deposits average just 1.<span class="word_wrap">&#8203;</span>26%.&quot;</p>
+<p>The lead piece continues, &quot;<span class="bold">While asset flows into money market funds attracted by these huge yield differentials remain subdued, we suspect this is beginning to change</span>. One reason that investors haven'<span class="word_wrap">&#8203;</span>t moved is that the news that money fund yields are back is still slow getting out. But this is changing too. A steady stream of articles pointing out these attractive spreads are appearing.&quot;</p>
+<p>It adds, &quot;<span class="bold">J.<span class="word_wrap">&#8203;</span>P. Morgan Securities</span> comments in a recent '<span class="institution"><a class="websnapr" href="https://markets.jpmorgan.com/research/email/-cs1mn55/dJb7_PtGjMluLkG6hvfedg/GPS-2738655-0">Short Duration Strategy</a></span>' piece, &quot;<span class="bold">With the Fed on the move and interest rates steadily rising, the topic of deposit betas and outflows has garnered significant attention from the financial community</span>. Indeed, deposit growth at US commercial banks has slowed to 3.<span class="word_wrap">&#8203;</span>0-<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>5% on a year-<span class="word_wrap">&#8203;</span>over-<span class="word_wrap">&#8203;</span>year basis, from a high of 5.<span class="word_wrap">&#8203;</span>0-<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>0% in 2015 before the Fed embarked on its mission to lift interest rates.... [<span class="bold">W]<span class="word_wrap">&#8203;</span>e have seen flows into other liquidity alternatives such as MMFs and short duration bond funds for both retail and institutional investors</span>. More notably, the magnitude of the flows this year has been above and beyond what typically takes place during this time period.&quot;</p>
+<p>Our <span class="bold">PGIM Profile</span>&quot; reads, &quot;<span class="bold">This month, Money Fund Intelligence interviews Joe D'<span class="word_wrap">&#8203;</span>Angelo, Managing Director of PGIM Fixed Income, who runs the money market desk, and Chris Nicholson, Vice President of Fixed-<span class="word_wrap">&#8203;</span>Income Product Management at PGIM Investments, the distributor of the PGIM funds</span>. PGIM'<span class="word_wrap">&#8203;</span>s funds formerly carried the <span class="bold">Prudential</span> moniker, but they changed names earlier this summer to synch the funds with that of their advisor. Our Q&amp;<span class="word_wrap">&#8203;</span>A follows.&quot;</p>
+<p>MFI asks, &quot;<span class="bold">How long have you been running cash</span>?&quot; D'<span class="word_wrap">&#8203;</span>Angelo answers, &quot;<span class="word_wrap">&#8203;</span>We were running cash before I started here, which was 30 years ago.... <span class="bold">PGIM Fixed Income evolved from three internal fixed income groups focused on mutual funds, separate accounts, and proprietary accounts</span>. These three separate groups were each managing money independently in the infant stages of money markets, going back to the early '<span class="word_wrap">&#8203;</span>80s or even late '<span class="word_wrap">&#8203;</span>70'<span class="word_wrap">&#8203;</span>s.... Ultimately, all fixed income asset management was brought together. At that time, in roughly 2000, the firm had about $<span class="word_wrap">&#8203;</span>130 billion in assets under management. <span class="bold">Now, PGIM Fixed Income is up to 600-<span class="word_wrap">&#8203;</span>plus clients with over $<span class="word_wrap">&#8203;</span>700 billion under management as of June 2018</span>.&quot;</p>
+<p>He continues, &quot;<span class="word_wrap">&#8203;</span>I grew up on the issuance side of Prudential, coming here in the late '<span class="word_wrap">&#8203;</span>80s to work under the Treasurer. <span class="bold">We were a prominent direct issuer of commercial paper</span>. I moved from the direct issuer desk to securities lending, then jumped to investments around 2000.&quot;</p>
+<p>Nicholson adds, &quot;<span class="word_wrap">&#8203;</span>I'<span class="word_wrap">&#8203;</span>ve worked in various roles in financial services for the last 15 years [<span class="word_wrap">&#8203;</span>and] came over to Prudential, or PGIM now, in November of 2014.... <span class="bold">I head up the fixed income product management efforts on the mutual fund side of things</span>.&quot; (<span class="word_wrap">&#8203;</span>Watch for more excerpts from our &quot;<span class="word_wrap">&#8203;</span>profile&quot; on www.<span class="word_wrap">&#8203;</span>cranedata.<span class="word_wrap">&#8203;</span>com later this month or ask us to see the full MFI issue.)</p>
+<p>MFI'<span class="word_wrap">&#8203;</span>s &quot;<span class="bold">European Reforms</span>&quot; piece says, &quot;<span class="bold">New European Money Market Fund Reforms went into effect July 21</span>. While existing funds don'<span class="word_wrap">&#8203;</span>t need to comply until <span class="bold">Jan. 31, 2019</span>, discussions and preparations have shifted into high gear. Several of the largest managers of the '<span class="word_wrap">&#8203;</span>offshore' stable value funds likely to be most-<span class="word_wrap">&#8203;</span>impacted by the changes have announced reform plans, with <span class="bold">most expecting investors to stay put and go '<span class="word_wrap">&#8203;</span>LVNAV</span>.' <span class="bold">Moody'<span class="word_wrap">&#8203;</span>s Investors Service and Fitch Ratings recently commented on the changes, one in the form of a Q&amp;​<span class="word_wrap">&#8203;</span>A and the other via webinar</span>. (​<span class="word_wrap">&#8203;</span>See our <span class="bold">July 23 News</span>, &quot;<span class="institution"><a class="websnapr" href="https://cranedata.com/archives/all-articles/7271/">European Money Market Fund Reforms Go Live; Moody'<span class="word_wrap">&#8203;</span>s, Fitch Comment</a></span>.&quot;)</p>
+<p>Our August <span class="crane_product">MFI XLS</span>, with July 31, 2018, data, shows <span class="bold">total assets increased $<span class="word_wrap">&#8203;</span>36.<span class="word_wrap">&#8203;</span>3 billion in July to $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>044 trillion</span>, after decreasing $<span class="word_wrap">&#8203;</span>49.<span class="word_wrap">&#8203;</span>9 billion in June, increasing $<span class="word_wrap">&#8203;</span>53.<span class="word_wrap">&#8203;</span>7 billion in May, and $<span class="word_wrap">&#8203;</span>19.<span class="word_wrap">&#8203;</span>9 billion in April. Our broad <span class="crane_product">Crane Money Fund Average</span> 7-<span class="word_wrap">&#8203;</span>Day Yield rose 2 bps to 1.<span class="word_wrap">&#8203;</span>57% during the month, while our <span class="crane_product">Crane 100 Money Fund Index</span> (<span class="word_wrap">&#8203;</span>the 100 largest taxable funds) was up 2 bps to 1.<span class="word_wrap">&#8203;</span>76%.</p>
+<p>On a <span class="bold">Gross Yield Basis (<span class="word_wrap">&#8203;</span>7-<span class="word_wrap">&#8203;</span>Day)</span> (<span class="word_wrap">&#8203;</span>before expenses are taken out), the Crane MFA rose 1 bps to 2.<span class="word_wrap">&#8203;</span>03% and the Crane 100 rose to 2.<span class="word_wrap">&#8203;</span>04%.  <span class="bold">Charged Expenses averaged 0.<span class="word_wrap">&#8203;</span>46%</span> and <span class="bold">0.<span class="word_wrap">&#8203;</span>28%</span> (<span class="word_wrap">&#8203;</span>unchanged), respectively for the Crane MFA and Crane 100. <span class="bold">The average WAM (<span class="word_wrap">&#8203;</span>weighted average maturity) for the Crane MFA and Crane 100 were 27 and 28 days, respectively (<span class="word_wrap">&#8203;</span>down two days and one day from last month)</span>. (<span class="word_wrap">&#8203;</span>See our <span class="crane_product">Crane Index</span> or <span class="bold">craneindexes.<span class="word_wrap">&#8203;</span>xlsx</span> history file for more on our averages.)</p>
+
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/7295/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+            
+
+
+
+
+     <a name="item-7257">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/7257/"
+              >
+        
+          July Money Fund Portfolio Holdings: Repo Falls, But Fed RRP Rebounds
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Jul 12</span>            <span class="date_year">18</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              <p><span class="bold">Crane Data released its July Money Fund Portfolio Holdings Wednesday, and our most recent collection of taxable money market securities, with data as of June 30, 2018, shows a drop in Repo overall but a sharp rebound in Fed Repo</span>. Money market securities held by Taxable U.<span class="word_wrap">&#8203;</span>S. money funds (<span class="word_wrap">&#8203;</span>tracked by Crane Data) <span class="bold">decreased by $<span class="word_wrap">&#8203;</span>53.<span class="word_wrap">&#8203;</span>8 billion to $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>871 trillion</span> last month, after increasing by $<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>7 billion in May and $<span class="word_wrap">&#8203;</span>46.<span class="word_wrap">&#8203;</span>4 billion in April, but decreasing $<span class="word_wrap">&#8203;</span>105.<span class="word_wrap">&#8203;</span>0 billion in March. <span class="bold">Repo continued to be the largest portfolio segment, followed by Treasury securities then Agencies</span>. <span class="bold">CP</span> remained fourth ahead of <span class="bold">CDs</span>, <span class="bold">Other/<span class="word_wrap">&#8203;</span>Time Deposits</span> and <span class="bold">VRDNs</span>. Below, we review our latest <span class="crane_product">Money Fund Portfolio Holdings</span> statistics. (<span class="word_wrap">&#8203;</span>Visit our <span class="institution"><a class="websnapr" href="http://cranedata.com/subscribers/content/">Content center</a></span> to download the latest files, or <span class="institution"><a class="websnapr" href="mailto:info&#37;&#52;&#48;cranedata&#46;com">contact us</a></span> to see our latest <span class="crane_product">Portfolio Holdings</span> reports.)</p>
+<p>Among taxable money funds, <span class="bold">Repurchase Agreements (<span class="word_wrap">&#8203;</span>repo) fell $<span class="word_wrap">&#8203;</span>31.<span class="word_wrap">&#8203;</span>4 billion (-<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>2%) to $<span class="word_wrap">&#8203;</span>952.<span class="word_wrap">&#8203;</span>8 billion, or 33.<span class="word_wrap">&#8203;</span>2% of holdings</span>, after jumping $<span class="word_wrap">&#8203;</span>67.<span class="word_wrap">&#8203;</span>1 billion in May and $<span class="word_wrap">&#8203;</span>99.<span class="word_wrap">&#8203;</span>9 in April, but dropping $<span class="word_wrap">&#8203;</span>89.<span class="word_wrap">&#8203;</span>6 billion in March. <span class="bold">Treasury securities fell again, down $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>3 billion (-<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>8%) to $<span class="word_wrap">&#8203;</span>773.<span class="word_wrap">&#8203;</span>0 billion, or 26.<span class="word_wrap">&#8203;</span>9% of holdings</span>, after dropping $<span class="word_wrap">&#8203;</span>50.<span class="word_wrap">&#8203;</span>9 billion in May and $<span class="word_wrap">&#8203;</span>108.<span class="word_wrap">&#8203;</span>3 billion in April, but jumping $<span class="word_wrap">&#8203;</span>95.<span class="word_wrap">&#8203;</span>3 billion in March. <span class="bold">Government Agency Debt fell by $<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>3 billion (-<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>4%) to $<span class="word_wrap">&#8203;</span>674.<span class="word_wrap">&#8203;</span>2 billion, or 23.<span class="word_wrap">&#8203;</span>5% of all holdings</span>, after rising by $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>5 billion in May, rising $<span class="word_wrap">&#8203;</span>23.<span class="word_wrap">&#8203;</span>4 in April, and falling $<span class="word_wrap">&#8203;</span>58.<span class="word_wrap">&#8203;</span>1 billion in March. <span class="bold">Repo, Treasuries and Agencies total $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>400 trillion, representing a massive 83.<span class="word_wrap">&#8203;</span>6% of all taxable holdings</span>.</p>
+<p><span class="bold">CP fell in the sixth month of the year, while CDs and Other (<span class="word_wrap">&#8203;</span>mainly Time Deposits) securities increased</span>. <span class="bold">Commercial Paper (<span class="word_wrap">&#8203;</span>CP)</span> was down $<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>0 billion (-<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>5%) to $<span class="word_wrap">&#8203;</span>213.<span class="word_wrap">&#8203;</span>9 billion, or 7.<span class="word_wrap">&#8203;</span>5% of holdings, after rising $<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>2 billion in May, rising $<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>8 billion in April and falling $<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>2 billion in March. <span class="bold">Certificates of Deposits (<span class="word_wrap">&#8203;</span>CDs)</span> rose by $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>6 billion (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>9%) to $<span class="word_wrap">&#8203;</span>169.<span class="word_wrap">&#8203;</span>3 billion, or 5.<span class="word_wrap">&#8203;</span>9% of taxable assets (<span class="word_wrap">&#8203;</span>after dropping by $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>2 billion in May and rising $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>7 billion in April). <span class="bold">Other</span> holdings, primarily <span class="bold">Time Deposits</span>, rose by $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>6 billion (<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>1%) to $<span class="word_wrap">&#8203;</span>79.<span class="word_wrap">&#8203;</span>3 billion, or 2.<span class="word_wrap">&#8203;</span>8% of holdings. <span class="bold">VRDNs</span> held by taxable funds fell by $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>0B (-<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>4%) (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>3% of assets).</p>
+<p><span class="bold">Prime money fund assets tracked by Crane Data dipped again to $<span class="word_wrap">&#8203;</span>651 billion (<span class="word_wrap">&#8203;</span>down from $<span class="word_wrap">&#8203;</span>662 billion last month), or 22.<span class="word_wrap">&#8203;</span>7% (<span class="word_wrap">&#8203;</span>up from 22.<span class="word_wrap">&#8203;</span>6%) of taxable money fund holdings' total of $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>871 trillion</span>. Among Prime money funds, <span class="bold">CDs represent over a quarter of holdings at 26.<span class="word_wrap">&#8203;</span>0% (<span class="word_wrap">&#8203;</span>up from 25.<span class="word_wrap">&#8203;</span>3% a month ago), followed by Commercial Paper at 33.<span class="word_wrap">&#8203;</span>0% (<span class="word_wrap">&#8203;</span>down from 33.<span class="word_wrap">&#8203;</span>8%)</span>. The CP totals are comprised of: <span class="bold">Financial Company CP</span>, which makes up 21.<span class="word_wrap">&#8203;</span>5% of total holdings, <span class="bold">Asset-<span class="word_wrap">&#8203;</span>Backed CP</span>, which accounts for 6.<span class="word_wrap">&#8203;</span>5%, and <span class="bold">Non-<span class="word_wrap">&#8203;</span>Financial Company CP</span>, which makes up 5.<span class="word_wrap">&#8203;</span>0%. Prime funds also hold 5.<span class="word_wrap">&#8203;</span>5% in US Govt Agency Debt, 6.<span class="word_wrap">&#8203;</span>9% in US Treasury Debt, 7.<span class="word_wrap">&#8203;</span>2% in US Treasury Repo, 1.<span class="word_wrap">&#8203;</span>6% in Other Instruments, 8.<span class="word_wrap">&#8203;</span>9% in Non-<span class="word_wrap">&#8203;</span>Negotiable Time Deposits, 5.<span class="word_wrap">&#8203;</span>1% in Other Repo, 3.<span class="word_wrap">&#8203;</span>5% in US Government Agency Repo, and 1.<span class="word_wrap">&#8203;</span>0% in VRDNs.</p>
+<p><span class="bold">Government money fund portfolios totaled $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>539 trillion (<span class="word_wrap">&#8203;</span>53.<span class="word_wrap">&#8203;</span>6% of all MMF assets), down from $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>589 trillion in May, while Treasury money fund assets totaled another $<span class="word_wrap">&#8203;</span>681 billion (<span class="word_wrap">&#8203;</span>23.<span class="word_wrap">&#8203;</span>7%), up from $<span class="word_wrap">&#8203;</span>673 billion the prior month</span>. Government money fund portfolios were made up of <span class="bold">41.<span class="word_wrap">&#8203;</span>5% US Govt Agency Debt</span>, <span class="bold">19.<span class="word_wrap">&#8203;</span>8% US Government Agency Repo</span>, <span class="bold">16.<span class="word_wrap">&#8203;</span>4% US Treasury debt</span>, and <span class="bold">22.<span class="word_wrap">&#8203;</span>0% in US Treasury Repo</span>. Treasury money funds were comprised of 69.<span class="word_wrap">&#8203;</span>7% US Treasury debt, 30.<span class="word_wrap">&#8203;</span>1% in US Treasury Repo, and 0.<span class="word_wrap">&#8203;</span>1% in Government agency repo, Other Instrument, and Investment Company shares. <span class="bold">Government and Treasury funds combined now total $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>220 trillion, or 77.<span class="word_wrap">&#8203;</span>3% of all taxable money fund assets</span>, the same as last month.</p>
+<p><span class="bold">European-<span class="word_wrap">&#8203;</span>affiliated holdings fell $<span class="word_wrap">&#8203;</span>136.<span class="word_wrap">&#8203;</span>5 billion in June to $<span class="word_wrap">&#8203;</span>541.<span class="word_wrap">&#8203;</span>0 billion among all taxable funds (<span class="word_wrap">&#8203;</span>and including repos); their share of holdings fell to 18.<span class="word_wrap">&#8203;</span>4% from 23.<span class="word_wrap">&#8203;</span>2%</span> the previous month. <span class="bold">Eurozone-<span class="word_wrap">&#8203;</span>affiliated holdings fell $<span class="word_wrap">&#8203;</span>98.<span class="word_wrap">&#8203;</span>2 billion to $<span class="word_wrap">&#8203;</span>337.<span class="word_wrap">&#8203;</span>3 billion</span> in June; they account for 11.<span class="word_wrap">&#8203;</span>8% of overall taxable money fund holdings. <span class="bold">Asia &amp; Pacific</span> related holdings increased by $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>9 billion to $<span class="word_wrap">&#8203;</span>244.<span class="word_wrap">&#8203;</span>8 billion (<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>5% of the total). <span class="bold">Americas</span> related holdings rose $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>1 billion to $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>083 trillion and now represent 72.<span class="word_wrap">&#8203;</span>6% of holdings.</p>
+<p>The overall taxable fund <span class="bold">Repo totals</span> were made up of: <span class="bold">US Treasury Repurchase Agreements</span>, which decreased $<span class="word_wrap">&#8203;</span>26.<span class="word_wrap">&#8203;</span>2 billion, or -<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>3%, to $<span class="word_wrap">&#8203;</span>591.<span class="word_wrap">&#8203;</span>1 billion, or 20.<span class="word_wrap">&#8203;</span>6% of assets; <span class="bold">US Government Agency Repurchase Agreements</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>1 billion to $<span class="word_wrap">&#8203;</span>328.<span class="word_wrap">&#8203;</span>0 billion, or 11.<span class="word_wrap">&#8203;</span>4% of total holdings), and <span class="bold">Other Repurchase Agreements</span> ($<span class="word_wrap">&#8203;</span>33.<span class="word_wrap">&#8203;</span>7 billion, or 1.<span class="word_wrap">&#8203;</span>2% of holdings, down $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>1 billion from last month). The <span class="bold">Commercial Paper totals</span> were comprised of <span class="bold">Financial Company Commercial Paper</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>1 billion to $<span class="word_wrap">&#8203;</span>139.<span class="word_wrap">&#8203;</span>6 billion, or 4.<span class="word_wrap">&#8203;</span>9% of assets), <span class="bold">Asset Backed Commercial Paper</span> (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>3 billion to $<span class="word_wrap">&#8203;</span>42.<span class="word_wrap">&#8203;</span>2 billion, or 1.<span class="word_wrap">&#8203;</span>5%), and <span class="bold">Non-<span class="word_wrap">&#8203;</span>Financial Company Commercial Paper</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>2 billion to $<span class="word_wrap">&#8203;</span>32.<span class="word_wrap">&#8203;</span>2 billion, or 1.<span class="word_wrap">&#8203;</span>1%).</p>
+<p>The <span class="bold">20 largest Issuers</span> to taxable money market funds as of June 30, 2018, include: the <span class="bold">US Treasury</span> ($<span class="word_wrap">&#8203;</span>773.<span class="word_wrap">&#8203;</span>0 billion, or 26.<span class="word_wrap">&#8203;</span>9%), <span class="bold">Federal Home Loan Bank</span> ($<span class="word_wrap">&#8203;</span>549.<span class="word_wrap">&#8203;</span>0B, 19.<span class="word_wrap">&#8203;</span>1%), <span class="bold">BNP Paribas</span> ($<span class="word_wrap">&#8203;</span>143.<span class="word_wrap">&#8203;</span>4B, 5.<span class="word_wrap">&#8203;</span>0%), <span class="bold">RBC</span> ($<span class="word_wrap">&#8203;</span>95.<span class="word_wrap">&#8203;</span>5B, 3.<span class="word_wrap">&#8203;</span>3%), <span class="bold">Federal Reserve Bank of New York</span> $<span class="word_wrap">&#8203;</span>88.<span class="word_wrap">&#8203;</span>6B, 3.<span class="word_wrap">&#8203;</span>1%), <span class="bold">Federal Farm Credit Bank</span> $<span class="word_wrap">&#8203;</span>76.<span class="word_wrap">&#8203;</span>9B, 2.<span class="word_wrap">&#8203;</span>7%), <span class="bold">Wells Fargo</span> ($<span class="word_wrap">&#8203;</span>67.<span class="word_wrap">&#8203;</span>5B, 2.<span class="word_wrap">&#8203;</span>4%), <span class="bold">Fixed Income Clearing Corp</span> ($<span class="word_wrap">&#8203;</span>51.<span class="word_wrap">&#8203;</span>0B, 1.<span class="word_wrap">&#8203;</span>8%), <span class="bold">HSBC</span> ($<span class="word_wrap">&#8203;</span>51.<span class="word_wrap">&#8203;</span>0B, 1.<span class="word_wrap">&#8203;</span>8%), <span class="bold">Mitsubishi UFJ Financial Group Inc</span> ($<span class="word_wrap">&#8203;</span>46.<span class="word_wrap">&#8203;</span>1B, 1.<span class="word_wrap">&#8203;</span>6%), <span class="bold">Sumitomo Mitsui Banking Co</span> ($<span class="word_wrap">&#8203;</span>45.<span class="word_wrap">&#8203;</span>1B, 1.<span class="word_wrap">&#8203;</span>6%), <span class="bold">JP Morgan</span> ($<span class="word_wrap">&#8203;</span>43.<span class="word_wrap">&#8203;</span>3B, 1.<span class="word_wrap">&#8203;</span>5%), <span class="bold">Bank of Montreal</span> ($<span class="word_wrap">&#8203;</span>41.<span class="word_wrap">&#8203;</span>5B, 1.<span class="word_wrap">&#8203;</span>4%), <span class="bold">Nomura</span> ($<span class="word_wrap">&#8203;</span>40.<span class="word_wrap">&#8203;</span>4B, 1.<span class="word_wrap">&#8203;</span>4%), <span class="bold">Bank of America</span> ($<span class="word_wrap">&#8203;</span>38.<span class="word_wrap">&#8203;</span>2B, 1.<span class="word_wrap">&#8203;</span>3%), <span class="bold">Barclays PLC</span> ($<span class="word_wrap">&#8203;</span>36.<span class="word_wrap">&#8203;</span>8B, 1.<span class="word_wrap">&#8203;</span>3%), <span class="bold">Societe Generale</span> ($<span class="word_wrap">&#8203;</span>36.<span class="word_wrap">&#8203;</span>1B, 1.<span class="word_wrap">&#8203;</span>3%), <span class="bold">Toronto-<span class="word_wrap">&#8203;</span>Dominion</span> ($<span class="word_wrap">&#8203;</span>33.<span class="word_wrap">&#8203;</span>7B, 1.<span class="word_wrap">&#8203;</span>2%), <span class="bold">Citi</span> ($<span class="word_wrap">&#8203;</span>30.<span class="word_wrap">&#8203;</span>2B, 1.<span class="word_wrap">&#8203;</span>1%), and <span class="bold">Federal Home Loan Mortgage Co</span> ($<span class="word_wrap">&#8203;</span>29.<span class="word_wrap">&#8203;</span>9B, 1.<span class="word_wrap">&#8203;</span>0%).</p>
+<p>In the repo space, the <span class="bold">10 largest Repo counterparties (<span class="word_wrap">&#8203;</span>dealers)</span> with the amount of repo outstanding and market share (<span class="word_wrap">&#8203;</span>among the money funds we track) include: BNP Paribas ($<span class="word_wrap">&#8203;</span>133.<span class="word_wrap">&#8203;</span>5B, 14.<span class="word_wrap">&#8203;</span>0%), Federal Reserve Bank of New York ($<span class="word_wrap">&#8203;</span>88.<span class="word_wrap">&#8203;</span>6B, 9.<span class="word_wrap">&#8203;</span>3%), RBC ($<span class="word_wrap">&#8203;</span>79.<span class="word_wrap">&#8203;</span>0B, 8.<span class="word_wrap">&#8203;</span>3%), Wells Fargo ($<span class="word_wrap">&#8203;</span>54.<span class="word_wrap">&#8203;</span>0B, 5.<span class="word_wrap">&#8203;</span>7%), Fixed Income Clearing Corp ($<span class="word_wrap">&#8203;</span>51.<span class="word_wrap">&#8203;</span>0B, 5.<span class="word_wrap">&#8203;</span>4%), HSBC ($<span class="word_wrap">&#8203;</span>42.<span class="word_wrap">&#8203;</span>7B, 4.<span class="word_wrap">&#8203;</span>5%), Nomura ($<span class="word_wrap">&#8203;</span>40.<span class="word_wrap">&#8203;</span>4B, 4.<span class="word_wrap">&#8203;</span>2%), JP Morgan ($<span class="word_wrap">&#8203;</span>34.<span class="word_wrap">&#8203;</span>7B, 3.<span class="word_wrap">&#8203;</span>6%), Bank of America ($<span class="word_wrap">&#8203;</span>34.<span class="word_wrap">&#8203;</span>1B, 3.<span class="word_wrap">&#8203;</span>6%), and Sumitomo Mitsui Banking Co ($<span class="word_wrap">&#8203;</span>32.<span class="word_wrap">&#8203;</span>4B, 3.<span class="word_wrap">&#8203;</span>4%).</p>
+<p>The <span class="bold">10 largest Fed Repo positions among MMFs</span> on 6/<span class="word_wrap">&#8203;</span>30/<span class="word_wrap">&#8203;</span>18 include: <span class="bold">Fidelity Cash Central Fund</span> ($<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>1B in Fed Repo), <span class="bold">Fidelity Sec Lending Cash Central</span> ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>7B), <span class="bold">Dreyfus Govt Cash Mgmt</span> ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>5B), <span class="bold">Schwab Govt MMkt</span> ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>4B), <span class="bold">Fidelity Inv MM: Treasury Port</span> ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>2B), <span class="bold">Dreyfus Tr&amp;<span class="word_wrap">&#8203;</span>Ag Cash Mgmt</span> ($<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>0B), <span class="bold">JP Morgan US Govt</span> ($<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>7B), <span class="bold">BlackRock Lq FedFund</span> ($<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>4B), <span class="bold">JP Morgan US Trs Plus</span> ($<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>9B), and <span class="bold">BlackRock Cash Treas</span> ($<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>8B),.</p>
+<p>The <span class="bold">10 largest issuers of &quot;<span class="word_wrap">&#8203;</span>credit&quot; -- CDs, CP and Other securities (<span class="word_wrap">&#8203;</span>including Time Deposits and Notes) combined</span> -- include: Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank ($<span class="word_wrap">&#8203;</span>21.<span class="word_wrap">&#8203;</span>3B, 5.<span class="word_wrap">&#8203;</span>4%), RBC ($<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>5B, 4.<span class="word_wrap">&#8203;</span>2%), Mitsubishi UFJ Financial Group Inc. ($<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>2B, 3.<span class="word_wrap">&#8203;</span>9%), Swedbank AB ($<span class="word_wrap">&#8203;</span>14.<span class="word_wrap">&#8203;</span>7B, 3.<span class="word_wrap">&#8203;</span>7%), Canadian Imperial Bank of Commerce ($<span class="word_wrap">&#8203;</span>14.<span class="word_wrap">&#8203;</span>0B, 3.<span class="word_wrap">&#8203;</span>6%), Bank of Montreal ($<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>5B, 3.<span class="word_wrap">&#8203;</span>4%) Wells Fargo ($<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>5B, 3.<span class="word_wrap">&#8203;</span>4%), Sumitomo Mitsui Banking Co ($<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>7, 3.<span class="word_wrap">&#8203;</span>2%), Australia &amp; New Zealand Banking Group Ltd ($<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>0B, 3.<span class="word_wrap">&#8203;</span>1%), and Svenska Handelsbanken ($<span class="word_wrap">&#8203;</span>11.<span class="word_wrap">&#8203;</span>9, 3.<span class="word_wrap">&#8203;</span>0%).</p>
+<p>The <span class="bold">10 largest CD issuers</span> include: Wells Fargo ($<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>4B, 8.<span class="word_wrap">&#8203;</span>0%), Bank of Montreal ($<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>6B, 7.<span class="word_wrap">&#8203;</span>4%), RBC ($<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>1, 6.<span class="word_wrap">&#8203;</span>0%), Svenska Handelsbanken ($<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>3B, 5.<span class="word_wrap">&#8203;</span>5%), Mitsubishi UFJ Financial Group Inc ($<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>0B, 5.<span class="word_wrap">&#8203;</span>3%), Sumitomo Mitsui Trust Bank ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>8B, 5.<span class="word_wrap">&#8203;</span>2%), Swedbank AB ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>7B, 5.<span class="word_wrap">&#8203;</span>2%), Sumitomo Mitsui Banking Co ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>7B, 4.<span class="word_wrap">&#8203;</span>6%), Mizuho Corporate Bank Ltd ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>6B, 4.<span class="word_wrap">&#8203;</span>5%), and Canadian Imperial Bank of Commerce ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>8B, 4.<span class="word_wrap">&#8203;</span>0%).</p>
+<p>The <span class="bold">10 largest CP issuers</span> (<span class="word_wrap">&#8203;</span>we include affiliated ABCP programs) include: Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank ($<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>2B, 7.<span class="word_wrap">&#8203;</span>3%), JPMorgan ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>5B, 4.<span class="word_wrap">&#8203;</span>7%), Commonwealth Bank of Australia ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>2B, 3.<span class="word_wrap">&#8203;</span>9%), Credit Suisse ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>8B, 3.<span class="word_wrap">&#8203;</span>7%), UBS AG ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>6B, 3.<span class="word_wrap">&#8203;</span>6%), Australia &amp; New Zealand Banking Group Ltd ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>5B, 3.<span class="word_wrap">&#8203;</span>6%), National Australia Bank Ltd ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>4B, 3.<span class="word_wrap">&#8203;</span>5%), Mitsubishi UFJ Financial Group Inc ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>1B, 3.<span class="word_wrap">&#8203;</span>4%), Bank of Nova Scotia ($<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>8B, 3.<span class="word_wrap">&#8203;</span>2%), and Canadian Imperial Bank of Commerce ($<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>7B, 3.<span class="word_wrap">&#8203;</span>1%).</p>
+<p>The <span class="bold">largest increases among Issuers</span> include: Federal Reserve Bank of New York (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>67.<span class="word_wrap">&#8203;</span>1B to $<span class="word_wrap">&#8203;</span>88.<span class="word_wrap">&#8203;</span>6B), RBC (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>6B to $<span class="word_wrap">&#8203;</span>95.<span class="word_wrap">&#8203;</span>5B), Bank of Montreal (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>7B to $<span class="word_wrap">&#8203;</span>41.<span class="word_wrap">&#8203;</span>5B), Nomura (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>0B to $<span class="word_wrap">&#8203;</span>40.<span class="word_wrap">&#8203;</span>4B), Sumitomo Mitsui Trust Bank (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>1B to $<span class="word_wrap">&#8203;</span>14.<span class="word_wrap">&#8203;</span>1B), Fixed Income Clearing Co (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>1B to $<span class="word_wrap">&#8203;</span>51.<span class="word_wrap">&#8203;</span>0B), BNP Paribas (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>7B to $<span class="word_wrap">&#8203;</span>143.<span class="word_wrap">&#8203;</span>4B), DNB ASA (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>6B to $<span class="word_wrap">&#8203;</span>14.<span class="word_wrap">&#8203;</span>0B), Mitsubishi UFJ Financial Group Inc (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>4B to $<span class="word_wrap">&#8203;</span>46.<span class="word_wrap">&#8203;</span>1B), and Bank of America (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>3B to $<span class="word_wrap">&#8203;</span>38.<span class="word_wrap">&#8203;</span>2B).</p>
+<p><span class="bold">The largest decreases among Issuers of money market securities (<span class="word_wrap">&#8203;</span>including Repo) in June</span> were shown by: Credit Agricole (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>42.<span class="word_wrap">&#8203;</span>1B to $<span class="word_wrap">&#8203;</span>24.<span class="word_wrap">&#8203;</span>4B), Barclays PLC (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>21.<span class="word_wrap">&#8203;</span>9B to 36.<span class="word_wrap">&#8203;</span>8B), Credit Suisse (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>18.<span class="word_wrap">&#8203;</span>1B to $<span class="word_wrap">&#8203;</span>11.<span class="word_wrap">&#8203;</span>2B), Natixis  (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>3B to $<span class="word_wrap">&#8203;</span>28.<span class="word_wrap">&#8203;</span>0B), Societe Generale (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>2B to $<span class="word_wrap">&#8203;</span>36.<span class="word_wrap">&#8203;</span>1B), Mizuho Corporate Bank Ltd (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>11.<span class="word_wrap">&#8203;</span>6B to $<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>8B), Deutsche Bank AG (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>5B to $<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>2B), JP Morgan (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>3B to $<span class="word_wrap">&#8203;</span>43.<span class="word_wrap">&#8203;</span>3B), Federal Home Loan Bank (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>7B to $<span class="word_wrap">&#8203;</span>549.<span class="word_wrap">&#8203;</span>0B), and the US Treasury (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>3B to $<span class="word_wrap">&#8203;</span>773.<span class="word_wrap">&#8203;</span>0B).</p>
+<p><span class="bold">The United States remained the largest segment of country-<span class="word_wrap">&#8203;</span>affiliations; it represents 64.<span class="word_wrap">&#8203;</span>3% of holdings, or $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>846 trillion</span>. <span class="bold">France</span> (<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>5%, $<span class="word_wrap">&#8203;</span>243.<span class="word_wrap">&#8203;</span>9B) remained in the No. 2 spot and <span class="bold">Canada</span> (<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>3%, $<span class="word_wrap">&#8203;</span>237.<span class="word_wrap">&#8203;</span>1B) remained No. 3. <span class="bold">Japan</span> (<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>7%, $<span class="word_wrap">&#8203;</span>191.<span class="word_wrap">&#8203;</span>3B) stayed in fourth place, while the <span class="bold">United Kingdom</span> (<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>2%, $<span class="word_wrap">&#8203;</span>119.<span class="word_wrap">&#8203;</span>5B) remained in fifth place. <span class="bold">Germany</span> (<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>5%, $<span class="word_wrap">&#8203;</span>43.<span class="word_wrap">&#8203;</span>9B) moved ahead of <span class="bold">The Netherlands</span> (<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>5%, $<span class="word_wrap">&#8203;</span>42.<span class="word_wrap">&#8203;</span>4B) into sixth place. <span class="bold">Sweden</span> (<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>5%, $<span class="word_wrap">&#8203;</span>44.<span class="word_wrap">&#8203;</span>1B) ranked 8th while <span class="bold">Australia</span> (<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>4%, $<span class="word_wrap">&#8203;</span>39.<span class="word_wrap">&#8203;</span>1B) moved ahead of <span class="bold">Switzerland</span> (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>8%, $<span class="word_wrap">&#8203;</span>23.<span class="word_wrap">&#8203;</span>7B) to rank 9th and 10th. (<span class="word_wrap">&#8203;</span>Note: Crane Data attributes Treasury and Government repo to the dealer'<span class="word_wrap">&#8203;</span>s parent country of origin, though money funds themselves &quot;<span class="word_wrap">&#8203;</span>look-<span class="word_wrap">&#8203;</span>through&quot; and consider these U.<span class="word_wrap">&#8203;</span>S. government securities. All money market securities must be U.<span class="word_wrap">&#8203;</span>S. dollar-<span class="word_wrap">&#8203;</span>denominated.)</p>
+<p><span class="bold">As of June 30, 2018, Taxable money funds held 31.<span class="word_wrap">&#8203;</span>8% (<span class="word_wrap">&#8203;</span>down from 32.<span class="word_wrap">&#8203;</span>0%) of their assets in securities maturing Overnight, and another 15.<span class="word_wrap">&#8203;</span>5% maturing in 2-<span class="word_wrap">&#8203;</span>7 days (<span class="word_wrap">&#8203;</span>down from 16.<span class="word_wrap">&#8203;</span>2%)</span>. Thus, <span class="bold">47.<span class="word_wrap">&#8203;</span>3% in total matures in 1-<span class="word_wrap">&#8203;</span>7 days</span>. Another 23.<span class="word_wrap">&#8203;</span>4% matures in 8-<span class="word_wrap">&#8203;</span>30 days, while 10.<span class="word_wrap">&#8203;</span>0% matures in 31-<span class="word_wrap">&#8203;</span>60 days. <span class="bold">Note that over three-<span class="word_wrap">&#8203;</span>quarters, or 80.<span class="word_wrap">&#8203;</span>6% of securities, mature in 60 days or less (<span class="word_wrap">&#8203;</span>down slightly from last month)</span>, the dividing line for use of amortized cost accounting under SEC regulations. The next bucket, 61-<span class="word_wrap">&#8203;</span>90 days, holds 10.<span class="word_wrap">&#8203;</span>6% of taxable securities, while 7.<span class="word_wrap">&#8203;</span>5% matures in 91-<span class="word_wrap">&#8203;</span>180 days, and just 1.<span class="word_wrap">&#8203;</span>3% matures beyond 181 days.</p>
+
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/7257/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+            
+
+
+
+
+     <a name="item-7152">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/7152/"
+              >
+        
+          <span class="institution"><a class="websnapr" href="https://www.barrons.com/articles/no-volatility-here-cash-makes-a-comeback-1524864021">Barron'<span class="word_wrap">&#8203;</span>s: Cash Makes a Comeback</a></span>
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Apr 30</span>            <span class="date_year">18</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              <span class="bold">Barron'<span class="word_wrap">&#8203;</span>s</span> writes &quot;<span class="institution"><a class="websnapr" href="https://www.barrons.com/articles/no-volatility-here-cash-makes-a-comeback-1524864021">No Volatility Here: Cash Makes a Comeback</a></span>.&quot; The article tells us, &quot;<span class="word_wrap">&#8203;</span>Rising interest rates are punishing bonds and causing stocks to teeter. <span class="bold">But cash investments -- a misnomer until recently -- haven'<span class="word_wrap">&#8203;</span>t looked so good in years. Yields on money-<span class="word_wrap">&#8203;</span>market funds and other cash sanctuaries are approaching 2%, levels not seen in almost a decade</span>.&quot; Barron'<span class="word_wrap">&#8203;</span>s quotes <span class="bold">Federated Investors' Deborah Cunningham</span>, &quot;<span class="bold">Cash is an asset class once again</span>.&quot; The piece explains, &quot;<span class="word_wrap">&#8203;</span>Cash'<span class="word_wrap">&#8203;</span>s comeback has been a long time coming. <span class="bold">From 2009-<span class="word_wrap">&#8203;</span>2016, the Fed held short-<span class="word_wrap">&#8203;</span>term rates near zero, forcing money funds to waive management fees just to maintain yields of 1/<span class="word_wrap">&#8203;</span>100th of one percent (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>01%)</span>. Online banks, hungry for deposits, filled the void with higher yields on savings. That left money funds touting safety and liquidity as their only selling points. <span class="bold">But as the Fed has hiked rates -- five times since late 2016 -- money-<span class="word_wrap">&#8203;</span>market yields have rebounded</span>. The average is 1.<span class="word_wrap">&#8203;</span>5%, almost a point above the level a year ago, according to <span class="bold">Crane Data</span>. Taxable funds now have a 0.<span class="word_wrap">&#8203;</span>50 percentage point yield edge over bank deposits, reports <span class="bold">iMoneyNet</span>. Investors have noticed -- <span class="bold">money-<span class="word_wrap">&#8203;</span>fund assets went from $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>6 trillion to $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>8 trillion over the past year</span>.&quot; They quote <span class="person">Crane Data'<span class="word_wrap">&#8203;</span>s Peter Crane</span>, &quot;<span class="bold">Money funds were on a starvation diet with yields at zero percent.... Rate increases have given them a stay of execution</span>.&quot; Barron'<span class="word_wrap">&#8203;</span>s adds, &quot;<span class="bold">Yet yields on money-<span class="word_wrap">&#8203;</span>market mutual funds (<span class="word_wrap">&#8203;</span>which aren'<span class="word_wrap">&#8203;</span>t insured) should catch up to online banks' soon</span>. The funds hold debt maturing in a few days or weeks, enabling them to harvest higher yields rapidly as rates rise. <span class="bold">With two rate hikes on tap -- likely in June and September or December -- yields should reach 2%, says Crane</span>. Some institutional-<span class="word_wrap">&#8203;</span>class funds (<span class="word_wrap">&#8203;</span>which have high minimum investments and floating net asset values) already have hit that mark.... Perhaps the best argument for bolstering liquid, short-<span class="word_wrap">&#8203;</span>term savings and bond accounts now: The stock-<span class="word_wrap">&#8203;</span>market rally is extremely aged. <span class="bold">When the bear strides back onto Wall Street, bargain hunters with cash will be king</span>.&quot;
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/7152/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+            
+
+
+
+
+     <a name="item-7081">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/7081/"
+              >
+        
+          <span class="institution"><a class="websnapr" href="https://blogs.wsj.com/moneybeat/2018/03/09/brokers-to-investors-your-cash-aint-nothin-but-trash/">WSJ Hits Brokerage Sweep Rates</a></span>
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Mar 12</span>            <span class="date_year">18</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              The weekend <span class="bold">Wsll Street Journal</span> features the piece, &quot;<span class="institution"><a class="websnapr" href="https://blogs.wsj.com/moneybeat/2018/03/09/brokers-to-investors-your-cash-aint-nothin-but-trash/">Don'<span class="word_wrap">&#8203;</span>t Sweep Cash Under Brokerage'<span class="word_wrap">&#8203;</span>s Rug</a></span>.&quot; Author <span class="person">Jason Zweig</span> writes, &quot;<span class="bold">Interest rates are on the rise, but customers of brokerage firms aren'<span class="word_wrap">&#8203;</span>t going along for the ride</span>. The Federal Reserve has driven short-<span class="word_wrap">&#8203;</span>term interest rates up a full percentage point since late 2016; one-<span class="word_wrap">&#8203;</span>month Treasury bills were yielding 1.<span class="word_wrap">&#8203;</span>6% this week. <span class="bold">But you'<span class="word_wrap">&#8203;</span>d never know any of that from looking at the returns on the cash in your brokerage account</span>. Consider the <span class="bold">rates major brokers are paying on so-<span class="word_wrap">&#8203;</span>called sweep accounts</span>, the main reservoir where they hold clients' cash. <span class="bold">As of March 2, according to Crane Data, a firm that monitors money-<span class="word_wrap">&#8203;</span>market funds and other cash investments, yields on sweep accounts ranged from as low as 0.<span class="word_wrap">&#8203;</span>01% at eTrade and 0.<span class="word_wrap">&#8203;</span>05% at TD Ameritrade up to -- if &quot;<span class="word_wrap">&#8203;</span>up&quot; is the right word -- 0.<span class="word_wrap">&#8203;</span>25% at UBS and 0.<span class="word_wrap">&#8203;</span>27% at Fidelity Investments</span>. Those rates are for clients carrying cash balances between $<span class="word_wrap">&#8203;</span>100,<span class="word_wrap">&#8203;</span>000 and $<span class="word_wrap">&#8203;</span>250,<span class="word_wrap">&#8203;</span>000. Yields can be even lower for the great unwashed.&quot; The Journal article continues, &quot;<span class="word_wrap">&#8203;</span>In fairness, brokerage firms aren'<span class="word_wrap">&#8203;</span>t the only skinflints in the financial industry. <span class="bold">Yields on savings accounts at the biggest retail banks range from 0.<span class="word_wrap">&#8203;</span>00% to 0.<span class="word_wrap">&#8203;</span>13%, says Ken Tumin, founding editor of DepositAccounts.<span class="word_wrap">&#8203;</span>com</span>. Rates on checking accounts have inched up only about a quarter of a point since late 2016. <span class="bold">Many money-<span class="word_wrap">&#8203;</span>market mutual funds have also dragged their heels</span>. Even so, <span class="bold">brokerage firms stand out for how little they pay on clients' cash</span>. That'<span class="word_wrap">&#8203;</span>s partly because commissions and trading volume continue to wither. <span class="bold">By paying paltry interest on the money they take in and then investing it at market rates, brokers can pocket the difference as a welcome and low-<span class="word_wrap">&#8203;</span>risk source of profit</span>.&quot; Zweig'<span class="word_wrap">&#8203;</span>s column adds, &quot;<span class="bold">Since the Fed began raising rates, yield differences of '<span class="word_wrap">&#8203;</span>only a fraction of a percent haven'<span class="word_wrap">&#8203;</span>t seemed to matter</span>,' says <span class="person">Peter Crane</span>, president and publisher at <span class="bold">Crane Data</span>. '<span class="bold">Brokerage firms have basically been betting on the laziness of their investors</span>.' <span class="bold">Charles Schwab</span> is even taking its yields down as market rates go up. <span class="bold">It is replacing a money-<span class="word_wrap">&#8203;</span>market sweep fund that has been earning about 0.<span class="word_wrap">&#8203;</span>8% -- one of the highest rates among brokerage firms -- with a bank sweep yielding 0.<span class="word_wrap">&#8203;</span>12%, squarely at the average for the industry</span>. According to the <span class="bold">Financial Industry Regulatory Authority</span>, free credit balances -- one partial measure of uninvested cash in brokerage accounts -- totaled $<span class="word_wrap">&#8203;</span>350.<span class="word_wrap">&#8203;</span>2 billion at the end of January. <span class="bold">Assuming the average yield of 0.<span class="word_wrap">&#8203;</span>12% that Crane Data estimates for brokerage sweep accounts, investors would earn an aggregate of only $<span class="word_wrap">&#8203;</span>420 million in income on that money over the next year</span>. If, <span class="bold">instead, investors shopped around to improve their yield and earned an average of 1% on that cash, they would pocket $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>5 billion in income</span>. Overall, then, the cost of that inertia is roughly $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>1 billion. <span class="bold">If you don'<span class="word_wrap">&#8203;</span>t shop around for better yields on your cash, you'<span class="word_wrap">&#8203;</span>re handing your broker another 1% a year</span>.&quot;
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/7081/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+            
+
+
+
+
+     <a name="item-7003">&#8203;</a> 
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+    <div class="news_header_wrapper">
+      <h2 class="news_header">
+          
+          <a  class="header-link-to-fulltext"
+              href="/archives/all-articles/7003/"
+              >
+        
+          <span class="institution"><a class="websnapr" href="https://www.barrons.com/articles/2017-cash-magnets-actively-run-intermediate-bond-funds-1515812604">Barron'<span class="word_wrap">&#8203;</span>s Piece Says Money Market Funds Emerging from Decade Long Funk</a></span>
+        
+          </a>
+        
+        
+      </h2>
+      
+      
+      
+      <div class="news_date_full">
+          <span class="date_month_day">Jan 16</span>            <span class="date_year">18</span>
+      </div>
+      
+      </div>
+    
+
+    
+      
+    
+    
+      <p> 
+           
+              This weekend, <span class="bold">Barron'<span class="word_wrap">&#8203;</span>s</span> features a &quot;<span class="word_wrap">&#8203;</span>Fund of Information&quot; article, entitled, &quot;<span class="institution"><a class="websnapr" href="https://www.barrons.com/articles/2017-cash-magnets-actively-run-intermediate-bond-funds-1515812604">Active Funds' Kings of Cash</a></span>,&quot; contains a segment on <span class="bold">money market funds</span>. <span class="person">Reshma Kapadia</span> writes, &quot;[<span class="word_wrap">&#8203;</span>M]<span class="word_wrap">&#8203;</span>eager yields in short-<span class="word_wrap">&#8203;</span>term bond funds and on cash ... have pushed investors further afield in their quest for income.... <span class="bold">Investors have used short-<span class="word_wrap">&#8203;</span>term bond funds to park cash, but money intended as dry powder for a market correction or needed within a year should be in more liquid options, such as money market funds, which are emerging from a decade-<span class="word_wrap">&#8203;</span>long funk during which they paid next to nothing</span>. The Fed'<span class="word_wrap">&#8203;</span>s initial interest-<span class="word_wrap">&#8203;</span>rate hikes didn'<span class="word_wrap">&#8203;</span>t filter through to all money funds, in part because some firms were still recouping fees they had waived to keep yields positive.... <span class="bold">But now, most of those fee waivers are gone, and the average yields for the 100 largest money-<span class="word_wrap">&#8203;</span>market funds tracked by research firm Crane Data is 1.<span class="word_wrap">&#8203;</span>12% and rising, versus just 0.<span class="word_wrap">&#8203;</span>43% at the end of 2016</span>. &quot;<span class="word_wrap">&#8203;</span>Nothing is worth doing unless you get at least 1% out if the shift,&quot; says <span class="bold">Crane Data'<span class="word_wrap">&#8203;</span>s Pete Crane</span>. <span class="bold">And that tipping point is here, with the yield expected to hit 1.<span class="word_wrap">&#8203;</span>5% as the Fed raises rates further this year</span>. As if often the case, some of the highest yields are in the institutional share classes, which can be accessible through advisors, but require higher minimum investments. Crane'<span class="word_wrap">&#8203;</span>s retail picks include: <span class="fund_name"><a class="websnapr" href="/data/fund/vmfxx">Vanguard Federal Money Market</a></span> (<span class="word_wrap">&#8203;</span>VMFXX), which yields 1.<span class="word_wrap">&#8203;</span>24%, <span class="fund_name"><a class="websnapr" href="/data/fund/fdrxx">Fidelity Government Cash Reserves</a></span> (<span class="word_wrap">&#8203;</span>FDRXX), 0.<span class="word_wrap">&#8203;</span>99%, and <span class="fund_name"><a class="websnapr" href="/data/fund/swrxx">Schwab Investor Money</a></span> (<span class="word_wrap">&#8203;</span>SWRXX), 1.<span class="word_wrap">&#8203;</span>19%.&quot;
+           
+           
+          
+      </p>
+
+      
+      
+      
+        <div class="article_tools">
+            <a href="#" class="tools_top">To the top</a>
+            <a href="/archives/all-articles/7003/#emailForm" class="tools_email tooltip" title="E-mail this article">E-mail this article</a>
+        </div>
+      
+
+    
+
+          
+          <a href="/archives/press/2024/8/" style="float:right" class="archives">
+            Archives &raquo;
+          </a>
+        </div>
+
+
+            
+            
+            <!-- end left_body -->
+        </div>
+
+        <div id="content_right_side_wrapper" class="clearfix">
+         
+            <div id="content_right_side">
+              
+                
+                
+                    <!--
+    base_right_upper_ad.html
+
+    google ad normally appearing under Crane100
+    -->
+<div id="small_ad"  style="border:none;">
+
+
+
+<div id="small_ad_2">
+  <a href="https://www.craneeurosymposium.com/" target="_blank">
+    <img src="/static/images/euromfs_2024.jpg" alt="Crane's European Money Fund Symposium" />
+  </a>
+</div>
+
+</div>
+
+
+                
+                
+                
+    
+    <!-- resources/link_archives_month_index.html -->
+
+
+    <h1 style="margin-bottom:10px">Press Release Archive</h1>
+    <div id="archives_mode_toggler">
+      
+    </div>
+    <div id="archives_tables">
+      <table class="archives_year" cellspacing="0">      
+                    
+              <thead>
+                <tr>
+                  
+                  <th>2022</th>
+                  
+                  <th>2020</th>
+                  
+                  <th>2018</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2022/8">
+                        August</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2020/12">
+                        December</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2018/11">
+                        November</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2020/4">
+                        April</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2018/8">
+                        August</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2020/3">
+                        March</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2018/7">
+                        July</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2018/4">
+                        April</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2018/3">
+                        March</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight  last ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2018/1">
+                        January</a>
+                       </td>
+                    
+                    </tr>
+                    
+              </tbody>              
+                    
+              <thead>
+                <tr>
+                  
+                  <th>2017</th>
+                  
+                  <th>2016</th>
+                  
+                  <th>2015</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2017/11">
+                        November</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2016/7">
+                        July</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/12">
+                        December</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2017/10">
+                        October</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2016/6">
+                        June</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/11">
+                        November</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2017/5">
+                        May</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2016/5">
+                        May</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/9">
+                        September</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2017/1">
+                        January</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2016/4">
+                        April</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/8">
+                        August</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2016/3">
+                        March</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/7">
+                        July</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2016/2">
+                        February</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/6">
+                        June</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/5">
+                        May</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/4">
+                        April</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/3">
+                        March</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/2">
+                        February</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="  last ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2015/1">
+                        January</a>
+                       </td>
+                    
+                    </tr>
+                    
+              </tbody>              
+                    
+              <thead>
+                <tr>
+                  
+                  <th>2014</th>
+                  
+                  <th>2013</th>
+                  
+                  <th>2012</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2014/12">
+                        December</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2013/12">
+                        December</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/12">
+                        December</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2014/11">
+                        November</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2013/11">
+                        November</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/11">
+                        November</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2014/10">
+                        October</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2013/10">
+                        October</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/8">
+                        August</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2014/9">
+                        September</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2013/6">
+                        June</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/7">
+                        July</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2014/8">
+                        August</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2013/5">
+                        May</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/6">
+                        June</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2014/7">
+                        July</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2013/4">
+                        April</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/5">
+                        May</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2014/6">
+                        June</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2013/2">
+                        February</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/4">
+                        April</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2014/5">
+                        May</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2013/1">
+                        January</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/3">
+                        March</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2014/4">
+                        April</a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/2">
+                        February</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2014/3">
+                        March</a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2012/1">
+                        January</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2014/2">
+                        February</a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="  last ">
+                    
+                      <td><a href="/archives/press/2014/1">
+                        January</a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                    </tr>
+                    
+              </tbody>              
+                    
+              <thead>
+                <tr>
+                  
+                  <th>2011</th>
+                  
+                  <th>2010</th>
+                  
+                  <th>2009</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2011/12">
+                        December</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/12">
+                        December</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/12">
+                        December</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2011/11">
+                        November</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/11">
+                        November</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/11">
+                        November</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2011/10">
+                        October</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/10">
+                        October</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/10">
+                        October</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2011/9">
+                        September</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/9">
+                        September</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/9">
+                        September</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2011/8">
+                        August</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/8">
+                        August</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/8">
+                        August</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2011/7">
+                        July</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/6">
+                        June</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/7">
+                        July</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2011/6">
+                        June</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/5">
+                        May</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/6">
+                        June</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2011/5">
+                        May</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/4">
+                        April</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/5">
+                        May</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2011/4">
+                        April</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/3">
+                        March</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/4">
+                        April</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2011/2">
+                        February</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/2">
+                        February</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/3">
+                        March</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2011/1">
+                        January</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2010/1">
+                        January</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/2">
+                        February</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="  last ">
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2009/1">
+                        January</a>
+                       </td>
+                    
+                    </tr>
+                    
+              </tbody>              
+                    
+              <thead>
+                <tr>
+                  
+                  <th>2008</th>
+                  
+                  <th>2007</th>
+                  
+                  <th>2006</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2008/12">
+                        December</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/12">
+                        December</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2006/12">
+                        December</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2008/11">
+                        November</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/11">
+                        November</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2006/11">
+                        November</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2008/10">
+                        October</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/10">
+                        October</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2006/10">
+                        October</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2008/9">
+                        September</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/9">
+                        September</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2006/9">
+                        September</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2008/8">
+                        August</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/8">
+                        August</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2006/8">
+                        August</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2008/7">
+                        July</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/7">
+                        July</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2006/7">
+                        July</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2008/6">
+                        June</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/6">
+                        June</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2006/5">
+                        May</a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2008/5">
+                        May</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/5">
+                        May</a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2008/4">
+                        April</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/4">
+                        April</a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class=" ">
+                    
+                      <td><a href="/archives/press/2008/3">
+                        March</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/3">
+                        March</a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="highlight ">
+                    
+                      <td><a href="/archives/press/2008/2">
+                        February</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/2">
+                        February</a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                    </tr>
+                  
+                    <tr class="  last ">
+                    
+                      <td><a href="/archives/press/2008/1">
+                        January</a>
+                       </td>
+                    
+                      <td><a href="/archives/press/2007/1">
+                        January</a>
+                       </td>
+                    
+                      <td><a href="/archives/press//">
+                        </a>
+                       </td>
+                    
+                    </tr>
+                    
+              </tbody>              
+        
+        </table>            
+    </div>
+
+
+  
+
+              
+              
+              
+                          
+                
+              
+              
+                    <!-- base_right_offer.html -->
+
+      
+      <!--
+      <div id="google_ad">
+      <div>
+<script type="text/javascript">
+-->
+<!--
+google_ad_client = "pub-7371625923727326";
+google_ad_width = 234;
+google_ad_height = 60;
+google_ad_format = "234x60_as";
+google_ad_type = "text_image";
+google_ad_channel ="";
+google_color_border = "ffffff";
+google_color_bg = "ffffff";
+google_color_link = "777777";
+google_color_text = "555555";
+google_color_url = "999999";
+//-->
+<!--
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js" >
+</script>
+</div>
+</div>
+-->
+      
+              
+            </div>
+          
+       </div>
+       <!-- end middle_body -->
+  <div style="clear:both"></div>
+      <div id="footer_wrapper">
+        
+         <!-- footer for block "footer" in base.html -->
+
+
+        <div id="footer">
+          <span class="info">E-mail: <a href="mailto:%69%6E%66%6F%40%63%72%61%6E%65%64%61%74%61%2E%63%6F%6D"><span>&#105;</span><span>&#110;</span><span>&#102;</span><span>&#111;</span><span>&#064;</span><span>&#099;</span><span>&#114;</span><span>&#097;</span><span>&#110;</span><span>&#101;</span><span>&#100;</span><span>&#097;</span><span>&#116;</span><span>&#097;</span><span>&#046;</span><span>&#099;</span><span>&#111;</span><span>&#109;</span></a> Phone: 1-508-439-4419</span>
+          <span id="rights">&copy; 2024 Crane Data LLC. All rights reserved.</span>
+        </div>
+
+        
+      </div>
+
+   <!-- body -->
+
+</div> <!-- wrapper -->
+</body>
+</html>

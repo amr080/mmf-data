@@ -1,0 +1,256 @@
+fieldset table {
+	width:515px;
+}
+table.subscription{
+       width:880px;
+       margin-top:20px;
+       border-left:2px solid #7576FF;
+       border-right:1px solid #7576FF;
+       border-top:2px solid #7576FF;
+       border-bottom:2px solid #7576FF;
+       
+       clear:both;
+}
+table.subscription{
+       font-size:.9em;
+}
+table.subscription th{
+       padding:2px;
+       background-color: #9999ff;
+       color:black;
+       border-right:1px solid #7576FF;
+       font-size:.9em;
+       text-transform: uppercase;
+       
+}
+table.subscription td {
+       text-align: center;
+       font-size:.9em;
+       border-right:1px solid #7576FF;
+       padding:1px 2px;
+       border-bottom:1px solid #CCCEFF;           
+}
+table.subscription td .crane_product {
+        font-style:normal;
+}
+table.subscription td.last {       
+       border-bottom:1px solid #7576FF;
+}
+
+fieldset {
+	border:none;
+}
+
+table.subscription {
+	width:515px;
+	margin-bottom:20px;
+	margin-top:0;
+}
+table.subscription td {
+	padding:2px;
+}
+
+table.subscription td input {
+margin:3px 5px 2px 2px;
+position:relative;
+top:1px;
+}
+table.subscription td.product {
+	text-align:left;
+}
+table.subscription th.price {
+  border-left:1px solid #7576FF;
+}
+
+table.subscription#order_seats {
+  border-top-width:2px;
+}
+table.subscription#order_seats td.price {
+  width:80px;
+  text-align:right;
+  padding-right:10px;
+  border-left:1px solid #7576FF;
+  border-right-width:2px;
+}
+table.subscription#order_seats th.product,
+table.subscription#order_seats td.product {
+  border-left:2px solid #7576FF;
+}
+table.subscription#order_seats td.product a {
+    font-size:.9em;
+}
+table.subscription td.expired * {
+  color:red;
+}
+
+#wrapper #content_left_side fieldset.data table#order_seats.subscription td input.vIntegerField {
+  width:80px;
+}
+
+table.subscription#order_seats td input#update {
+  width:80px;
+  left:5px;
+}
+
+table#order_seats.subscription tr.update td {
+  border-width:2px 0 0 0;
+  border-top: 2px solid #7576FF;
+}
+
+
+
+fieldset.controls {
+	text-align:right;
+	padding-bottom:10px;
+}
+table.subscription tr.highlight td {
+	background-color: #DFE1FF;
+
+}
+table.subscription span.crane_product{
+	font-weight:normal;
+}
+
+
+/*
+  characteristics of elements near or in form, other than form itself
+*/
+div#subscriber_form_wrapper {
+  margin-bottom:20px;
+  padding:0 5px 30px 10px;
+}
+#subscriber_form_wrapper h2 {
+       padding: 7px 0 2px 30px;
+       margin: 5px 0 15px 0;
+       position:relative;
+       top:5px;
+       border-bottom:1px solid #333;
+}
+
+
+#subscriber_form_wrapper h3 {
+  font-weight:bold;
+  margin:15px 0px 10px 30px;
+}
+#subscriber_form_wrapper p {
+  width:500px;
+  margin: 3px 0 5px 10px;
+
+}
+#subscriber_form_wrapper table {
+  margin-top:15px;
+}
+
+/*
+  field rules
+*/
+fieldset#personal_info label,
+fieldset.data label {
+	display:block;
+	float:left;
+	width:12em;
+	margin-bottom:2px;
+	
+
+}
+fieldset#personal_info label.required,
+fieldset.data label.required {
+	font-weight:bold;
+}
+#wrapper #content_left_side table td.label {
+	font-weight:normal;
+	text-align:left;
+	padding-left:10px;
+}
+#wrapper #content_left_side table td.required {
+	font-weight:bold;
+}
+fieldset#personal_info input,
+#wrapper #content_left_side fieldset.data input,
+#wrapper #content_left_side fieldset.data select {
+	margin-bottom:2px;
+	width:200px;
+	font-size:1.0em;
+}
+fieldset#mailing {
+	padding-top:5px;
+}
+fieldset#mailing input {
+	margin-bottom:2px;
+	margin-right:5px;
+}
+span.form_instruction {
+	display:block;
+	padding: 20px 0 5px 0;
+	color:#7389FF;
+	font-weight: bold;
+}
+
+span.form_instruction,
+span.instruction {
+	display:block;
+	padding: 20px 0 5px 0;
+	color:#7389FF;
+	font-weight: bold;
+}
+
+div.form_errors, #wrapper #content_left_side table td span.form_error_value {
+  color:#CC3300;
+  display:block;
+  margin:15px 0 5px 20px;
+  font-weight:bold;
+  
+}
+
+
+/* q & a... for check boxes */
+fieldset.question input, fieldset.question label {
+  margin: 3px 10px 2px 10px;
+}
+/* I don't know why I need this... but it seems to help */
+fieldset.question input {
+  position:relative;
+  top:3px;
+}
+
+fieldset table td.radio {
+	width:30px;
+}
+fieldset table td.answer {
+	text-align:left;
+}
+fieldset.question {
+  margin-bottom:10px;
+}
+#wrapper #content_left_side input#to_bulk {
+	border:none;
+	background:none;
+	font-size:1em;
+	font-family: Verdana;
+	font-weight:bolder;
+	text-decoration:none;
+	border-bottom:1px solid black;
+	width:11em;
+	margin:0;	
+	padding:0;	
+
+}
+
+#wrapper #content_left_side table td.summaryLabel {
+  text-align:right;
+  padding-right:5px;
+  font-weight:normal;
+}
+
+#wrapper #content_left_side table td.totalLabel {
+  font-weight:bold;
+}
+#wrapper #content_left_side table td.serviceName {
+  font-weight:bold;
+}
+
+#wrapper #content_left_side #account_summary h1 {
+}
+#wrapper #content_left_side #account_summary p {
+  margin:10px;
+}

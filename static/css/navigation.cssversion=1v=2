@@ -1,0 +1,124 @@
+#navigation {    
+    width: 730px;
+    height: 22px;    
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    overflow: visible;
+    z-index: 10000;    
+    text-align: center;
+}
+#navigation #nav_wrapper {
+    display: inline-block;        
+    background: transparent url(/static/assets/nav_left.png) no-repeat top left;
+}
+#nav, 
+#nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    overflow: visible;    
+}
+#nav {
+    display: inline-block;    
+    background: transparent url(/static/assets/nav_right.png) no-repeat top right;
+    padding: 4px 8px 0 0;    
+    margin: 0 0 0 5px;
+    height: 22px;
+}
+#nav li {
+    float: left;    
+    height: 22px;
+    line-height: 22px;
+    margin: 0;    
+}
+#nav li.first {
+    margin-left: 0px;    
+}
+#nav li.last a {
+    border-right: none;
+}
+#nav li li.last {
+    border-bottom: none;  
+}
+#nav li a {
+    display: block;
+    position: relative;
+    left: 5px;
+    padding: 0 10px 0 9px;
+    color: #ccc;    
+    text-decoration: none;
+    height:16px;
+    line-height:15px;
+    border-right: 1px solid #666;
+}
+#nav li a:hover {
+    color: #fff;
+}
+#nav li.first a {
+    padding-left:0;    
+}
+#nav li div.submenu {
+    position: absolute;
+    width: auto;
+    left: -999em;
+    top: 24px;
+    background: transparent url(/static/assets/subleft.png) no-repeat bottom left;       
+    padding-left: 5px;
+    margin-left: 3px;
+    text-align: left;
+}
+#nav li div.submenu ul {
+    background: transparent url(/static/assets/subright.png) no-repeat bottom right;
+    padding-bottom: 3px;
+    z-index: 2000;       
+    border-bottom: none;
+} 
+#nav li:hover div.submenu, 
+#nav li.sfhover div.submenu {
+    left: auto;
+}
+#nav li ul li{
+    float: none;     
+    background: none;
+    margin: 0 9px 0 5px;
+    position: relative;    
+    line-height: 20px;
+    height: auto;
+    padding: 0 5px 0 0;
+    left:0px;
+    border-bottom: 1px solid #666;
+}
+#nav li ul li a {
+    height: 20px;
+    line-height: 20px;
+    left:0;
+    background: none;
+    margin:0;
+    padding:0;
+    border: none;
+}
+#nav li ul li a:hover {
+    color:#fff;
+}
+#nav li#products_menu li{       
+    width:18.7em;
+}
+#nav li#subscribers_menu ul li{       
+    width:8.7em;
+}
+#nav li#subscribers_menu_wider ul li{       
+    width:9.5em;
+}
+#nav li#resources_menu ul li{       
+    width:10.7em;
+}
+#nav li#news_menu li{       
+    width:10.5em;
+}
+#nav li#conferences_menu li{       
+    width:18.7em;
+}
+#nav li#management_menu ul li{       
+    width:11.5em;
+}

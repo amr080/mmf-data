@@ -1,0 +1,6 @@
+.web_thumbnail {
+  width: 197px;
+  height: 150px;
+  padding: 0;
+}
+

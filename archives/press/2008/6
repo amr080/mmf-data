@@ -1,0 +1,608 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  
+    <!-- default meta definitions (block 'metas') for base.html template -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2" />
+    <meta name="author" content="ProjectKaitsch.com 2006" />
+    <meta name="description" content="Crane Data brings you money market mutual fund news, information, intelligence and data." />
+    <meta name="keywords" content="Crane Data Cranedata Money Market Mutual Fund News Info Intelligence Data Cash Rates" />
+    <meta name="robots" content="index,follow" />
+    <meta name="verify-v1" content="MTKgAmiCqb38AX9b0tPD3A+dYGcJJdrm21tMLHVhamk=" />
+    <meta name="verify-v1" content="t+YJ6cewyfc9Qzu3Uq5m3PpTbSUa7WU5m9v5EbTxH8I=" />
+    <meta name="google-site-verification" content="qNOHZCaTcUcu2A4qDKn4K0qolutrhyeIsqR-j-DriNE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  
+
+  
+    <!-- stylesheet definitions: for inclusion in block "stylesheets" in base.html -->
+    
+    <link rel="stylesheet" type="text/css" href="/static/css/base_layout.css?v=4?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base_layout_left.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base_layout_right.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/text_classes.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/navigation.css?version=1?v=2"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery.tooltip.css?version=1"/>
+
+    <!--[if IE 6]>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_ie.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_left_ie.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_right_ie.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/navigation_ie6.css?version=1"/>
+    <script type="text/javascript" src="/static/hover.js"></script>
+    <![endif]-->
+
+    <!--[if IE 7]>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_ie7.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/navigation_ie7.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_right_ie7.css?version=1"/>
+    <![endif]-->
+
+
+<!-- favion -->
+    <link rel="shortcut icon" href="/static/assets/favicon.ico?version=1" />
+
+<!-- ticker css -->
+    <link rel="stylesheet" type="text/css" href='/static/css/ticker.css?version=1'/>
+
+<!-- Function to clear form field -->
+
+    <script type="text/javascript" src="/static/base/vendor/jquery/js/jquery-1.4.4.min.js?version=1"></script>
+    <script type="text/javascript" src="/static/base/vendor/jquery/js/jquery-ui-1.8.6.custom.min.js?version=1"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/cranedata-theme/jquery-ui-1.8.6.custom.css?version=1"/>
+    <script type="text/javascript" src="/static/base/vendor/jquery-plugins/qtip/js/jquery.qtip-1.0.0-rc3.min.js?version=1"></script>
+    <script type="text/javascript" src="/static/base/vendor/jquery-plugins/cookie/js/jquery.cookie.js?version=1"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" media="(max-width: 600px)" type="text/css" href='/static/css/base_mobile.css?version=1'>
+    <style type="text/css">
+      .mobile {
+        display: none;
+      }
+    </style>
+    <script type="text/javascript" src="/static/js/tooltip.js?version=1"></script>
+
+
+    <script type="text/javascript">
+    //<![CDATA[
+        $.cookie("js_test_cookie", "welcome to Crane Data");
+    //]]>
+    </script>
+
+    <script type="text/javascript">
+    //<![CDATA[
+    //usage info
+    //
+    // <input type".." id="theFieldID" value="Search our website..."onfocus="clearField('theFieldID',true/false,'Search our website...')"
+    //
+    // middle parameter:
+    // true: field is only cleared if the current value==default
+    // false: field is always cleared
+    var selectedText;
+
+    document.onmouseup = function () {
+        if (document.getSelection) {
+            selectedText = document.getSelection();
+        } else if (document.selection && document.selection.createRange) {
+            var range = document.selection.createRange();
+            selectedText = range.text;
+            }
+
+    }
+
+
+    function clearOnDrag(fieldId) {
+        field=document.getElementById(fieldId);
+        if (navigator.appName != 'Opera') // disable in Opera due to strange behavior
+                if (selectedText != undefined && selectedText != '') //if we didn't select anything or reset the variable don't verwrite field.
+                            {
+                            field.value=selectedText;
+                            selectedText=''; //flag-like usage
+                            }
+
+
+
+    }
+
+
+    function clearField(fieldId, clearOnlyIfDefault, defaultValue) {
+        field=document.getElementById(fieldId);
+        if (clearOnlyIfDefault)
+            {//clear the field only if the current value=default
+                if (field.value==defaultValue)
+                    {
+                        field.value='';
+                    }
+
+            }
+        else
+            {//always clear the field
+                field.value='';
+            }
+
+    }
+    // -- mobile collapse button --
+    $(document).ready(function() {
+      // setup collapse/reveal of mfi news
+
+      var btnSelectors = ["#mfi_news .btn-mfi", "#mfi_news .btn-xls"]
+      var colSelectors = ['td:first-of-type', 'td:last-of-type']
+      $(btnSelectors[0]).click(function(event) {
+        var btn = $(event.target)
+        var csel = [0, 1]
+        toggleMfi(btn, csel)
+      })
+      $(btnSelectors[1]).click(function(event) {
+        var btn = $(event.target)
+        var csel = [1, 0]
+        toggleMfi(btn, csel)
+      })
+
+      function toggleMfi(btn, csel) {
+        var tbl = $("#mfi_news table.mfi_news")
+        var col = tbl.find(colSelectors[csel[0]])
+        var active = btn.hasClass('active')
+        if (active) {
+          btn.removeClass('active')
+          tbl.removeClass('active')
+          col.removeClass('active')
+        } else {
+          btn.addClass('active')
+          tbl.addClass('active')
+          col.addClass('active')
+          var ucol = tbl.find(colSelectors[csel[1]])
+          ucol.removeClass('active')
+          var ubtn = $(btnSelectors[csel[1]])
+          ubtn.removeClass('active')
+        }
+      }
+      $("#subscribers .btn-login").click(function(event) {
+        var btn = $(event.target)
+        var form = $("#subscribers #short-login-form")
+        if (form.hasClass("authenticated")) {
+          var submit = $("input#logout")
+          submit.click()
+          return
+        }
+        if (form.hasClass("active")) {
+          var submit = $("input#login")
+          alert('here ' + $("input#id_username").val() + " " + $("input#id_password").val())
+          submit.click()
+          return
+        } else {
+          // var username = $("input#id_username")
+          // username.focus()
+        }
+        form.toggleClass("active")
+      })
+    })
+    //]]>
+    </script>
+
+   <!-- end stylesheets -->
+  
+  <link rel="stylesheet" type="text/css" href="/static/css/centered.css?version=1"/>
+  <link rel="stylesheet" type="text/css" href="/static/css/subscribers.css?version=1"/>
+  <!--[if IE 6]>
+  <link rel="stylesheet" type="text/css" href="/static/css/centered_ie.css?version=1"/>
+  <link rel="stylesheet" type="text/css" href="/static/css/subscribers_ie.css?version=1"/>
+  <![endif]-->
+
+
+  
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-45587515-1', 'cranedata.com');
+        ga('send', 'pageview');
+
+    </script>
+  
+
+  <title>
+    
+      Crane Data
+    
+  </title>
+
+</head>
+<body>
+<div id="wrapper">
+
+  
+      <div id="above_content">
+        
+          
+               
+               
+               <!-- cd banner for inclusion in block "cd_banner" in base.html -->
+  <!--
+    <div id="slogan">--<span>Measuring money... faster, cheaper, cleaner</span></div>
+  -->
+    <div id="logo"><a class="logo" href="/"><img src="/static/assets/full_logo.png" alt="Crane Data logo"/></a>
+          <div id="social">
+              <a href="https://twitter.com/cranedata" target="_blank">
+                  <img src="/static/images/icon-twitter.png" />
+              </a>
+              <a href="https://www.linkedin.com/in/pete-crane-a1822b2?trk=hp-identity-name" target="_blank">
+                  <img src="/static/images/icon-linkedin.png" />
+              </a>
+              <a href="https://www.facebook.com/cranedata/" target="_blank" class="last-child">
+                  <img src="/static/images/icon-facebook.png" />
+              </a>
+          </div>
+
+          <div id="navigation">
+            
+              <div id="nav_wrapper">
+              <ul id="nav" class="nav">
+                <!-- navigation menus, for inclusion in block "navigation" in base.html -->
+
+<!-- load filter for user types -->
+
+
+  <li class="first"><a href="/">Home</a></li>
+  <li id="news_menu"><a href="/news/">News</a>
+      <div class="submenu">
+          <div class="spacer"></div>
+      <ul
+      ><li><a href="/news/">News</a></li
+      ><li><a href="/resources/link-of-the-day/">Link of the Day</a></li
+      ><li><a href="/news/press/">Press</a></li
+      ><li class="last"><a href="/news/people/">People</a></li
+      ></ul>
+      </div>
+   </li>
+  <li id="resources_menu"><a href="/resources/">Resources</a>
+      <div class="submenu">
+      <ul
+      ><li><a href="/resources/resources/">Resources</a></li
+      ><li><a href="/resources/basics/">Basics</a></li
+      ><li><a href="/resources/browse-funds/">Browse Funds</a></li
+      ><li class="last"><a href="/resources/link-of-the-day/">Link of the Day</a></li
+      ></ul>
+      </div>
+   </li>
+   <li id="products_menu"><a href="/products/">Products</a>
+      <div class="submenu">
+      <ul>
+        <li><a href="/products/overview/">Overview</a></li>
+        <li><a href="/products/money-fund-intelligence/">Money Fund Intelligence</a></li>
+        <li><a href="/products/money-fund-intelligence-xls/">Money Fund Intelligence XLS</a></li>
+        <li><a href="/products/money-fund-wisdom/">Money Fund Wisdom</a></li>
+        <li><a href="http://moneyfundsymposium.com">Money Fund Symposium</a></li>
+        <li><a href="http://moneyfunduniversity.com">Money Fund University</a></li>
+        <li class="last"><a href="/products/overview/#additional_services">Additional Services</a></li>
+      </ul>
+      </div>
+   </li>
+   
+   <li id="subscribers_menu"><a href="/subscribers/sign-up/">Subscribers</a>
+      <div class="submenu">
+      <ul>
+          <li><a href="/subscribers/sign-up/">New&nbsp;Sign&nbsp;Up</a></li>
+          <li class="last"><a href="/subscribers/content/">Content</a></li>
+      </ul>
+      </div>
+    </li>
+   
+      <li id="conferences_menu"><a href="#">Conferences</a>
+      <div class="submenu">
+      <ul>
+        <li><a href="https://www.cranesmfsymposium.com/">Money Fund Symposium</a></li>
+        <li><a href="https://www.cranesmfuniversity.com/">Money Fund University</a></li>
+        <li><a href="https://www.craneeurosymposium.com/">European Money Fund Symposium</a></li>
+        <li><a href="https://www.cranesbfsymposium.com/">Bond Fund Symposium</a></li>
+        <li class="last"><a href="/subscribers/webinars/">Webinars</a></li>
+      </ul>
+      </div>
+   </li>
+   <li><a href="/contact/">Contact</a></li>
+   <li id="wisdom_menu"  class="last" >
+
+
+        <a href="https://k8.cranedata.com/wisdom">Wisdom</a>
+        <div class="submenu">
+            <ul>
+                <li><a href="https://k8.cranedata.com/wisdom">Wisdom</a></li>
+            </ul>
+        </div>
+   </li>
+    
+      
+      
+   
+
+                 
+              </ul>
+              </div>
+             <!-- navigation -->
+          </div>
+
+
+      </div>
+      <div id="right_crane_ad"><a
+              href="/products/money-fund-intelligence/">
+              <img src="/static/assets/mfi_publisher.png" 
+                   alt="Publisher of Moeny Fund Intelligence"/></a></div>
+    <!--<div id="right_crane_ad"><a href="http://www.moneyfundsymposium.com" target="_blank"><img src="/static/images/producer_of_symposium.png" alt="Producer of Money Fund Symposium"/></a></div>-->
+    
+      <div id="subscribers">
+        <div id="header">Crane Data Subscribers</div>
+        <div id="form">
+             <!-- logon form rendered as a subview -->
+             <!-- base_login.html  template to render login form -->
+<div id="short-login-form" class="">
+  
+      <div class="mobile">
+        <button class="btn-collapse btn-login">Login</button>
+      </div>
+      <form  action="" method="post" >
+         <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='4e06e1a5561ecee59d8dd68b13e0223a' /></div>
+        <fieldset id="inputs">
+              <label for="id_username">User ID:</label>
+              <input type="text" id="id_username" name="username"/>
+              <label for="id_password">Password:</label>
+              <input type="password" id="id_password" name="password" />
+        </fieldset>
+        <fieldset id="login-controls">
+          
+            <input type="hidden" name="next" value="/archives/press/2008/6" />
+          
+          <input type="submit" name="login" value="Login"  id="login"/>
+          <input type="submit" name="signup" value="New User"  id="signup"/>
+
+        </fieldset>
+      </form>
+
+      
+  
+</div>
+
+<script type="text/javascript">
+sfFocus = function() {
+    var sfEls = document.getElementsByTagName("input");
+    for (var i=0; i<sfEls.length; i++) {
+        sfEls[i].onfocus=function() {
+                this.className+=" sffocus";
+        }
+        sfEls[i].onblur=function() {
+                this.className=this.className.replace(new RegExp(" sffocus\\b"), "");
+        }
+    }}
+sfFocus();
+</script>
+
+       </div>
+      </div>
+    
+
+           <!-- cd_banner -->
+          
+           
+            
+          <div id="ad_cd_wrapper">        
+            <div id="ad_wrapper">
+              
+                <!-- default_ad.html -->
+
+<div id="ad" ><div id="flashcontent" style="z-index: 1;">
+
+        <script type="text/javascript" src="/static/swfobject.js"></script>
+
+
+    <a href="https://www.dreyfus.com" target="_blank">
+        <img src="/static/images/dreyfus-crane-468x60.jpg?v=4" alt="Dreyfus"/>
+    </a>
+
+</div></div>
+
+                      
+            </div>
+          
+          
+          <div id="cd_index_wrapper">            
+             
+                  <!-- base_crane100.html -->
+
+
+      <div id="crane_index">
+          <span id="cd_index_title">Crane 100 Money Fund Index</span>
+          <div id="index">
+            
+            
+
+              <span class="big">5.10%</span> <span class="small">unch.</span>
+            
+          </div>
+          <span id="cd_index_footer">
+            annualized 7-day current yield as of  8/23 
+          </span>
+          <div id="cd_index_link_wrapper"><a id="cd_index_link" href="/subscribers/content/"></a></div>
+      </div>
+
+                    
+           </div>
+           </div>
+           
+              
+            <div id="newsbar_search_wrapper"> <!-- news ticker and search form container-->
+      	    
+                
+
+<div id="newsbar">
+   <div id="news_ticker">
+      <div class="ticker-edge edge-left"></div>
+      <div class="ticker-edge edge-right"></div>
+      <div class="ticker-wrap">
+         <div class="ticker">
+            
+              <div class="ticker__item">
+                 <a href='https://www.craneeurosymposium.com/'
+                     >
+                   Register ASAP! European Money Fund Symposium, Sept. 19-20, London
+                  </a>
+               </div>
+            
+              <div class="ticker__item">
+                 <a href='https://www.cranesmfsymposium.com/'
+                     >
+                   Mark Your Calendars! Money Fund Symposium 2025, Boston, June 23-25
+                  </a>
+               </div>
+            
+              <div class="ticker__item">
+                 <a href='https://cranedata.com/archives/all-articles/10436/'
+                     >
+                   August Money Fund Portfolio Holdings: TDs, TBills Up; Repo Slides
+                  </a>
+               </div>
+            
+         </div>
+      </div>
+   </div>
+</div>
+
+      	    
+      	    
+                <!-- base_newsbar_area_search.html -->
+
+
+
+<div id="search_area">
+                    <form id="search_form" action="/search/" method="post">
+                        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='4e06e1a5561ecee59d8dd68b13e0223a' /></div>
+                        <fieldset>                
+                            <span><input type="text" id="search_phrase" name="search-query" value="Search our website ..." onmousedown="clearField('search_phrase',true,'Search our website ...')" onmousemove="clearOnDrag('search_phrase');"/></span>
+                            <input type="hidden" name="submit-search" value="Search" />
+                            <input type="submit" id="search_button" name="search_button" value="Search" />
+                        </fieldset>
+                    </form>
+</div>
+
+<!-- end base_newsbar_area_search.html -->
+
+            
+      	    
+      	    </div> <!-- end news ticker and search form container-->
+            
+
+            
+            
+            
+            
+           <!-- end below_navigation -->
+        <!-- end upper_wrapper -->
+      </div>
+
+      
+  <div id="content_left_side" class="centered clearfix">
+    
+      <h1>Please Log In Or Sign Up</h1>
+        <p>Welcome to Crane Data.
+        
+          You must register to view the page you requested.
+          <span class="bold">Registration is
+          free, and simple: just fill out your email and password below.</span>
+        </p><p>
+          <span class="alert">If you
+          are already registered, use the login box in the upper right to log in.
+          </span>
+        
+        </p>
+    
+      <!-- subscribers/signupShortform.html -->
+
+<!-- preamble content -->
+  
+	
+<div id="short_subscription">
+  <form method="post" action="">
+    <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='4e06e1a5561ecee59d8dd68b13e0223a' /></div>  
+    <fieldset>
+      <table cellspacing="0" class="subscription">
+  	<tr>
+    	  <th colspan="2">Sign-up form</th>
+	</tr>
+	
+	<tr>
+	  <td><label for="email" class="right">E-mail address:
+	    </label></td> 
+	  <td><input type="text" name="email" id="id_email" /></td>
+	</tr>
+	
+	<tr><td><label for="password" class="right">Password:</label></td>
+	<td><input type="password" name="password" /></td></tr>
+	<tr>
+	  <td><label for="confirm_password" class="right">Confirm Password: </label></td>
+	  <td><input type="password" name="confirm" /></td>
+	</tr>
+      </table>
+    </fieldset>
+    <fieldset id="controls">
+  <!--[if IE7]
+        <input type="hidden" name="signup_short" value="Sign Up" />
+      -->
+    <input type="submit" name="signup_short" value="Sign Up"/>
+    </fieldset>
+ </form>
+</div>
+
+
+        <hr />
+      <p>
+        Have you already signed up, but can't remember your password? Enter your
+        email to reset your password. A temporary password will be sent to you.
+      </p>
+      <!-- subscribers/retreive_account.html -->
+
+<div id="retrieve_password">
+   <form method="post" action="">
+      <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='4e06e1a5561ecee59d8dd68b13e0223a' /></div>
+      <fieldset>
+      	<table cellspacing="0" class="subscription">
+      	<tr>
+	  <th colspan="2">Retrieve Password</th>
+      	</tr>
+	
+    	<tr>
+	  <td><label for="email">E-mail address: </label></td><td><input type="text" name="email"/></td>
+      	</tr>
+      	</table>
+      </fieldset>
+      <fieldset id="controls">
+      <!--[if IE7]
+        <input type="hidden" name="retrieve" value="Retrieve Password"/>
+        -->
+        <input type="submit" name="retrieve" value="Retrieve Password"/>
+      </fieldset>
+    </form>
+  </div>
+
+  </div>
+ <!-- end middle_body -->
+  <div style="clear:both"></div>
+      <div id="footer_wrapper">
+        
+         <!-- footer for block "footer" in base.html -->
+
+
+        <div id="footer">
+          <span class="info">E-mail: <a href="mailto:%69%6E%66%6F%40%63%72%61%6E%65%64%61%74%61%2E%63%6F%6D"><span>&#105;</span><span>&#110;</span><span>&#102;</span><span>&#111;</span><span>&#064;</span><span>&#099;</span><span>&#114;</span><span>&#097;</span><span>&#110;</span><span>&#101;</span><span>&#100;</span><span>&#097;</span><span>&#116;</span><span>&#097;</span><span>&#046;</span><span>&#099;</span><span>&#111;</span><span>&#109;</span></a> Phone: 1-508-439-4419</span>
+          <span id="rights">&copy; 2024 Crane Data LLC. All rights reserved.</span>
+        </div>
+
+        
+      </div>
+
+   <!-- body -->
+
+</div> <!-- wrapper -->
+</body>
+</html>
