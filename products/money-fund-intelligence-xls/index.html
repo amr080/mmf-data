@@ -1,0 +1,1110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  
+    <!-- default meta definitions (block 'metas') for base.html template -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2" />
+    <meta name="author" content="ProjectKaitsch.com 2006" />
+    <meta name="description" content="Crane Data brings you money market mutual fund news, information, intelligence and data." />
+    <meta name="keywords" content="Crane Data Cranedata Money Market Mutual Fund News Info Intelligence Data Cash Rates" />
+    <meta name="robots" content="index,follow" />
+    <meta name="verify-v1" content="MTKgAmiCqb38AX9b0tPD3A+dYGcJJdrm21tMLHVhamk=" />
+    <meta name="verify-v1" content="t+YJ6cewyfc9Qzu3Uq5m3PpTbSUa7WU5m9v5EbTxH8I=" />
+    <meta name="google-site-verification" content="qNOHZCaTcUcu2A4qDKn4K0qolutrhyeIsqR-j-DriNE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  
+
+  
+    <!-- stylesheet definitions: for inclusion in block "stylesheets" in base.html -->
+    
+    <link rel="stylesheet" type="text/css" href="/static/css/base_layout.css?v=4?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base_layout_left.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base_layout_right.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/text_classes.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/navigation.css?version=1?v=2"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery.tooltip.css?version=1"/>
+
+    <!--[if IE 6]>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_ie.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_left_ie.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_right_ie.css?version=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/navigation_ie6.css?version=1"/>
+    <script type="text/javascript" src="/static/hover.js"></script>
+    <![endif]-->
+
+    <!--[if IE 7]>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_ie7.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/navigation_ie7.css?version=1"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/base_layout_right_ie7.css?version=1"/>
+    <![endif]-->
+
+
+<!-- favion -->
+    <link rel="shortcut icon" href="/static/assets/favicon.ico?version=1" />
+
+<!-- ticker css -->
+    <link rel="stylesheet" type="text/css" href='/static/css/ticker.css?version=1'/>
+
+<!-- Function to clear form field -->
+
+    <script type="text/javascript" src="/static/base/vendor/jquery/js/jquery-1.4.4.min.js?version=1"></script>
+    <script type="text/javascript" src="/static/base/vendor/jquery/js/jquery-ui-1.8.6.custom.min.js?version=1"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/cranedata-theme/jquery-ui-1.8.6.custom.css?version=1"/>
+    <script type="text/javascript" src="/static/base/vendor/jquery-plugins/qtip/js/jquery.qtip-1.0.0-rc3.min.js?version=1"></script>
+    <script type="text/javascript" src="/static/base/vendor/jquery-plugins/cookie/js/jquery.cookie.js?version=1"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" media="(max-width: 600px)" type="text/css" href='/static/css/base_mobile.css?version=1'>
+    <style type="text/css">
+      .mobile {
+        display: none;
+      }
+    </style>
+    <script type="text/javascript" src="/static/js/tooltip.js?version=1"></script>
+
+
+    <script type="text/javascript">
+    //<![CDATA[
+        $.cookie("js_test_cookie", "welcome to Crane Data");
+    //]]>
+    </script>
+
+    <script type="text/javascript">
+    //<![CDATA[
+    //usage info
+    //
+    // <input type".." id="theFieldID" value="Search our website..."onfocus="clearField('theFieldID',true/false,'Search our website...')"
+    //
+    // middle parameter:
+    // true: field is only cleared if the current value==default
+    // false: field is always cleared
+    var selectedText;
+
+    document.onmouseup = function () {
+        if (document.getSelection) {
+            selectedText = document.getSelection();
+        } else if (document.selection && document.selection.createRange) {
+            var range = document.selection.createRange();
+            selectedText = range.text;
+            }
+
+    }
+
+
+    function clearOnDrag(fieldId) {
+        field=document.getElementById(fieldId);
+        if (navigator.appName != 'Opera') // disable in Opera due to strange behavior
+                if (selectedText != undefined && selectedText != '') //if we didn't select anything or reset the variable don't verwrite field.
+                            {
+                            field.value=selectedText;
+                            selectedText=''; //flag-like usage
+                            }
+
+
+
+    }
+
+
+    function clearField(fieldId, clearOnlyIfDefault, defaultValue) {
+        field=document.getElementById(fieldId);
+        if (clearOnlyIfDefault)
+            {//clear the field only if the current value=default
+                if (field.value==defaultValue)
+                    {
+                        field.value='';
+                    }
+
+            }
+        else
+            {//always clear the field
+                field.value='';
+            }
+
+    }
+    // -- mobile collapse button --
+    $(document).ready(function() {
+      // setup collapse/reveal of mfi news
+
+      var btnSelectors = ["#mfi_news .btn-mfi", "#mfi_news .btn-xls"]
+      var colSelectors = ['td:first-of-type', 'td:last-of-type']
+      $(btnSelectors[0]).click(function(event) {
+        var btn = $(event.target)
+        var csel = [0, 1]
+        toggleMfi(btn, csel)
+      })
+      $(btnSelectors[1]).click(function(event) {
+        var btn = $(event.target)
+        var csel = [1, 0]
+        toggleMfi(btn, csel)
+      })
+
+      function toggleMfi(btn, csel) {
+        var tbl = $("#mfi_news table.mfi_news")
+        var col = tbl.find(colSelectors[csel[0]])
+        var active = btn.hasClass('active')
+        if (active) {
+          btn.removeClass('active')
+          tbl.removeClass('active')
+          col.removeClass('active')
+        } else {
+          btn.addClass('active')
+          tbl.addClass('active')
+          col.addClass('active')
+          var ucol = tbl.find(colSelectors[csel[1]])
+          ucol.removeClass('active')
+          var ubtn = $(btnSelectors[csel[1]])
+          ubtn.removeClass('active')
+        }
+      }
+      $("#subscribers .btn-login").click(function(event) {
+        var btn = $(event.target)
+        var form = $("#subscribers #short-login-form")
+        if (form.hasClass("authenticated")) {
+          var submit = $("input#logout")
+          submit.click()
+          return
+        }
+        if (form.hasClass("active")) {
+          var submit = $("input#login")
+          alert('here ' + $("input#id_username").val() + " " + $("input#id_password").val())
+          submit.click()
+          return
+        } else {
+          // var username = $("input#id_username")
+          // username.focus()
+        }
+        form.toggleClass("active")
+      })
+    })
+    //]]>
+    </script>
+
+   <!-- end stylesheets -->
+  
+    
+    <link rel="stylesheet" type="text/css" href="/static/css/products.css?version=1"/>
+    <!--[if lte IE 6]>
+  <link rel="stylesheet" type="text/css" href="/static/css/products_ie.css?version=1"/>  
+  <![endif]-->
+     
+
+
+  
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-45587515-1', 'cranedata.com');
+        ga('send', 'pageview');
+
+    </script>
+  
+
+  <title>
+    Crane Data Money Fund Intelligence XLS
+  </title>
+
+</head>
+<body>
+<div id="wrapper">
+
+  
+      <div id="above_content">
+        
+          
+               
+               
+               <!-- cd banner for inclusion in block "cd_banner" in base.html -->
+  <!--
+    <div id="slogan">--<span>Measuring money... faster, cheaper, cleaner</span></div>
+  -->
+    <div id="logo"><a class="logo" href="/"><img src="/static/assets/full_logo.png" alt="Crane Data logo"/></a>
+          <div id="social">
+              <a href="https://twitter.com/cranedata" target="_blank">
+                  <img src="/static/images/icon-twitter.png" />
+              </a>
+              <a href="https://www.linkedin.com/in/pete-crane-a1822b2?trk=hp-identity-name" target="_blank">
+                  <img src="/static/images/icon-linkedin.png" />
+              </a>
+              <a href="https://www.facebook.com/cranedata/" target="_blank" class="last-child">
+                  <img src="/static/images/icon-facebook.png" />
+              </a>
+          </div>
+
+          <div id="navigation">
+            
+              <div id="nav_wrapper">
+              <ul id="nav" class="nav">
+                <!-- navigation menus, for inclusion in block "navigation" in base.html -->
+
+<!-- load filter for user types -->
+
+
+  <li class="first"><a href="/">Home</a></li>
+  <li id="news_menu"><a href="/news/">News</a>
+      <div class="submenu">
+          <div class="spacer"></div>
+      <ul
+      ><li><a href="/news/">News</a></li
+      ><li><a href="/resources/link-of-the-day/">Link of the Day</a></li
+      ><li><a href="/news/press/">Press</a></li
+      ><li class="last"><a href="/news/people/">People</a></li
+      ></ul>
+      </div>
+   </li>
+  <li id="resources_menu"><a href="/resources/">Resources</a>
+      <div class="submenu">
+      <ul
+      ><li><a href="/resources/resources/">Resources</a></li
+      ><li><a href="/resources/basics/">Basics</a></li
+      ><li><a href="/resources/browse-funds/">Browse Funds</a></li
+      ><li class="last"><a href="/resources/link-of-the-day/">Link of the Day</a></li
+      ></ul>
+      </div>
+   </li>
+   <li id="products_menu"><a href="/products/">Products</a>
+      <div class="submenu">
+      <ul>
+        <li><a href="/products/overview/">Overview</a></li>
+        <li><a href="/products/money-fund-intelligence/">Money Fund Intelligence</a></li>
+        <li><a href="/products/money-fund-intelligence-xls/">Money Fund Intelligence XLS</a></li>
+        <li><a href="/products/money-fund-wisdom/">Money Fund Wisdom</a></li>
+        <li><a href="http://moneyfundsymposium.com">Money Fund Symposium</a></li>
+        <li><a href="http://moneyfunduniversity.com">Money Fund University</a></li>
+        <li class="last"><a href="/products/overview/#additional_services">Additional Services</a></li>
+      </ul>
+      </div>
+   </li>
+   
+   <li id="subscribers_menu"><a href="/subscribers/sign-up/">Subscribers</a>
+      <div class="submenu">
+      <ul>
+          <li><a href="/subscribers/sign-up/">New&nbsp;Sign&nbsp;Up</a></li>
+          <li class="last"><a href="/subscribers/content/">Content</a></li>
+      </ul>
+      </div>
+    </li>
+   
+      <li id="conferences_menu"><a href="#">Conferences</a>
+      <div class="submenu">
+      <ul>
+        <li><a href="https://www.cranesmfsymposium.com/">Money Fund Symposium</a></li>
+        <li><a href="https://www.cranesmfuniversity.com/">Money Fund University</a></li>
+        <li><a href="https://www.craneeurosymposium.com/">European Money Fund Symposium</a></li>
+        <li><a href="https://www.cranesbfsymposium.com/">Bond Fund Symposium</a></li>
+        <li class="last"><a href="/subscribers/webinars/">Webinars</a></li>
+      </ul>
+      </div>
+   </li>
+   <li><a href="/contact/">Contact</a></li>
+   <li id="wisdom_menu"  class="last" >
+
+
+        <a href="https://k8.cranedata.com/wisdom">Wisdom</a>
+        <div class="submenu">
+            <ul>
+                <li><a href="https://k8.cranedata.com/wisdom">Wisdom</a></li>
+            </ul>
+        </div>
+   </li>
+    
+      
+      
+   
+
+                 
+              </ul>
+              </div>
+             <!-- navigation -->
+          </div>
+
+
+      </div>
+      <div id="right_crane_ad"><a
+              href="/products/money-fund-intelligence/">
+              <img src="/static/assets/mfi_publisher.png" 
+                   alt="Publisher of Moeny Fund Intelligence"/></a></div>
+    <!--<div id="right_crane_ad"><a href="http://www.moneyfundsymposium.com" target="_blank"><img src="/static/images/producer_of_symposium.png" alt="Producer of Money Fund Symposium"/></a></div>-->
+    
+      <div id="subscribers">
+        <div id="header">Crane Data Subscribers</div>
+        <div id="form">
+             <!-- logon form rendered as a subview -->
+             <!-- base_login.html  template to render login form -->
+<div id="short-login-form" class="">
+  
+      <div class="mobile">
+        <button class="btn-collapse btn-login">Login</button>
+      </div>
+      <form  action="" method="post" >
+         <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='4e06e1a5561ecee59d8dd68b13e0223a' /></div>
+        <fieldset id="inputs">
+              <label for="id_username">User ID:</label>
+              <input type="text" id="id_username" name="username"/>
+              <label for="id_password">Password:</label>
+              <input type="password" id="id_password" name="password" />
+        </fieldset>
+        <fieldset id="login-controls">
+          
+            <input type="hidden" name="next" value="/products/money-fund-intelligence-xls/" />
+          
+          <input type="submit" name="login" value="Login"  id="login"/>
+          <input type="submit" name="signup" value="New User"  id="signup"/>
+
+        </fieldset>
+      </form>
+
+      
+  
+</div>
+
+<script type="text/javascript">
+sfFocus = function() {
+    var sfEls = document.getElementsByTagName("input");
+    for (var i=0; i<sfEls.length; i++) {
+        sfEls[i].onfocus=function() {
+                this.className+=" sffocus";
+        }
+        sfEls[i].onblur=function() {
+                this.className=this.className.replace(new RegExp(" sffocus\\b"), "");
+        }
+    }}
+sfFocus();
+</script>
+
+       </div>
+      </div>
+    
+
+           <!-- cd_banner -->
+          
+           
+            
+          <div id="ad_cd_wrapper">        
+            <div id="ad_wrapper">
+              
+                <!-- default_ad.html -->
+
+<div id="ad" ><div id="flashcontent" style="z-index: 1;">
+
+        <script type="text/javascript" src="/static/swfobject.js"></script>
+
+
+    <a href="https://www.dreyfus.com" target="_blank">
+        <img src="/static/images/dreyfus-crane-468x60.jpg?v=4" alt="Dreyfus"/>
+    </a>
+
+</div></div>
+
+                      
+            </div>
+          
+          
+          <div id="cd_index_wrapper">            
+             
+                  <!-- base_crane100.html -->
+
+
+      <div id="crane_index">
+          <span id="cd_index_title">Crane 100 Money Fund Index</span>
+          <div id="index">
+            
+            
+
+              <span class="big">5.10%</span> <span class="small">unch.</span>
+            
+          </div>
+          <span id="cd_index_footer">
+            annualized 7-day current yield as of  8/23 
+          </span>
+          <div id="cd_index_link_wrapper"><a id="cd_index_link" href="/subscribers/content/"></a></div>
+      </div>
+
+                    
+           </div>
+           </div>
+           
+              
+            <div id="newsbar_search_wrapper"> <!-- news ticker and search form container-->
+      	    
+                
+
+<div id="newsbar">
+   <div id="news_ticker">
+      <div class="ticker-edge edge-left"></div>
+      <div class="ticker-edge edge-right"></div>
+      <div class="ticker-wrap">
+         <div class="ticker">
+            
+              <div class="ticker__item">
+                 <a href='https://www.craneeurosymposium.com/'
+                     >
+                   Register ASAP! European Money Fund Symposium, Sept. 19-20, London
+                  </a>
+               </div>
+            
+              <div class="ticker__item">
+                 <a href='https://www.cranesmfsymposium.com/'
+                     >
+                   Mark Your Calendars! Money Fund Symposium 2025, Boston, June 23-25
+                  </a>
+               </div>
+            
+              <div class="ticker__item">
+                 <a href='https://cranedata.com/archives/all-articles/10436/'
+                     >
+                   August Money Fund Portfolio Holdings: TDs, TBills Up; Repo Slides
+                  </a>
+               </div>
+            
+         </div>
+      </div>
+   </div>
+</div>
+
+      	    
+      	    
+                <!-- base_newsbar_area_search.html -->
+
+
+
+<div id="search_area">
+                    <form id="search_form" action="/search/" method="post">
+                        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='4e06e1a5561ecee59d8dd68b13e0223a' /></div>
+                        <fieldset>                
+                            <span><input type="text" id="search_phrase" name="search-query" value="Search our website ..." onmousedown="clearField('search_phrase',true,'Search our website ...')" onmousemove="clearOnDrag('search_phrase');"/></span>
+                            <input type="hidden" name="submit-search" value="Search" />
+                            <input type="submit" id="search_button" name="search_button" value="Search" />
+                        </fieldset>
+                    </form>
+</div>
+
+<!-- end base_newsbar_area_search.html -->
+
+            
+      	    
+      	    </div> <!-- end news ticker and search form container-->
+            
+
+            
+            
+            
+            
+           <!-- end below_navigation -->
+        <!-- end upper_wrapper -->
+      </div>
+
+      
+        <div id="middle_preamble" >
+         
+        </div>
+        <div id="content_left_side" class="clearfix">
+          
+            <!-- left side of middle -->
+            
+            
+            
+  <h1>Money Fund Intelligence XLS</h1>
+  <div id="products_left">
+
+
+    
+      <div id="product_pitch">
+      
+        
+          
+              <a href="/static/products/money-fund-intelligence-xls_demo.pdf">
+          
+            <img src="/static/images/products/money-fund-intelligence-xls.jpg"
+                alt="Money Fund Intelligence XLS Sample" class="product_sample"/>
+          </a>
+      
+    
+        
+
+
+
+
+    
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+
+    
+      
+    
+    
+       
+           
+              <p><span class="bold">Crane Data released its October Money Fund Portfolio Holdings Friday, and our most recent collection, with data as of September 30, 2020, shows a decrease in every category except VRDNs last month</span>. Money market securities held by Taxable U.<span class="word_wrap">&#8203;</span>S. money funds (<span class="word_wrap">&#8203;</span>tracked by Crane Data) <span class="bold">decreased by $<span class="word_wrap">&#8203;</span>94.<span class="word_wrap">&#8203;</span>3 billion to $<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>772 trillion</span> last month, after decreasing $<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>7 billion in August, $<span class="word_wrap">&#8203;</span>83.<span class="word_wrap">&#8203;</span>1 billion in July and $<span class="word_wrap">&#8203;</span>159.<span class="word_wrap">&#8203;</span>1 billion in June. Money market securities increased $<span class="word_wrap">&#8203;</span>31.<span class="word_wrap">&#8203;</span>6 billion in May, and a staggering $<span class="word_wrap">&#8203;</span>529.<span class="word_wrap">&#8203;</span>4 billion in April and $<span class="word_wrap">&#8203;</span>725.<span class="word_wrap">&#8203;</span>6 billion in March. <span class="bold">Treasury securities remained the largest portfolio segment, followed by Repo, then Agencies</span>. <span class="bold">CP</span> remained fourth, ahead of <span class="bold">CDs</span>, <span class="bold">Other/<span class="word_wrap">&#8203;</span>Time Deposits</span> and <span class="bold">VRDNs</span>. Below, we review our latest <span class="crane_product">Money Fund Portfolio Holdings</span> statistics. (<span class="word_wrap">&#8203;</span>Visit our <span class="institution"><a class="websnapr" href="http://cranedata.com/subscribers/content/">Content center</a></span> to download the latest files, or <span class="institution"><a class="websnapr" href="mailto:info&#37;&#52;&#48;cranedata&#46;com">contact us</a></span> to see our latest <span class="institution"><a class="websnapr" href="https://cranedata.com/publications/money-fund-portfolio-holdings/details/2020-10-1/">Portfolio Holdings</a></span> reports.)</p>
+<p>Among taxable money funds, <span class="bold">Treasury securities decreased by $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>3 billion (-<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>25%) to $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>461 trillion, or 51.<span class="word_wrap">&#8203;</span>6% of holdings</span>, after increasing $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>1 billion in August, decreasing $<span class="word_wrap">&#8203;</span>79.<span class="word_wrap">&#8203;</span>9 billion in July and increasing $<span class="word_wrap">&#8203;</span>60.<span class="word_wrap">&#8203;</span>8 billion in June. <span class="bold">Repurchase Agreements (<span class="word_wrap">&#8203;</span>repo) decreased by $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>7 billion (-<span class="word_wrap">&#8203;</span>64%) to $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>041 trillion, or 21.<span class="word_wrap">&#8203;</span>8% of holdings</span>, after increasing $<span class="word_wrap">&#8203;</span>60.<span class="word_wrap">&#8203;</span>8 billion in August, increasing $<span class="word_wrap">&#8203;</span>40.<span class="word_wrap">&#8203;</span>0 billion in July, and decreasing $<span class="word_wrap">&#8203;</span>124.<span class="word_wrap">&#8203;</span>3 billion in June. <span class="bold">Government Agency Debt decreased</span> by $<span class="word_wrap">&#8203;</span>28.<span class="word_wrap">&#8203;</span>1 billion (-<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>5%) to $<span class="word_wrap">&#8203;</span>768.<span class="word_wrap">&#8203;</span>4 billion, or 16.<span class="word_wrap">&#8203;</span>1% of holdings, after decreasing $<span class="word_wrap">&#8203;</span>37.<span class="word_wrap">&#8203;</span>6 billion in August, $<span class="word_wrap">&#8203;</span>45.<span class="word_wrap">&#8203;</span>1 billion in July and $<span class="word_wrap">&#8203;</span>65.<span class="word_wrap">&#8203;</span>2 billion in June. <span class="bold">Repo, Treasuries and Agencies totaled $<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>271 trillion, representing a massive 89.<span class="word_wrap">&#8203;</span>5% of all taxable holdings</span>.</p>
+<p><span class="bold">Money funds' holdings of CP, CDs and  Other (<span class="word_wrap">&#8203;</span>mainly Time Deposits) fell in September, breaking below the $<span class="word_wrap">&#8203;</span>500 billion level for the first time since December 2018, while  VDRNs saw assets increase</span>. <span class="bold">Commercial Paper (<span class="word_wrap">&#8203;</span>CP)</span> decreased $<span class="word_wrap">&#8203;</span>11.<span class="word_wrap">&#8203;</span>6 billion (-<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>8%) to $<span class="word_wrap">&#8203;</span>231.<span class="word_wrap">&#8203;</span>9 billion, or 4.<span class="word_wrap">&#8203;</span>9% of holdings, after decreasing $<span class="word_wrap">&#8203;</span>32.<span class="word_wrap">&#8203;</span>5 billion in August, $<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>7 billion in July and $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>5 billion in June. <span class="bold">Certificates of Deposit (<span class="word_wrap">&#8203;</span>CDs)</span> fell by $<span class="word_wrap">&#8203;</span>20.<span class="word_wrap">&#8203;</span>8 billion (-<span class="word_wrap">&#8203;</span>11.<span class="word_wrap">&#8203;</span>8%) to $<span class="word_wrap">&#8203;</span>156.<span class="word_wrap">&#8203;</span>1 billion, or 3.<span class="word_wrap">&#8203;</span>3% of taxable assets, after decreasing $<span class="word_wrap">&#8203;</span>19.<span class="word_wrap">&#8203;</span>0 billion in August, $<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>3 billion in July and $<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>1 billion in June. <span class="bold">Other</span> holdings, primarily <span class="bold">Time Deposits</span>, decreased $<span class="word_wrap">&#8203;</span>21.<span class="word_wrap">&#8203;</span>0 billion (-<span class="word_wrap">&#8203;</span>18.<span class="word_wrap">&#8203;</span>2%) to $<span class="word_wrap">&#8203;</span>94.<span class="word_wrap">&#8203;</span>6 billion, or 2.<span class="word_wrap">&#8203;</span>0% of holdings, after increasing $<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>3 billion in August, $<span class="word_wrap">&#8203;</span>22.<span class="word_wrap">&#8203;</span>3 billion in July and decreasing by $<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>7 billion in June. <span class="bold">VRDNs increased to</span> $<span class="word_wrap">&#8203;</span>94.<span class="word_wrap">&#8203;</span>6 billion, or 0.<span class="word_wrap">&#8203;</span>4% of assets, from $<span class="word_wrap">&#8203;</span>19.<span class="word_wrap">&#8203;</span>1 billion the previous month. (<span class="word_wrap">&#8203;</span>Note: This total is VRDNs for taxable funds only. We will publish Tax Exempt MMF holdings separately late Tuesday.)</p>
+<p><span class="bold">Prime money fund assets tracked by Crane Data dropped $<span class="word_wrap">&#8203;</span>149.<span class="word_wrap">&#8203;</span>0 billion to $<span class="word_wrap">&#8203;</span>987.<span class="word_wrap">&#8203;</span>0 billion, or 20.<span class="word_wrap">&#8203;</span>7% of taxable money funds' $<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>772 trillion total</span>. Among Prime money funds, <span class="bold">CDs represent 15.<span class="word_wrap">&#8203;</span>8% (<span class="word_wrap">&#8203;</span>up from 15.<span class="word_wrap">&#8203;</span>6% a month ago), while Commercial Paper accounted for 23.<span class="word_wrap">&#8203;</span>5% (<span class="word_wrap">&#8203;</span>up from 21.<span class="word_wrap">&#8203;</span>4%)</span>. The CP totals are comprised of: <span class="bold">Financial Company CP</span>, which makes up 14.<span class="word_wrap">&#8203;</span>3% of total holdings, <span class="bold">Asset-<span class="word_wrap">&#8203;</span>Backed CP</span>, which accounts for 5.<span class="word_wrap">&#8203;</span>3%, and <span class="bold">Non-<span class="word_wrap">&#8203;</span>Financial Company CP</span>, which makes up 3.<span class="word_wrap">&#8203;</span>9%. Prime funds also hold 6.<span class="word_wrap">&#8203;</span>4% in US Govt Agency Debt, 27.<span class="word_wrap">&#8203;</span>5% in US Treasury Debt, 5.<span class="word_wrap">&#8203;</span>0% in US Treasury Repo, 0.<span class="word_wrap">&#8203;</span>6% in Other Instruments, 5.<span class="word_wrap">&#8203;</span>6% in Non-<span class="word_wrap">&#8203;</span>Negotiable Time Deposits, 4.<span class="word_wrap">&#8203;</span>9% in Other Repo, 6.<span class="word_wrap">&#8203;</span>4% in US Government Agency Repo and 1.<span class="word_wrap">&#8203;</span>0% in VRDNs.</p>
+<p><span class="bold">Government money fund portfolios totaled $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>616 trillion (<span class="word_wrap">&#8203;</span>54.<span class="word_wrap">&#8203;</span>8% of all MMF assets), up $<span class="word_wrap">&#8203;</span>111.<span class="word_wrap">&#8203;</span>0 billion from $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>505 trillion in August, while Treasury money fund assets totaled another $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>170 trillion (<span class="word_wrap">&#8203;</span>24.<span class="word_wrap">&#8203;</span>5%), down from $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>226 trillion the prior month</span>. Government money fund portfolios were made up of <span class="bold">27.<span class="word_wrap">&#8203;</span>0% US Govt Agency Debt</span>, <span class="bold">11.<span class="word_wrap">&#8203;</span>7% US Government Agency Repo</span>, <span class="bold">46.<span class="word_wrap">&#8203;</span>1% US Treasury debt</span>, <span class="bold">14.<span class="word_wrap">&#8203;</span>9% in US Treasury Repo</span>, <span class="bold">0.<span class="word_wrap">&#8203;</span>2% in VRDNs</span>  and <span class="bold">0.<span class="word_wrap">&#8203;</span>1% in Investment Company</span> . Treasury money funds were comprised of 84.<span class="word_wrap">&#8203;</span>1% US Treasury Debt and 15.<span class="word_wrap">&#8203;</span>8% in US Treasury Repo. <span class="bold">Government and Treasury funds combined now total $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>786 trillion, or 79.<span class="word_wrap">&#8203;</span>3% of all taxable money fund assets</span>.</p>
+<p><span class="bold">European-<span class="word_wrap">&#8203;</span>affiliated holdings (<span class="word_wrap">&#8203;</span>including repo) decreased by $<span class="word_wrap">&#8203;</span>33.<span class="word_wrap">&#8203;</span>5 billion in September to $<span class="word_wrap">&#8203;</span>626.<span class="word_wrap">&#8203;</span>4 billion; their share of holdings fell to 13.<span class="word_wrap">&#8203;</span>1% from last month'<span class="word_wrap">&#8203;</span>s 13.<span class="word_wrap">&#8203;</span>6%</span>. <span class="bold">Eurozone-<span class="word_wrap">&#8203;</span>affiliated holdings fell to $<span class="word_wrap">&#8203;</span>430.<span class="word_wrap">&#8203;</span>0 billion from last month'<span class="word_wrap">&#8203;</span>s $<span class="word_wrap">&#8203;</span>456.<span class="word_wrap">&#8203;</span>7 billion</span>; they account for 9.<span class="word_wrap">&#8203;</span>0% of overall taxable money fund holdings. <span class="bold">Asia &amp; Pacific</span> related holdings decreased $<span class="word_wrap">&#8203;</span>21.<span class="word_wrap">&#8203;</span>1 billion to $<span class="word_wrap">&#8203;</span>227.<span class="word_wrap">&#8203;</span>0 billion (<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>8% of the total). <span class="bold">Americas</span> related holdings fell $<span class="word_wrap">&#8203;</span>37.<span class="word_wrap">&#8203;</span>0 billion to $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>915 trillion and now represent 82.<span class="word_wrap">&#8203;</span>0% of holdings.</p>
+<p>The overall taxable fund <span class="bold">Repo totals</span> were made up of: <span class="bold">US Treasury Repurchase Agreements</span> (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>29.<span class="word_wrap">&#8203;</span>9 billion, or 5.<span class="word_wrap">&#8203;</span>0%, to $<span class="word_wrap">&#8203;</span>623.<span class="word_wrap">&#8203;</span>4 billion, or 13.<span class="word_wrap">&#8203;</span>1% of assets); <span class="bold">US Government Agency Repurchase Agreements</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>22,<span class="word_wrap">&#8203;</span>9 billion, or -<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>8%, to $<span class="word_wrap">&#8203;</span>369.<span class="word_wrap">&#8203;</span>4 billion, or 7.<span class="word_wrap">&#8203;</span>7% of total holdings), and <span class="bold">Other Repurchase Agreements</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>7 billion, or -<span class="word_wrap">&#8203;</span>22.<span class="word_wrap">&#8203;</span>2%, from last month to $<span class="word_wrap">&#8203;</span>48.<span class="word_wrap">&#8203;</span>0 billion, or 1.<span class="word_wrap">&#8203;</span>0% of holdings). The <span class="bold">Commercial Paper totals</span> were comprised of <span class="bold">Financial Company Commercial Paper</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>0 billion to $<span class="word_wrap">&#8203;</span>141.<span class="word_wrap">&#8203;</span>5 billion, or 3.<span class="word_wrap">&#8203;</span>0% of assets), <span class="bold">Asset Backed Commercial Paper</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>2 billion to $<span class="word_wrap">&#8203;</span>52.<span class="word_wrap">&#8203;</span>3 billion, or 1.<span class="word_wrap">&#8203;</span>1%), and <span class="bold">Non-<span class="word_wrap">&#8203;</span>Financial Company Commercial Paper</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>4 billion to $<span class="word_wrap">&#8203;</span>38.<span class="word_wrap">&#8203;</span>2 billion, or 0.<span class="word_wrap">&#8203;</span>8%).</p>
+<p>The <span class="bold">20 largest Issuers</span> to taxable money market funds as of Sept. 30, 2020, include: the <span class="bold">US Treasury</span> ($<span class="word_wrap">&#8203;</span>2,<span class="word_wrap">&#8203;</span>477.<span class="word_wrap">&#8203;</span>9 billion, or 51.<span class="word_wrap">&#8203;</span>9%), <span class="bold">Federal Home Loan Bank</span> ($<span class="word_wrap">&#8203;</span>460.<span class="word_wrap">&#8203;</span>7B, 9.<span class="word_wrap">&#8203;</span>7%), <span class="bold">Fixed Income Clearing Co</span> ($<span class="word_wrap">&#8203;</span>144.<span class="word_wrap">&#8203;</span>9B, 3.<span class="word_wrap">&#8203;</span>0%), <span class="bold">BNP Paribas</span> ($<span class="word_wrap">&#8203;</span>132.<span class="word_wrap">&#8203;</span>9B, 2.<span class="word_wrap">&#8203;</span>8%), <span class="bold">Federal National Mortgage Association</span> ($<span class="word_wrap">&#8203;</span>113.<span class="word_wrap">&#8203;</span>7B, 2.<span class="word_wrap">&#8203;</span>4%), <span class="bold">Federal Farm Credit Bank</span> ($<span class="word_wrap">&#8203;</span>98.<span class="word_wrap">&#8203;</span>3B, 2.<span class="word_wrap">&#8203;</span>1%), <span class="bold">RBC</span> ($<span class="word_wrap">&#8203;</span>96.<span class="word_wrap">&#8203;</span>7B, 2.<span class="word_wrap">&#8203;</span>0%), <span class="bold">JP Morgan</span> ($<span class="word_wrap">&#8203;</span>92.<span class="word_wrap">&#8203;</span>7B, 1.<span class="word_wrap">&#8203;</span>9%), <span class="bold">Federal Home Loan Mortgage Co</span> ($<span class="word_wrap">&#8203;</span>74.<span class="word_wrap">&#8203;</span>7B, 1.<span class="word_wrap">&#8203;</span>6%), <span class="bold">Barclays</span> ($<span class="word_wrap">&#8203;</span>64.<span class="word_wrap">&#8203;</span>0B, 1.<span class="word_wrap">&#8203;</span>3%), <span class="bold">Mitsubishi UFJ Financial Group Inc</span> ($<span class="word_wrap">&#8203;</span>62.<span class="word_wrap">&#8203;</span>3B, 1.<span class="word_wrap">&#8203;</span>3%), <span class="bold">Credit Agricole</span> ($<span class="word_wrap">&#8203;</span>50.<span class="word_wrap">&#8203;</span>5B, 1.<span class="word_wrap">&#8203;</span>1%), <span class="bold">Citi</span> ($<span class="word_wrap">&#8203;</span>47.<span class="word_wrap">&#8203;</span>9B, 1.<span class="word_wrap">&#8203;</span>0%), <span class="bold">Sumitomo Mitsui Banking Co</span> ($<span class="word_wrap">&#8203;</span>47.<span class="word_wrap">&#8203;</span>0B, 1.<span class="word_wrap">&#8203;</span>0%), <span class="bold">Societe Generale</span> ($<span class="word_wrap">&#8203;</span>42.<span class="word_wrap">&#8203;</span>3B, 0.<span class="word_wrap">&#8203;</span>9%), <span class="bold">Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank</span> ($<span class="word_wrap">&#8203;</span>39.<span class="word_wrap">&#8203;</span>5B, 0.<span class="word_wrap">&#8203;</span>8%), <span class="bold">Bank of Montreal</span> ($<span class="word_wrap">&#8203;</span>37.<span class="word_wrap">&#8203;</span>5B, 0.<span class="word_wrap">&#8203;</span>8%), <span class="bold">Bank of America</span> ($<span class="word_wrap">&#8203;</span>37.<span class="word_wrap">&#8203;</span>5B, 0.<span class="word_wrap">&#8203;</span>8%), <span class="bold">HSBC</span> ($<span class="word_wrap">&#8203;</span>31.<span class="word_wrap">&#8203;</span>9B, 0.<span class="word_wrap">&#8203;</span>7%) and <span class="bold">Canadian Imperial Bank of Commerce</span> ($<span class="word_wrap">&#8203;</span>28.<span class="word_wrap">&#8203;</span>5B, 0.<span class="word_wrap">&#8203;</span>6%).</p>
+<p>In the repo space, the <span class="bold">10 largest Repo counterparties (<span class="word_wrap">&#8203;</span>dealers)</span> with the amount of repo outstanding and market share (<span class="word_wrap">&#8203;</span>among the money funds we track) include: Fixed Income Clearing Co ($<span class="word_wrap">&#8203;</span>144.<span class="word_wrap">&#8203;</span>8B, 13.<span class="word_wrap">&#8203;</span>9%), BNP Paribas ($<span class="word_wrap">&#8203;</span>120.<span class="word_wrap">&#8203;</span>8B, 11.<span class="word_wrap">&#8203;</span>6%), JP Morgan ($<span class="word_wrap">&#8203;</span>83.<span class="word_wrap">&#8203;</span>1B, 8.<span class="word_wrap">&#8203;</span>0%), RBC ($<span class="word_wrap">&#8203;</span>78.<span class="word_wrap">&#8203;</span>8B, 7.<span class="word_wrap">&#8203;</span>6%), Barclays ($<span class="word_wrap">&#8203;</span>46.<span class="word_wrap">&#8203;</span>6B, 4.<span class="word_wrap">&#8203;</span>5%), Credit Agricole ($<span class="word_wrap">&#8203;</span>42.<span class="word_wrap">&#8203;</span>6B, 4.<span class="word_wrap">&#8203;</span>1%), Mitsubishi UFJ Financial Group ($<span class="word_wrap">&#8203;</span>42.<span class="word_wrap">&#8203;</span>4B, 4.<span class="word_wrap">&#8203;</span>1%), Citi ($<span class="word_wrap">&#8203;</span>39.<span class="word_wrap">&#8203;</span>4B, 3.<span class="word_wrap">&#8203;</span>8%), Bank of America ($<span class="word_wrap">&#8203;</span>35.<span class="word_wrap">&#8203;</span>5B, 3.<span class="word_wrap">&#8203;</span>4%) and Societe Generale ($<span class="word_wrap">&#8203;</span>32.<span class="word_wrap">&#8203;</span>9B, 3.<span class="word_wrap">&#8203;</span>2%).</p>
+<p>The <span class="bold">10 largest issuers of &quot;<span class="word_wrap">&#8203;</span>credit&quot; -- CDs, CP and Other securities (<span class="word_wrap">&#8203;</span>including Time Deposits and Notes) combined</span> -- include: Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank ($<span class="word_wrap">&#8203;</span>23.<span class="word_wrap">&#8203;</span>7B, 5.<span class="word_wrap">&#8203;</span>6%), Mitsubishi UFJ Financial Group ($<span class="word_wrap">&#8203;</span>19.<span class="word_wrap">&#8203;</span>9B, 4.<span class="word_wrap">&#8203;</span>7%), RBC ($<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>9B, 4.<span class="word_wrap">&#8203;</span>2%), Barclays ($<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>4B, 4.<span class="word_wrap">&#8203;</span>1%), Mizuho Corporate Bank Ltd ($<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>3B, 4.<span class="word_wrap">&#8203;</span>1%), Sumitomo Mitsui Trust Bank ($<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>3B, 3.<span class="word_wrap">&#8203;</span>9%), Credit Suisse ($<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>2B, 2.<span class="word_wrap">&#8203;</span>9%), Canadian Imperial Bank of Commerce ($<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>0B, 2.<span class="word_wrap">&#8203;</span>8%) and BNP Paribas ($<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>0B, 2.<span class="word_wrap">&#8203;</span>8%).</p>
+<p>The <span class="bold">10 largest CD issuers</span> include: Sumitomo Mitsui Banking Co ($<span class="word_wrap">&#8203;</span>14.<span class="word_wrap">&#8203;</span>2B, 9.<span class="word_wrap">&#8203;</span>1%), Mitsubishi UFJ Financial Group Inc ($<span class="word_wrap">&#8203;</span>14.<span class="word_wrap">&#8203;</span>1B, 9.<span class="word_wrap">&#8203;</span>0%), Sumitomo Mitsui Trust Bank ($<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>2B, 6.<span class="word_wrap">&#8203;</span>6%), Bank of Montreal ($<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>2B, 6.<span class="word_wrap">&#8203;</span>5%), Mizuho Corporate Bank Ltd ($<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>5B, 6.<span class="word_wrap">&#8203;</span>1%), Canadian Imperial Bank of Commerce ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>7B, 4.<span class="word_wrap">&#8203;</span>9%), Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>2B, 4.<span class="word_wrap">&#8203;</span>6%), Credit Suisse ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>1B, 4.<span class="word_wrap">&#8203;</span>5%), Svenska Handelsbanken ($<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>9B, 3.<span class="word_wrap">&#8203;</span>7%) and Credit Mutuel ($<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>2B, 3.<span class="word_wrap">&#8203;</span>3%).</p>
+<p>The <span class="bold">10 largest CP issuers</span> (<span class="word_wrap">&#8203;</span>we include affiliated ABCP programs) include: Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank ($<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>2B, 8.<span class="word_wrap">&#8203;</span>0%), RBC ($<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>3B, 5.<span class="word_wrap">&#8203;</span>1%), JP Morgan ($<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>6B, 4.<span class="word_wrap">&#8203;</span>8%), Societe Generale ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>3B, 4.<span class="word_wrap">&#8203;</span>1%), Citi ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>6B, 3.<span class="word_wrap">&#8203;</span>8%), BNP Paribas ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>5B, 3.<span class="word_wrap">&#8203;</span>7%), BPCE SA ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>0B, 3.<span class="word_wrap">&#8203;</span>5%), NRW.<span class="word_wrap">&#8203;</span>Bank ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>6B, 3.<span class="word_wrap">&#8203;</span>3%), Sumitomo Mitsui Trust Bank ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>1B, 3.<span class="word_wrap">&#8203;</span>0%) and Toyota ($<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>3B, 2.<span class="word_wrap">&#8203;</span>6%).</p>
+<p>The <span class="bold">largest increases among Issuers</span> include: Fixed Income Clearing Corp (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>31.<span class="word_wrap">&#8203;</span>7B to $<span class="word_wrap">&#8203;</span>144.<span class="word_wrap">&#8203;</span>9B), US Treasury (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>4B to $<span class="word_wrap">&#8203;</span>2,<span class="word_wrap">&#8203;</span>477.<span class="word_wrap">&#8203;</span>9B), Barclays PLC (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>3B to $<span class="word_wrap">&#8203;</span>64.<span class="word_wrap">&#8203;</span>0B), BNP Paribas (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>7B to $<span class="word_wrap">&#8203;</span>132.<span class="word_wrap">&#8203;</span>9B), HSBC (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>4B to $<span class="word_wrap">&#8203;</span>31.<span class="word_wrap">&#8203;</span>9B), ABN Amro Bank (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>9B to $<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>4B), Deutsche Bank AG (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>7B to $<span class="word_wrap">&#8203;</span>19.<span class="word_wrap">&#8203;</span>0B), JP Morgan (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>5B to $<span class="word_wrap">&#8203;</span>92.<span class="word_wrap">&#8203;</span>7B), Rabobank (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>4B to $<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>8B) and Natixis (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>0B to $<span class="word_wrap">&#8203;</span>25.<span class="word_wrap">&#8203;</span>5B).</p>
+<p><span class="bold">The largest decreases among Issuers of money market securities (<span class="word_wrap">&#8203;</span>including Repo) in September</span> were shown by: the Federal Home Loan Bank (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>30.<span class="word_wrap">&#8203;</span>7B to $<span class="word_wrap">&#8203;</span>460.<span class="word_wrap">&#8203;</span>7B), Credit Agricole (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>22.<span class="word_wrap">&#8203;</span>5B to $<span class="word_wrap">&#8203;</span>50.<span class="word_wrap">&#8203;</span>5B), Federal Home Loan Mortgage Corp (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>6B to $<span class="word_wrap">&#8203;</span>74.<span class="word_wrap">&#8203;</span>7B), Mizuho Corporate Bank Ltd (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>2B to $<span class="word_wrap">&#8203;</span>26.<span class="word_wrap">&#8203;</span>7B), DNB ASA (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>9B to $<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>1B), Bank of Nova Scotia (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>4B to $<span class="word_wrap">&#8203;</span>20.<span class="word_wrap">&#8203;</span>2B), Citi (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>9B to $<span class="word_wrap">&#8203;</span>47.<span class="word_wrap">&#8203;</span>9B), RBC (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>8B to $<span class="word_wrap">&#8203;</span>96.<span class="word_wrap">&#8203;</span>7B), Mitsubishi UFJ Financial Group Inc (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>6B to $<span class="word_wrap">&#8203;</span>62.<span class="word_wrap">&#8203;</span>3B) and Canadian Imperial Bank of Commerce (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>2B to $<span class="word_wrap">&#8203;</span>28.<span class="word_wrap">&#8203;</span>5B).</p>
+<p><span class="bold">The United States remained the largest segment of country-<span class="word_wrap">&#8203;</span>affiliations; it represents 77.<span class="word_wrap">&#8203;</span>1% of holdings, or $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>679 trillion</span>. <span class="bold">France</span> (<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>8%, $<span class="word_wrap">&#8203;</span>276.<span class="word_wrap">&#8203;</span>0B) was number two, and <span class="bold">Canada</span> (<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>9%, $<span class="word_wrap">&#8203;</span>235.<span class="word_wrap">&#8203;</span>3B) was third. <span class="bold">Japan</span> (<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>5%, $<span class="word_wrap">&#8203;</span>216.<span class="word_wrap">&#8203;</span>3B) occupied fourth place. The <span class="bold">United Kingdom</span> (<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>6%, $<span class="word_wrap">&#8203;</span>125.<span class="word_wrap">&#8203;</span>5B) remained in fifth place. <span class="bold">The Netherlands</span> (<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>3%, $<span class="word_wrap">&#8203;</span>59.<span class="word_wrap">&#8203;</span>7B) was in sixth place, followed by <span class="bold">Germany</span> (<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>2%, $<span class="word_wrap">&#8203;</span>58.<span class="word_wrap">&#8203;</span>1B), <span class="bold">Sweden</span> (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>7%, $<span class="word_wrap">&#8203;</span>31.<span class="word_wrap">&#8203;</span>1B), <span class="bold">Switzerland</span> (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>6%, $<span class="word_wrap">&#8203;</span>30.<span class="word_wrap">&#8203;</span>0B) and <span class="bold">Australia</span> (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>6%, $<span class="word_wrap">&#8203;</span>26.<span class="word_wrap">&#8203;</span>2B). (<span class="word_wrap">&#8203;</span>Note: Crane Data attributes Treasury and Government repo to the dealer'<span class="word_wrap">&#8203;</span>s parent country of origin, though money funds themselves &quot;<span class="word_wrap">&#8203;</span>look-<span class="word_wrap">&#8203;</span>through&quot; and consider these U.<span class="word_wrap">&#8203;</span>S. government securities. All money market securities must be U.<span class="word_wrap">&#8203;</span>S. dollar-<span class="word_wrap">&#8203;</span>denominated.)</p>
+<p><span class="bold">As of September 30, 2020, Taxable money funds held 35.<span class="word_wrap">&#8203;</span>7% (<span class="word_wrap">&#8203;</span>down from 36.<span class="word_wrap">&#8203;</span>0%) of their assets in securities maturing Overnight, and another 9.<span class="word_wrap">&#8203;</span>5% maturing in 2-<span class="word_wrap">&#8203;</span>7 days (<span class="word_wrap">&#8203;</span>up from 6.<span class="word_wrap">&#8203;</span>9% last month)</span>. Thus, <span class="bold">45.<span class="word_wrap">&#8203;</span>2% in total matures in 1-<span class="word_wrap">&#8203;</span>7 days</span>. Another 14.<span class="word_wrap">&#8203;</span>3% matures in 8-<span class="word_wrap">&#8203;</span>30 days, while 13.<span class="word_wrap">&#8203;</span>0% matures in 31-<span class="word_wrap">&#8203;</span>60 days. <span class="bold">Note that close to three-<span class="word_wrap">&#8203;</span>quarters, or 72.<span class="word_wrap">&#8203;</span>5% of securities, mature in 60 days or less (<span class="word_wrap">&#8203;</span>down slightly from last month)</span>, the dividing line for use of amortized cost accounting under SEC regulations. The next bucket, 61-<span class="word_wrap">&#8203;</span>90 days, holds 9.<span class="word_wrap">&#8203;</span>6% of taxable securities, while 15.<span class="word_wrap">&#8203;</span>8% matures in 91-<span class="word_wrap">&#8203;</span>180 days, and just 2.<span class="word_wrap">&#8203;</span>2% matures beyond 181 days.</p>
+
+           
+           
+          
+      
+
+      
+      
+      
+
+    
+
+      </div>
+    
+
+    
+      <div id="product_content">
+       
+<!-- Latest Issues -->
+  <div id="content_container" style="padding-bottom:50px;">
+  <div id="issues" class="clearfix">      
+  <h2>Issues</h2>  
+        
+          <ul id="link_list">   
+          
+            <li><a href="/publications/download/money-fund-intelligence-xls/issue/2024-08-01/">Aug. 1, 2024
+              (Vol. 19, #8)</a></li>
+          
+            <li><a href="/publications/download/money-fund-intelligence-xls/issue/2024-07-01/">July 1, 2024
+              (Vol. 19, #7)</a></li>
+          
+            <li><a href="/publications/download/money-fund-intelligence-xls/issue/2024-06-01/">June 1, 2024
+              (Vol. 19, #6)</a></li>
+          
+            <li><a href="/publications/download/money-fund-intelligence-xls/issue/2024-05-01/">May 1, 2024
+              (Vol. 19, #5)</a></li>
+          
+            <li><a href="/publications/download/money-fund-intelligence-xls/issue/2024-04-01/">April 1, 2024
+              (Vol. 19, #4)</a></li>
+                    
+           </ul>
+        
+  </div>  
+  <div id="latest_contents"  class="clearfix">
+   <h2>Latest Contents ()</h2>  
+        
+  </div>
+  </div>
+  <hr class="bottom_line" style="clear:both;margin-top:20px;"/>
+  <p>
+      <a href="/subscribers/content/" class="bold">The content page</a> contains
+      archives and delivery settings for all subscriptions.
+  </p>
+
+      </div>
+    
+  </div>
+
+            
+            
+            <!-- end left_body -->
+        </div>
+
+        <div id="content_right_side_wrapper" class="clearfix">
+         
+            <div id="content_right_side">
+              
+                
+    
+      <!-- products/product_summary.html -->
+
+
+    	<table cellspacing="0" id="product_specs">
+    		<tr>
+    			<th colspan="3" id="product_specs_header">Product Summary</th>
+    		</tr>
+    		<tr>
+      		<th id="price" class="row_name">Price</th>
+          <td class="right">&nbsp;$1000/yr</td>
+          <td class="left">
+            (
+              <a
+                  
+                    href="/subscribers/sign-up/#discount"
+                  >
+                Discount Policy
+              </a> )
+            </td>
+    		</tr>
+        
+          
+      		  <tr class="highlight">
+          		<th class="row_name">News</th>
+              
+                <td class="dots right">
+                  
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                </td>
+                <td class="left">
+                  
+                    ( <a href="/products/overview/#News">
+
+                    Articles</a> )
+                  
+                </td>
+              
+            </tr>
+          
+        
+          
+      		  <tr >
+          		<th class="row_name">Ranks</th>
+              
+                <td class="dots right">
+                  
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                </td>
+                <td class="left">
+                  
+                    ( <a href="/products/overview/#Ranks">
+
+                    Sortable</a> )
+                  
+                </td>
+              
+            </tr>
+          
+        
+          
+      		  <tr class="highlight">
+          		<th class="row_name">Funds</th>
+              
+                <td class="dots right">
+                  
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                </td>
+                <td class="left">
+                  
+                    ( <a href="/products/overview/#Funds">
+
+                    Profile Info</a> )
+                  
+                </td>
+              
+            </tr>
+          
+        
+          
+      		  <tr >
+          		<th class="row_name">Archives</th>
+              
+                <td class="dots right">
+                  
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                </td>
+                <td class="left">
+                  
+                    ( <a href="/products/overview/#Archives">
+
+                    Articles</a> )
+                  
+                </td>
+              
+            </tr>
+          
+        
+          
+      		  <tr class="highlight">
+          		<th class="row_name">Index</th>
+              
+                <td class="dots right">
+                  
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                    <img class="dot" src="/static/images/product_dot.gif" alt="dot"/>
+                
+                </td>
+                <td class="left">
+                  
+                    ( <a href="/products/overview/#Index">
+
+                    Components</a> )
+                  
+                </td>
+              
+            </tr>
+          
+        
+          
+        
+    		
+        <tr><th id="product_specs_header" colspan="3">Next Steps</th></tr>
+    		<tr class="next_steps">
+    			<td colspan="3"><a href="/subscribers/sign-up/" class="alert">
+            Subscribe
+             Now &raquo;
+          </a></td>
+   		  </tr>
+        
+          <tr class="next_steps"><td colspan="3">
+            <a href="/static/products/money-fund-intelligence-xls_demo.pdf">
+                    See a demo issue.
+            </a></th>
+          </tr>
+        
+        
+          <tr class="next_steps"><td colspan="3">
+            <a href="mailto:%69%6E%66%6F%40%63%72%61%6E%65%64%61%74%61%2E%63%6F%6D">Request a trial issue.</a>
+          </th></tr>
+        
+        <tr class="next_steps"><td colspan="3">
+          Call <span class="bold">1-508-439-4419</span> for order or info.
+        </td></tr>
+   		
+    	</table>
+
+    
+  
+    
+    <div id="product_news" class="information_container">
+    <h1>Money Fund Intelligence XLS News</h1>
+        
+            <div class="information_instance">                
+                <h2 class="information_header"><div class="news_date">
+                <span class="date_month">Aug</span>            <span class="date_day">12</span>
+                </div>&nbsp;</h2>
+                
+
+
+
+
+    
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+
+    
+      
+    
+    
+       
+           
+              <p><span class="bold">Crane Data'<span class="word_wrap">&#8203;</span>s August Money Fund Portfolio Holdings, with data as of July 31, 2024, show that Other, Treasuries and Agencies jumped while, Repo holdings dropped last month</span>. Money market securities held by Taxable U.<span class="word_wrap">&#8203;</span>S. money funds (<span class="word_wrap">&#8203;</span>tracked by Crane Data) <span class="bold">increased by $<span class="word_wrap">&#8203;</span>90.<span class="word_wrap">&#8203;</span>4 billion to $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>437 trillion in July</span>, after decreasing by $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>4 billion in June, increasing $<span class="word_wrap">&#8203;</span>105.<span class="word_wrap">&#8203;</span>6 billion in May and decreasing $<span class="word_wrap">&#8203;</span>61.<span class="word_wrap">&#8203;</span>4 billion in April. <span class="bold">Repo decreased $<span class="word_wrap">&#8203;</span>21.<span class="word_wrap">&#8203;</span>5 billion in July</span> after increasing $<span class="word_wrap">&#8203;</span>99.<span class="word_wrap">&#8203;</span>3 billion in June. <span class="bold">It remains the largest portfolio segment</span>. <span class="bold">Treasuries increased by $<span class="word_wrap">&#8203;</span>24.<span class="word_wrap">&#8203;</span>3 billion</span>, staying at the No. 2 spot. (<span class="word_wrap">&#8203;</span>The <span class="bold">U.<span class="word_wrap">&#8203;</span>S. Treasury continues to be the single largest Issuer to MMFs. `<span class="word_wrap">&#8203;</span>In July, U.<span class="word_wrap">&#8203;</span>S. Treasury holdings increased to $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>453 trillion, while NY Fed Repo decreased by $<span class="word_wrap">&#8203;</span>234.<span class="word_wrap">&#8203;</span>3 billion to $<span class="word_wrap">&#8203;</span>380.<span class="word_wrap">&#8203;</span>6 billion</span>.) <span class="bold">Agencies</span> were the third largest segment, <span class="bold">CP</span> remained fourth, ahead of <span class="bold">CDs</span>, <span class="bold">Other/<span class="word_wrap">&#8203;</span>Time Deposits</span> and <span class="bold">VRDNs</span>. Below, we review our latest <span class="crane_product">Money Fund Portfolio Holdings</span> statistics. (<span class="bold">Note</span>: <span class="bold">Register soon</span> for our <span class="institution"><a class="websnapr" href="https://www.craneeurosymposium.com/">European Money Fund Symposium</a></span>, which is <span class="bold">Sept. 19-<span class="word_wrap">&#8203;</span>20, 2024</span> in <span class="bold">London, England</span>. Our discounted <span class="institution"><a class="websnapr" href="https://www.craneeurosymposium.com/hotel-and-travel">hotel rate</a></span> expires on Wednesday!)</p>
+<p>Among taxable money funds, <span class="bold">Repurchase Agreements (<span class="word_wrap">&#8203;</span>repo) decreased $<span class="word_wrap">&#8203;</span>21.<span class="word_wrap">&#8203;</span>5 billion (-<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>8%) to $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>559 trillion, or 39.<span class="word_wrap">&#8203;</span>8% of holdings, in July</span>, after increasing $<span class="word_wrap">&#8203;</span>99.<span class="word_wrap">&#8203;</span>3 billion in June, $<span class="word_wrap">&#8203;</span>26.<span class="word_wrap">&#8203;</span>8 billion in May, and $<span class="word_wrap">&#8203;</span>94.<span class="word_wrap">&#8203;</span>9 billion in April. <span class="bold">Treasury securities increased $<span class="word_wrap">&#8203;</span>24.<span class="word_wrap">&#8203;</span>3 billion (<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>0%) to $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>453 trillion, or 38.<span class="word_wrap">&#8203;</span>1% of holdings</span>, after decreasing $<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>3 billion in June, increasing $<span class="word_wrap">&#8203;</span>51.<span class="word_wrap">&#8203;</span>0 billion in May and decreasing $<span class="word_wrap">&#8203;</span>144.<span class="word_wrap">&#8203;</span>9 billion in April. <span class="bold">Government Agency Debt was up $<span class="word_wrap">&#8203;</span>22.<span class="word_wrap">&#8203;</span>9 billion, or 3.<span class="word_wrap">&#8203;</span>2%, to $<span class="word_wrap">&#8203;</span>747.<span class="word_wrap">&#8203;</span>0 billion, or 11.<span class="word_wrap">&#8203;</span>6% of holdings</span>. Agencies decreased $<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>9 billion in June, increased $<span class="word_wrap">&#8203;</span>19.<span class="word_wrap">&#8203;</span>9 billion in May and $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>8 billion in April, but decreased $<span class="word_wrap">&#8203;</span>14.<span class="word_wrap">&#8203;</span>2 billion in March and $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>7 billion in February. <span class="bold">Repo, Treasuries and Agency holdings now total $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>758 trillion, representing a massive 89.<span class="word_wrap">&#8203;</span>5% of all taxable holdings</span>.</p>
+<p><span class="bold">Money fund holdings of Other (<span class="word_wrap">&#8203;</span>Time Deposits), CP and CDs increased in July</span>. <span class="bold">Commercial Paper (<span class="word_wrap">&#8203;</span>CP)</span> increased $<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>2 billion (<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>1%) to $<span class="word_wrap">&#8203;</span>276.<span class="word_wrap">&#8203;</span>7 billion, or 4.<span class="word_wrap">&#8203;</span>3% of holdings. CP holdings decreased $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>0 billion in June, $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>8 billion in May and $<span class="word_wrap">&#8203;</span>30.<span class="word_wrap">&#8203;</span>7 billion in April. <span class="bold">Certificates of Deposit (<span class="word_wrap">&#8203;</span>CDs)</span> increased $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>9 billion (<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>6%) to $<span class="word_wrap">&#8203;</span>200.<span class="word_wrap">&#8203;</span>7 billion, or 3.<span class="word_wrap">&#8203;</span>1% of taxable assets. CDs decreased $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>6 billion in June, $<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>8 billion in May and $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>2 billion in April. <span class="bold">Other</span> holdings, primarily <span class="bold">Time Deposits</span>, increased $<span class="word_wrap">&#8203;</span>49.<span class="word_wrap">&#8203;</span>0 billion (<span class="word_wrap">&#8203;</span>35.<span class="word_wrap">&#8203;</span>2%) to $<span class="word_wrap">&#8203;</span>188.<span class="word_wrap">&#8203;</span>2 billion, or 2.<span class="word_wrap">&#8203;</span>9% of holdings, after decreasing $<span class="word_wrap">&#8203;</span>57.<span class="word_wrap">&#8203;</span>5 billion in June and increasing $<span class="word_wrap">&#8203;</span>26.<span class="word_wrap">&#8203;</span>2 billion. <span class="bold">VRDNs increased to</span> $<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>4 billion, or 0.<span class="word_wrap">&#8203;</span>2% of assets. (<span class="word_wrap">&#8203;</span>Note: This total is VRDNs for taxable funds only. We will post our Tax Exempt MMF holdings separately Monday around noon.)</p>
+<p><span class="bold">Prime money fund assets tracked by Crane Data increased to $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>171 trillion, or 18.<span class="word_wrap">&#8203;</span>2% of taxable money funds' $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>437 trillion total</span>. Among Prime money funds, <span class="bold">CDs represent 17.<span class="word_wrap">&#8203;</span>1% (<span class="word_wrap">&#8203;</span>up from 16.<span class="word_wrap">&#8203;</span>6% a month ago), while Commercial Paper accounted for 23.<span class="word_wrap">&#8203;</span>6% (<span class="word_wrap">&#8203;</span>up from 23.<span class="word_wrap">&#8203;</span>0% in June)</span>. The CP totals are comprised of: <span class="bold">Financial Company CP</span>, which makes up 15.<span class="word_wrap">&#8203;</span>9% of total holdings, <span class="bold">Asset-<span class="word_wrap">&#8203;</span>Backed CP</span>, which accounts for 6.<span class="word_wrap">&#8203;</span>3%, and <span class="bold">Non-<span class="word_wrap">&#8203;</span>Financial Company CP</span>, which makes up 1.<span class="word_wrap">&#8203;</span>4%. Prime funds also hold 0.<span class="word_wrap">&#8203;</span>4% in US Govt Agency Debt, 4.<span class="word_wrap">&#8203;</span>5% in US Treasury Debt, 20.<span class="word_wrap">&#8203;</span>9% in US Treasury Repo, 0.<span class="word_wrap">&#8203;</span>8% in Other Instruments, 13.<span class="word_wrap">&#8203;</span>5% in Non-<span class="word_wrap">&#8203;</span>Negotiable Time Deposits, 7.<span class="word_wrap">&#8203;</span>6% in Other Repo, 10.<span class="word_wrap">&#8203;</span>3% in US Government Agency Repo and 0.<span class="word_wrap">&#8203;</span>8% in VRDNs.</p>
+<p><span class="bold">Government money fund portfolios totaled $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>503 trillion (<span class="word_wrap">&#8203;</span>54.<span class="word_wrap">&#8203;</span>4% of all MMF assets), up from $<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>426 trillion in June, while Treasury money fund assets totaled another $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>762 trillion (<span class="word_wrap">&#8203;</span>27.<span class="word_wrap">&#8203;</span>4%), up from $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>754 trillion the prior month</span>. Government money fund portfolios were made up of <span class="bold">21.<span class="word_wrap">&#8203;</span>2% US Govt Agency Debt</span>, <span class="bold">17.<span class="word_wrap">&#8203;</span>0% US Government Agency Repo</span>, <span class="bold">31.<span class="word_wrap">&#8203;</span>7% US Treasury Debt</span>, <span class="bold">29.<span class="word_wrap">&#8203;</span>6% in US Treasury Repo</span>, <span class="bold">0.<span class="word_wrap">&#8203;</span>4% in Other Instruments</span>. Treasury money funds were comprised of 73.<span class="word_wrap">&#8203;</span>2% US Treasury Debt and 26.<span class="word_wrap">&#8203;</span>5% in US Treasury Repo. <span class="bold">Government and Treasury funds combined now total $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>265 trillion, or 81.<span class="word_wrap">&#8203;</span>8% of all taxable money fund assets</span>.</p>
+<p><span class="bold">European-<span class="word_wrap">&#8203;</span>affiliated holdings (<span class="word_wrap">&#8203;</span>including repo) increased by $<span class="word_wrap">&#8203;</span>140.<span class="word_wrap">&#8203;</span>9 billion in July to $<span class="word_wrap">&#8203;</span>798.<span class="word_wrap">&#8203;</span>0 billion; their share of holdings rose to 12.<span class="word_wrap">&#8203;</span>4% from last month'<span class="word_wrap">&#8203;</span>s 10.<span class="word_wrap">&#8203;</span>4%</span>. <span class="bold">Eurozone-<span class="word_wrap">&#8203;</span>affiliated holdings increased to $<span class="word_wrap">&#8203;</span>510.<span class="word_wrap">&#8203;</span>9 billion from last month'<span class="word_wrap">&#8203;</span>s $<span class="word_wrap">&#8203;</span>438.<span class="word_wrap">&#8203;</span>2 billion</span>; they account for 7.<span class="word_wrap">&#8203;</span>9% of overall taxable money fund holdings. <span class="bold">Asia &amp; Pacific</span> related holdings rose to $<span class="word_wrap">&#8203;</span>336.<span class="word_wrap">&#8203;</span>1 billion (<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>2% of the total) from last month'<span class="word_wrap">&#8203;</span>s $<span class="word_wrap">&#8203;</span>293.<span class="word_wrap">&#8203;</span>1 billion. <span class="bold">Americas</span> related holdings fell to $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>293 trillion from last month'<span class="word_wrap">&#8203;</span>s $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>391 trillion, and now represent 82.<span class="word_wrap">&#8203;</span>2% of holdings.</p>
+<p>The overall taxable fund <span class="bold">Repo totals</span> were made up of: <span class="bold">US Treasury Repurchase Agreements</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>39.<span class="word_wrap">&#8203;</span>2 billion, or -<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>2%, to $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>747 trillion, or 27.<span class="word_wrap">&#8203;</span>1% of assets); <span class="bold">US Government Agency Repurchase Agreements</span> (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>5 billion, or 2.<span class="word_wrap">&#8203;</span>5%, to $<span class="word_wrap">&#8203;</span>717.<span class="word_wrap">&#8203;</span>5 billion, or 11.<span class="word_wrap">&#8203;</span>1% of total holdings), and <span class="bold">Other Repurchase Agreements</span> (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>3 billion, or 0.<span class="word_wrap">&#8203;</span>3%, from last month to $<span class="word_wrap">&#8203;</span>94.<span class="word_wrap">&#8203;</span>0 billion, or 1.<span class="word_wrap">&#8203;</span>5% of holdings). The <span class="bold">Commercial Paper totals</span> were comprised of <span class="bold">Financial Company Commercial Paper</span> (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>2 billion to $<span class="word_wrap">&#8203;</span>186.<span class="word_wrap">&#8203;</span>0 billion, or 2.<span class="word_wrap">&#8203;</span>9% of assets), <span class="bold">Asset Backed Commercial Paper</span> (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>0 billion to $<span class="word_wrap">&#8203;</span>74.<span class="word_wrap">&#8203;</span>2 billion, or 1.<span class="word_wrap">&#8203;</span>2%), and <span class="bold">Non-<span class="word_wrap">&#8203;</span>Financial Company Commercial Paper</span> (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>9 billion to $<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>6 billion, or 0.<span class="word_wrap">&#8203;</span>3%).</p>
+<p>The <span class="bold">20 largest Issuers</span> to taxable money market funds as of July 31, 2024, include: the <span class="bold">US Treasury</span> ($<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>453T, 38.<span class="word_wrap">&#8203;</span>1%), <span class="bold">Fixed Income Clearing Corp</span> ($<span class="word_wrap">&#8203;</span>646.<span class="word_wrap">&#8203;</span>3B, 10.<span class="word_wrap">&#8203;</span>0%), <span class="bold">Federal Home Loan Bank</span> ($<span class="word_wrap">&#8203;</span>598.<span class="word_wrap">&#8203;</span>6B, 9.<span class="word_wrap">&#8203;</span>3%), the <span class="bold">Federal Reserve Bank of New York</span> ($<span class="word_wrap">&#8203;</span>380.<span class="word_wrap">&#8203;</span>6B, or 5.<span class="word_wrap">&#8203;</span>9%), <span class="bold">JP Morgan</span> ($<span class="word_wrap">&#8203;</span>201.<span class="word_wrap">&#8203;</span>1B, 3.<span class="word_wrap">&#8203;</span>1%), <span class="bold">Citi</span> ($<span class="word_wrap">&#8203;</span>162.<span class="word_wrap">&#8203;</span>4B, 2.<span class="word_wrap">&#8203;</span>5%), <span class="bold">BNP Paribas</span> ($<span class="word_wrap">&#8203;</span>144.<span class="word_wrap">&#8203;</span>2B, 2.<span class="word_wrap">&#8203;</span>2%), <span class="bold">RBC</span> ($<span class="word_wrap">&#8203;</span>140.<span class="word_wrap">&#8203;</span>8B, 2.<span class="word_wrap">&#8203;</span>2%), <span class="bold">Federal Farm Credit Bank</span> ($<span class="word_wrap">&#8203;</span>133.<span class="word_wrap">&#8203;</span>2B, 2.<span class="word_wrap">&#8203;</span>1%), <span class="bold">Barclays PLC</span> ($<span class="word_wrap">&#8203;</span>126.<span class="word_wrap">&#8203;</span>2B, 2.<span class="word_wrap">&#8203;</span>0%), <span class="bold">Bank of America</span> ($<span class="word_wrap">&#8203;</span>125.<span class="word_wrap">&#8203;</span>1B, 1.<span class="word_wrap">&#8203;</span>9%), <span class="bold">Goldman Sachs</span> ($<span class="word_wrap">&#8203;</span>110.<span class="word_wrap">&#8203;</span>2B, 1.<span class="word_wrap">&#8203;</span>7%), <span class="bold">Mitsubishi UFJ Financial Group Inc</span> ($<span class="word_wrap">&#8203;</span>83.<span class="word_wrap">&#8203;</span>3B, 1.<span class="word_wrap">&#8203;</span>3%), <span class="bold">Credit Agricole</span> ($<span class="word_wrap">&#8203;</span>72.<span class="word_wrap">&#8203;</span>4B, 1.<span class="word_wrap">&#8203;</span>1%), <span class="bold">Wells Fargo</span> ($<span class="word_wrap">&#8203;</span>67.<span class="word_wrap">&#8203;</span>9B, 1.<span class="word_wrap">&#8203;</span>1%), <span class="bold">Sumitomo Mitsui Banking Corp</span> ($<span class="word_wrap">&#8203;</span>65.<span class="word_wrap">&#8203;</span>5B, 1.<span class="word_wrap">&#8203;</span>0%), <span class="bold">Mizuho Corporate Bank Ltd</span> ($<span class="word_wrap">&#8203;</span>57.<span class="word_wrap">&#8203;</span>4B, 0.<span class="word_wrap">&#8203;</span>9%), <span class="bold">Societe Generale</span> ($<span class="word_wrap">&#8203;</span>56.<span class="word_wrap">&#8203;</span>7B, 0.<span class="word_wrap">&#8203;</span>9%), <span class="bold">Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank</span> ($<span class="word_wrap">&#8203;</span>54.<span class="word_wrap">&#8203;</span>1B, 0.<span class="word_wrap">&#8203;</span>8%) and <span class="bold">Canadian Imperial Bank of Commerce</span> ($<span class="word_wrap">&#8203;</span>54.<span class="word_wrap">&#8203;</span>1B, 0.<span class="word_wrap">&#8203;</span>8%).</p>
+<p>In the repo space, the <span class="bold">10 largest Repo counterparties (<span class="word_wrap">&#8203;</span>dealers)</span> with the amount of repo outstanding and market share (<span class="word_wrap">&#8203;</span>among the money funds we track) include: <span class="bold">Fixed Income Clearing Corp ($<span class="word_wrap">&#8203;</span>630.<span class="word_wrap">&#8203;</span>3B, 24.<span class="word_wrap">&#8203;</span>6%), the Federal Reserve Bank of New York ($<span class="word_wrap">&#8203;</span>380.<span class="word_wrap">&#8203;</span>6B, 14.<span class="word_wrap">&#8203;</span>9%), JP Morgan ($<span class="word_wrap">&#8203;</span>192.<span class="word_wrap">&#8203;</span>7B, 7.<span class="word_wrap">&#8203;</span>5%), Citi ($<span class="word_wrap">&#8203;</span>150.<span class="word_wrap">&#8203;</span>6B, 5.<span class="word_wrap">&#8203;</span>9%), BNP Paribas ($<span class="word_wrap">&#8203;</span>133.<span class="word_wrap">&#8203;</span>2B, 5.<span class="word_wrap">&#8203;</span>2%), RBC ($<span class="word_wrap">&#8203;</span>111.<span class="word_wrap">&#8203;</span>8B, 4.<span class="word_wrap">&#8203;</span>4%), Barclays PLC ($<span class="word_wrap">&#8203;</span>111.<span class="word_wrap">&#8203;</span>7B, 4.<span class="word_wrap">&#8203;</span>4%), Goldman Sachs ($<span class="word_wrap">&#8203;</span>110.<span class="word_wrap">&#8203;</span>0B, 4.<span class="word_wrap">&#8203;</span>3%), Bank of America ($<span class="word_wrap">&#8203;</span>104.<span class="word_wrap">&#8203;</span>7B, 4,<span class="word_wrap">&#8203;</span>1%) and Wells Fargo ($<span class="word_wrap">&#8203;</span>63.<span class="word_wrap">&#8203;</span>1B, 2.<span class="word_wrap">&#8203;</span>5%)</span>. The <span class="bold">largest users of the $<span class="word_wrap">&#8203;</span>380.<span class="word_wrap">&#8203;</span>6 billion in Fed RRP</span> include: <span class="bold">Vanguard Federal Money Mkt Fund ($<span class="word_wrap">&#8203;</span>71.<span class="word_wrap">&#8203;</span>8B), Fidelity Cash Central Fund ($<span class="word_wrap">&#8203;</span>46.<span class="word_wrap">&#8203;</span>5B), Vanguard Cash Reserves Federal MM ($<span class="word_wrap">&#8203;</span>22.<span class="word_wrap">&#8203;</span>7B), Fidelity Govt Money Market ($<span class="word_wrap">&#8203;</span>20.<span class="word_wrap">&#8203;</span>2B), Fidelity Sec Lending Cash Central Fund ($<span class="word_wrap">&#8203;</span>20.<span class="word_wrap">&#8203;</span>0B), Fidelity Inv MM: MM Port ($<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>6B), Fidelity Inv MM: Treas Port ($<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>9B), Fidelity Money Market ($<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>4B), American Funds Central Cash ($<span class="word_wrap">&#8203;</span>14.<span class="word_wrap">&#8203;</span>5B) and Vanguard Market Liquidity Fund ($<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>6B)</span>.</p>
+<p>The <span class="bold">10 largest issuers of &quot;<span class="word_wrap">&#8203;</span>credit&quot; -- CDs, CP and Other securities (<span class="word_wrap">&#8203;</span>including Time Deposits and Notes) combined</span> -- include: Mitsubishi UFJ Financial Group Inc ($<span class="word_wrap">&#8203;</span>33.<span class="word_wrap">&#8203;</span>4B, 5.<span class="word_wrap">&#8203;</span>6%), RBC ($<span class="word_wrap">&#8203;</span>29.<span class="word_wrap">&#8203;</span>1B, 4.<span class="word_wrap">&#8203;</span>8%), Mizuho Corporate Bank Ltd ($<span class="word_wrap">&#8203;</span>28.<span class="word_wrap">&#8203;</span>9B, 4.<span class="word_wrap">&#8203;</span>8%), Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank ($<span class="word_wrap">&#8203;</span>28.<span class="word_wrap">&#8203;</span>4B, 4.<span class="word_wrap">&#8203;</span>7%), Credit Agricole ($<span class="word_wrap">&#8203;</span>23.<span class="word_wrap">&#8203;</span>2B, 3.<span class="word_wrap">&#8203;</span>9%), Skandinaviska Enskilda Banken AB ($<span class="word_wrap">&#8203;</span>22.<span class="word_wrap">&#8203;</span>5B, 3.<span class="word_wrap">&#8203;</span>7%), Sumitomo Mitsui Trust Bank ($<span class="word_wrap">&#8203;</span>21.<span class="word_wrap">&#8203;</span>6B, 3.<span class="word_wrap">&#8203;</span>6%), Canadian Imperial Bank of Commerce ($<span class="word_wrap">&#8203;</span>20.<span class="word_wrap">&#8203;</span>8B, 3.<span class="word_wrap">&#8203;</span>5%), Bank of America ($<span class="word_wrap">&#8203;</span>20.<span class="word_wrap">&#8203;</span>4B, 3.<span class="word_wrap">&#8203;</span>4%) and ING Bank ($<span class="word_wrap">&#8203;</span>19.<span class="word_wrap">&#8203;</span>8B, 3.<span class="word_wrap">&#8203;</span>3%).</p>
+<p>The <span class="bold">10 largest CD issuers</span> include: Mitsubishi UFJ Financial Group Inc ($<span class="word_wrap">&#8203;</span>23.<span class="word_wrap">&#8203;</span>9B, 11.<span class="word_wrap">&#8203;</span>9%), Credit Agricole ($<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>9B, 6.<span class="word_wrap">&#8203;</span>9%), Bank of America ($<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>5B, 6.<span class="word_wrap">&#8203;</span>7%), Sumitomo Mitsui Banking Corp ($<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>8B, 6.<span class="word_wrap">&#8203;</span>4%), Sumitomo Mitsui Trust Bank ($<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>2B, 6.<span class="word_wrap">&#8203;</span>1%), Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank ($<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>6B, 5.<span class="word_wrap">&#8203;</span>3%), Canadian Imperial Bank of Commerce ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>4B, 4.<span class="word_wrap">&#8203;</span>2%), Mitsubishi UFJ Trust and Banking Corporation ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>2B, 4.<span class="word_wrap">&#8203;</span>1%), Mizuho Corporate Bank Ltd ($<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>2B, 3.<span class="word_wrap">&#8203;</span>6%) and Bank of Montreal ($<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>7B, 3.<span class="word_wrap">&#8203;</span>3%).</p>
+<p>The <span class="bold">10 largest CP issuers</span> (<span class="word_wrap">&#8203;</span>we include affiliated ABCP programs) include: Toronto-<span class="word_wrap">&#8203;</span>Dominion Bank ($<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>7B, 7.<span class="word_wrap">&#8203;</span>0%), RBC ($<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>8B, 6.<span class="word_wrap">&#8203;</span>6%), Barclays PLC ($<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>4B, 4.<span class="word_wrap">&#8203;</span>9%), Bank of Montreal ($<span class="word_wrap">&#8203;</span>11.<span class="word_wrap">&#8203;</span>0B, 4.<span class="word_wrap">&#8203;</span>3%), BPCE SA ($<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>4B, 4.<span class="word_wrap">&#8203;</span>1%), BSN Holdings Ltd ($<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>4B, 3.<span class="word_wrap">&#8203;</span>7%), Sumitomo Mitsui Trust Bank ($<span class="word_wrap">&#8203;</span>9.<span class="word_wrap">&#8203;</span>3B, 3.<span class="word_wrap">&#8203;</span>7%), Bank of Nova Scotia ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>6B, 3.<span class="word_wrap">&#8203;</span>4%), Canadian Imperial Bank of Commerce ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>5B, 3.<span class="word_wrap">&#8203;</span>3%) and JP Morgan ($<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>4B, 3.<span class="word_wrap">&#8203;</span>3%).</p>
+<p>The <span class="bold">largest increases among Issuers</span> include: Fixed Income Clearing Corp (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>110.<span class="word_wrap">&#8203;</span>5B to $<span class="word_wrap">&#8203;</span>646.<span class="word_wrap">&#8203;</span>3B), Barclays PLC (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>45.<span class="word_wrap">&#8203;</span>0B to $<span class="word_wrap">&#8203;</span>126.<span class="word_wrap">&#8203;</span>2B), Citi (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>26.<span class="word_wrap">&#8203;</span>9B to $<span class="word_wrap">&#8203;</span>162.<span class="word_wrap">&#8203;</span>4B), Credit Agricole (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>25.<span class="word_wrap">&#8203;</span>1B to $<span class="word_wrap">&#8203;</span>72.<span class="word_wrap">&#8203;</span>4B), US Treasury (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>24.<span class="word_wrap">&#8203;</span>3B to $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>453T), Mitsubishi UFJ Financial Group Inc (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>18.<span class="word_wrap">&#8203;</span>8B to $<span class="word_wrap">&#8203;</span>83.<span class="word_wrap">&#8203;</span>3B), Societe Generale (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>2B to $<span class="word_wrap">&#8203;</span>56.<span class="word_wrap">&#8203;</span>7B), Federal Home Loan Bank (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>5B to $<span class="word_wrap">&#8203;</span>598.<span class="word_wrap">&#8203;</span>6B), Mizuho Corporate Bank Ltd (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>6B to $<span class="word_wrap">&#8203;</span>57.<span class="word_wrap">&#8203;</span>4B) and Bank of America (<span class="word_wrap">&#8203;</span>up $<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>1B to $<span class="word_wrap">&#8203;</span>125.<span class="word_wrap">&#8203;</span>1B).</p>
+<p><span class="bold">The largest decreases among Issuers of money market securities (<span class="word_wrap">&#8203;</span>including Repo) in July</span> were shown by: the Federal Reserve Bank of New York (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>234.<span class="word_wrap">&#8203;</span>3B to $<span class="word_wrap">&#8203;</span>380.<span class="word_wrap">&#8203;</span>6B), RBC (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>31.<span class="word_wrap">&#8203;</span>4B to $<span class="word_wrap">&#8203;</span>140.<span class="word_wrap">&#8203;</span>8B), Wells Fargo (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>12.<span class="word_wrap">&#8203;</span>5B to $<span class="word_wrap">&#8203;</span>67.<span class="word_wrap">&#8203;</span>9B), JP Morgan (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>8.<span class="word_wrap">&#8203;</span>9B to $<span class="word_wrap">&#8203;</span>201.<span class="word_wrap">&#8203;</span>1B), Sumitomo Mitsui Banking Corp (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>2B to $<span class="word_wrap">&#8203;</span>65.<span class="word_wrap">&#8203;</span>5B), Bank of Nova Scotia (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>2.<span class="word_wrap">&#8203;</span>4B to $<span class="word_wrap">&#8203;</span>27.<span class="word_wrap">&#8203;</span>9B), BPCE SA (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>2B to $<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>4B), HSBC (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>8B to $<span class="word_wrap">&#8203;</span>32.<span class="word_wrap">&#8203;</span>7B), Canadian Imperial Bank of Commerce (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>7B to $<span class="word_wrap">&#8203;</span>54.<span class="word_wrap">&#8203;</span>1B) and Norinchukin Bank (<span class="word_wrap">&#8203;</span>down $<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>7B to $<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>3B).</p>
+<p><span class="bold">The United States remained the largest segment of country-<span class="word_wrap">&#8203;</span>affiliations; it represents 77.<span class="word_wrap">&#8203;</span>0% of holdings, or $<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>956 trillion</span>. <span class="bold">Canada</span> (<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>2%, $<span class="word_wrap">&#8203;</span>336.<span class="word_wrap">&#8203;</span>3B) was in second place, while <span class="bold">France</span> (<span class="word_wrap">&#8203;</span>5.<span class="word_wrap">&#8203;</span>0%, $<span class="word_wrap">&#8203;</span>322.<span class="word_wrap">&#8203;</span>4B) was No. 3. <span class="bold">Japan</span> (<span class="word_wrap">&#8203;</span>4.<span class="word_wrap">&#8203;</span>7%, $<span class="word_wrap">&#8203;</span>300.<span class="word_wrap">&#8203;</span>5B) occupied fourth place. The <span class="bold">United Kingdom</span> (<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>2%, $<span class="word_wrap">&#8203;</span>204.<span class="word_wrap">&#8203;</span>4B) remained in fifth place. <span class="bold">Netherlands</span> (<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>0%, $<span class="word_wrap">&#8203;</span>61.<span class="word_wrap">&#8203;</span>3B) was in sixth place, followed by <span class="bold">Australia</span> (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>8%, $<span class="word_wrap">&#8203;</span>49.<span class="word_wrap">&#8203;</span>1B), <span class="bold">Germany</span> (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>8%, $<span class="word_wrap">&#8203;</span>48.<span class="word_wrap">&#8203;</span>8B), <span class="bold">Sweden</span> (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>8%, $<span class="word_wrap">&#8203;</span>48.<span class="word_wrap">&#8203;</span>0B), and <span class="bold">Spain</span> (<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>4%, $<span class="word_wrap">&#8203;</span>26.<span class="word_wrap">&#8203;</span>4B). (<span class="word_wrap">&#8203;</span>Note: Crane Data attributes Treasury and Government repo to the dealer'<span class="word_wrap">&#8203;</span>s parent country of origin, though money funds themselves &quot;<span class="word_wrap">&#8203;</span>look-<span class="word_wrap">&#8203;</span>through&quot; and consider these U.<span class="word_wrap">&#8203;</span>S. government securities. All money market securities must be U.<span class="word_wrap">&#8203;</span>S. dollar-<span class="word_wrap">&#8203;</span>denominated.)</p>
+<p><span class="bold">As of July 31, 2024, Taxable money funds held 50.<span class="word_wrap">&#8203;</span>3% (<span class="word_wrap">&#8203;</span>up from 48.<span class="word_wrap">&#8203;</span>6%) of their assets in securities maturing Overnight, and another 10.<span class="word_wrap">&#8203;</span>1% maturing in 2-<span class="word_wrap">&#8203;</span>7 days (<span class="word_wrap">&#8203;</span>down from 12.<span class="word_wrap">&#8203;</span>2%)</span>. Thus, <span class="bold">60.<span class="word_wrap">&#8203;</span>4% in total matures in 1-<span class="word_wrap">&#8203;</span>7 days</span>. Another 11.<span class="word_wrap">&#8203;</span>2% matures in 8-<span class="word_wrap">&#8203;</span>30 days, while 9.<span class="word_wrap">&#8203;</span>0% matures in 31-<span class="word_wrap">&#8203;</span>60 days. <span class="bold">Note that over three-<span class="word_wrap">&#8203;</span>quarters, or 80.<span class="word_wrap">&#8203;</span>6% of securities, mature in 60 days or less</span>, the dividing line for use of amortized cost accounting under SEC regulations. The next bucket, 61-<span class="word_wrap">&#8203;</span>90 days, holds 5.<span class="word_wrap">&#8203;</span>9% of taxable securities, while 9.<span class="word_wrap">&#8203;</span>6% matures in 91-<span class="word_wrap">&#8203;</span>180 days, and just 3.<span class="word_wrap">&#8203;</span>9% matures beyond 181 days. (<span class="word_wrap">&#8203;</span>Visit our <span class="institution"><a class="websnapr" href="http://cranedata.com/subscribers/content/">Content center</a></span> to download, or <span class="institution"><a class="websnapr" href="mailto:info&#37;&#52;&#48;cranedata&#46;com">contact us</a></span> to request our latest <span class="institution"><a class="websnapr" href="https://cranedata.com/publications/money-fund-portfolio-holdings/details/2024-8-1/">Portfolio Holdings</a></span> reports.)</p>
+
+           
+           
+          
+      
+
+      
+      
+      
+
+    
+
+            </div>
+        
+            <div class="information_instance">                
+                <h2 class="information_header"><div class="news_date">
+                <span class="date_month">Aug</span>            <span class="date_day">07</span>
+                </div>&nbsp;</h2>
+                
+
+
+
+
+    
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+
+    
+      
+    
+    
+       
+           
+              <p>The <span class="bold">August</span> issue of our flagship <span class="crane_product">Money Fund Intelligence</span> newsletter, which was sent out to subscribers Wednesday morning, features the articles: &quot;<span class="bold">Prime Inst MMF Conversions, Shifts Continue: FAF Does WLA</span>,&quot; which breaks down the <span class="bold">latest shifts in the Prime Inst space</span>; &quot;<span class="bold">Q2 Earnings Calls: Sweep Rates Take Center Stage</span>,&quot; which quotes from recent <span class="bold">questions over brokerage sweep programs</span>; and, &quot;<span class="bold">Deposits Under Pressure from Insurance, Funding</span>,&quot; which covers a recent speech by <span class="bold">Lorie Logan, President of the Federal Reserve Bank of Dallas</span>. We also sent out our <span class="crane_product">MFI XLS</span> spreadsheet Wednesday a.<span class="word_wrap">&#8203;</span>m., and we'<span class="word_wrap">&#8203;</span>ve updated our <span class="crane_product">Money Fund Wisdom</span> database with 7/<span class="word_wrap">&#8203;</span>31/<span class="word_wrap">&#8203;</span>24 data. Our Aug. <span class="crane_product">Money Fund Portfolio Holdings</span> are scheduled to ship on Friday, August 9, and our Aug. <span class="crane_product">Bond Fund Intelligence</span> is scheduled to go out on Wednesday, August 14. (<span class="bold">Note</span>: <span class="bold">We'<span class="word_wrap">&#8203;</span>ll be publishing</span> our latest <span class="bold">Form N-<span class="word_wrap">&#8203;</span>MFP files and revisions</span> on <span class="bold">Thursday, August 8</span>. The <span class="bold">SEC has changed the format</span> of these files as their <span class="bold">new regulations go into effect</span>, so <span class="bold">there may still be issues with our programs and collections</span>.)</p>
+<p>MFI'<span class="word_wrap">&#8203;</span>s &quot;<span class="bold">Prime Inst.</span>&quot; article says, &quot;<span class="bold">We'<span class="word_wrap">&#8203;</span>ve now seen 16 Prime Institutional money funds with over $<span class="word_wrap">&#8203;</span>265 billion in assets (<span class="word_wrap">&#8203;</span>over 1/<span class="word_wrap">&#8203;</span>3 of the sector) announce exits from the space to date (<span class="word_wrap">&#8203;</span>see the News brief on DFA at right</span>). But now comes a <span class="bold">decision by one to live with the new rules in a unique way</span>. A <span class="institution"><a class="websnapr" href="https://www.sec.gov/Archives/edgar/data/1890141/000089710124000308/faf240743_497.htm">Prospectus Supplement</a></span> for <span class="bold">First American'<span class="word_wrap">&#8203;</span>s Institutional Prime Obligations Fund</span> tells us, '<span class="word_wrap">&#8203;</span>In July 2023, the SEC adopted amendments to Rule 2a-<span class="word_wrap">&#8203;</span>7 under the Investment Company Act of 1940.... [<span class="bold">T]<span class="word_wrap">&#8203;</span>he Amendments will require institutional prime and institutional tax-<span class="word_wrap">&#8203;</span>exempt money market funds, including First American Institutional Prime Obligations Fund, to impose a mandatory liquidity fee</span> when [<span class="word_wrap">&#8203;</span>they] experience daily net redemptions that exceed 5% of assets on a day. Funds subject to the mandatory liquidity fee will not be required to apply such fee if the amount of the fee is less than 0.<span class="word_wrap">&#8203;</span>01% of the value of the shares redeemed.'&quot;</p>
+<p>They continue, &quot;<span class="word_wrap">&#8203;</span>It explains, '<span class="bold">The mandatory liquidity fee requirement will become effective on Oct. 2, 2024</span>. In calculating the amount of the mandatory liquidity fee under Rule 2a-<span class="word_wrap">&#8203;</span>7, the fee amount must be based on a good faith estimate, supported by data available, of the <span class="bold">costs the fund would incur if it sold a pro rata amount of each security in its portfolio to satisfy the amount of net redemptions</span>. The calculation must factor in the spread costs and market impacts for each portfolio security, as described further in this supplement. <span class="bold">A fund may assume a market impact of zero for its daily and weekly liquid assets</span>.'&quot;</p>
+<p>We write in our <span class="bold">Q2 Earnings</span> article, “<span class="bold">This past month, a number of earnings calls and articles discuss the continued shift from bank deposits into money market funds, and questions focused on brokerages facing pressure to pay higher rates on '<span class="word_wrap">&#8203;</span>advisory' sweeps due to lawsuits and regulatory pressure</span>.&quot;</p>
+<p>It tells us, &quot;<span class="institution"><a class="websnapr" href="https://www.aboutschwab.com/schwabevents">Schwab'<span class="word_wrap">&#8203;</span>s</a></span> <span class="bold">Peter Crawford</span> was asked about '<span class="bold">scrutiny of advisory sweeps</span>.' He answers, '<span class="bold">With respect to the Wells Fargo issue, we have provided money market fund sweep cash and -- or money market yields on bank cash for all of our fiduciary-<span class="word_wrap">&#8203;</span>driven investment advisory solutions already</span>. So, I don'<span class="word_wrap">&#8203;</span>t really see the Wells Fargo report having any kind of meaningful implications for us. We'<span class="word_wrap">&#8203;</span>ve been doing this for an extended period of time already.'&quot;</p>
+<p>Our &quot;<span class="bold">Deposits Under Pressure</span>&quot; piece says, &quot;<span class="bold">Federal Reserve Bank of Dallas</span> President <span class="bold">Lorie Logan</span> recently gave a speech titled, '<span class="institution"><a class="websnapr" href="https://www.dallasfed.org/news/speeches/logan/2024/lkl240718">A level playing field for deposit insurance</a></span>,' which discussed <span class="bold">increasing the FDIC deposit limit and other means of preventing bank deposit runs</span>. She tells us, '<span class="bold">Funding risk is both one of the oldest challenges in banking and one of the most timely</span>.... [<span class="word_wrap">&#8203;</span>B]<span class="word_wrap">&#8203;</span>ankers have long understood the importance of being prepared to meet withdrawals -- and of maintaining depositors' confidence so they don'<span class="word_wrap">&#8203;</span>t withdraw money based on unfounded fears.'&quot;</p>
+<p>It continues, &quot;<span class="word_wrap">&#8203;</span>Logan explains, '<span class="bold">But as we saw in 2023, maintaining depositors' confidence can be challenging in today'<span class="word_wrap">&#8203;</span>s highly networked society that allows bank runs to propagate with unprecedented speed</span>. Now ... <span class="bold">it’<span class="word_wrap">&#8203;</span>s a good time to consider whether adjustments in banks' liquidity risk management</span> or in related public policies can support a strong and vibrant banking system.'&quot;</p>
+<p>MFI also includes the <span class="bold">News</span> brief, &quot;<span class="bold">MMF Assets Eke Out Record $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>510 Trillion in July; Fasten Your Seatbelts</span>.&quot; It says, <span class="bold">Crane Data'<span class="word_wrap">&#8203;</span>s Money Fund Intelligence XLS shows money fund assets rising by $<span class="word_wrap">&#8203;</span>16.<span class="word_wrap">&#8203;</span>8 billion in July to a (<span class="word_wrap">&#8203;</span>monthly) record $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>510 trillion</span>. Over 12 months (<span class="word_wrap">&#8203;</span>through 7/<span class="word_wrap">&#8203;</span>31/<span class="word_wrap">&#8203;</span>24), <span class="bold">money fund assets have increased by $<span class="word_wrap">&#8203;</span>607.<span class="word_wrap">&#8203;</span>5 billion, or 10.<span class="word_wrap">&#8203;</span>3%</span>. (<span class="word_wrap">&#8203;</span>Our <span class="bold">MFI Daily</span> shows <span class="bold">assets up $<span class="word_wrap">&#8203;</span>32.<span class="word_wrap">&#8203;</span>3 billion in August through 8/<span class="word_wrap">&#8203;</span>5 to $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>5384 trillion</span>. We expect MMF totals to break $<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>0 trillion by year end.)</p>
+<p>Another News brief, &quot;<span class="bold">DFA Short-<span class="word_wrap">&#8203;</span>Term Investment Fund Converts to Ultra-<span class="word_wrap">&#8203;</span>Short</span>,&quot; tells us, &quot;<span class="word_wrap">&#8203;</span>An <span class="bold">SEC filing</span> for the <span class="institution"><a class="websnapr" href="https://www.sec.gov/Archives/edgar/data/896162/000113743924001201/posami.htm">DFA Short Term Investment Fund</a></span> indicates that <span class="bold">yet another internal money market fund is abandoning the Prime Institutional sector ahead of the implementation of emergency mandatory liquidity fees in October</span>. The <span class="bold">$<span class="word_wrap">&#8203;</span>15.<span class="word_wrap">&#8203;</span>1 billion DFA Short Term Investment Fund is converting to an ultra-<span class="word_wrap">&#8203;</span>short bond fund</span>, though we couldn'<span class="word_wrap">&#8203;</span>t confirm this with <span class="bold">Dimensional Fund Advisors</span>.&quot;</p>
+<p>A third News brief, &quot;<span class="bold">BNY Mellon Govt MMF Liquidates</span>,&quot; tells readers, &quot;<span class="institution"><a class="websnapr" href="https://www.sec.gov/Archives/edgar/data/1111565/000111156524000026/prosaistkr-0558_0624.htm">BNY announced</a></span> <span class="bold">that it is</span> liquidating its MLMXX, explaining, '<span class="bold">The Board of Trustees of BNY Mellon Funds Trust has approved the liquidation of BNY Mellon Government Money Market Fund</span>, a series of the Trust, effective on or about <span class="bold">August 27, 2024</span>.'&quot;</p>
+<p>A sidebar, &quot;<span class="bold">WSJ on Bank NIM Squeeze</span>,&quot; says, &quot;<span class="bold">The Wall Street Journal</span> covers the <span class="bold">Q2 earnings news</span> in, '<span class="institution"><a class="websnapr" href="https://www.wsj.com/finance/banking/yield-hungry-wealth-management-clients-are-becoming-a-headache-for-big-banks-1a591820?page=1">Yield-<span class="word_wrap">&#8203;</span>Hungry Wealth Management Clients Are Becoming a Headache for Big Banks</a></span>,' They explain, '<span class="bold">Brokerage customers are still demanding more for their cash</span>. And banks are scrambling to keep up. <span class="bold">Across several banks with large wealth-<span class="word_wrap">&#8203;</span>management businesses, a common theme in second-<span class="word_wrap">&#8203;</span>quarter earnings reports was continuing to have to pay higher rates to hang on to brokerage customers' cash that isn'<span class="word_wrap">&#8203;</span>t invested in things like stocks and bonds. Wells Fargo</span> and <span class="bold">Morgan Stanley</span> called out <span class="bold">increases in some of the rates they pay on certain brokerage account deposit products</span>, and <span class="bold">Bank of America</span> noted <span class="bold">a rise in rates paid on wealth-<span class="word_wrap">&#8203;</span>management deposits</span>.'&quot;</p>
+<p><span class="bold">Our August MFI XLS, with July 31 data, shows total assets increased $<span class="word_wrap">&#8203;</span>19.<span class="word_wrap">&#8203;</span>7 billion to $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>513 trillion</span>, after increasing $<span class="word_wrap">&#8203;</span>11.<span class="word_wrap">&#8203;</span>8 billion in June, $<span class="word_wrap">&#8203;</span>79.<span class="word_wrap">&#8203;</span>7 billion in May, decreasing $<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>6 billion in April, $<span class="word_wrap">&#8203;</span>66.<span class="word_wrap">&#8203;</span>7 billion in March, increasing $<span class="word_wrap">&#8203;</span>50.<span class="word_wrap">&#8203;</span>0 billion in February, $<span class="word_wrap">&#8203;</span>87.<span class="word_wrap">&#8203;</span>0 billion in January, $<span class="word_wrap">&#8203;</span>24.<span class="word_wrap">&#8203;</span>5 billion in December and $<span class="word_wrap">&#8203;</span>219.<span class="word_wrap">&#8203;</span>8 billion in November. Assets decreased $<span class="word_wrap">&#8203;</span>39.<span class="word_wrap">&#8203;</span>3 billion in October, but increased $<span class="word_wrap">&#8203;</span>77.<span class="word_wrap">&#8203;</span>8 billion in September and $<span class="word_wrap">&#8203;</span>104.<span class="word_wrap">&#8203;</span>2 billion in August.</p>
+<p><span class="bold">Our broad Crane Money Fund Average 7-<span class="word_wrap">&#8203;</span>Day Yield was unchanged at 5.<span class="word_wrap">&#8203;</span>02%, and our Crane 100 Money Fund Index (<span class="word_wrap">&#8203;</span>the 100 largest taxable funds) was also unchanged at 5.<span class="word_wrap">&#8203;</span>13% in July</span>. On a <span class="bold">Gross Yield Basis (<span class="word_wrap">&#8203;</span>7-<span class="word_wrap">&#8203;</span>Day)</span> (<span class="word_wrap">&#8203;</span>before expenses are taken out), the Crane MFA and the Crane 100 both averaged 5.<span class="word_wrap">&#8203;</span>40%. <span class="bold">Charged Expenses averaged 0.<span class="word_wrap">&#8203;</span>37% and 0.<span class="word_wrap">&#8203;</span>27%</span> for the Crane MFA and the Crane 100. (<span class="word_wrap">&#8203;</span>We'<span class="word_wrap">&#8203;</span>ll revise expenses once we upload the <span class="bold">SEC'<span class="word_wrap">&#8203;</span>s Form N-<span class="word_wrap">&#8203;</span>MFP</span> data for 7/<span class="word_wrap">&#8203;</span>31/<span class="word_wrap">&#8203;</span>24, though this may take some time as we adjust to the new N-<span class="word_wrap">&#8203;</span>MFP format.) <span class="bold">The average WAM (<span class="word_wrap">&#8203;</span>weighted average maturity)</span> for the Crane MFA was 34 days (<span class="word_wrap">&#8203;</span>unchanged) and the Crane 100 WAM was down 1 bp from previous month at 33 days. (<span class="word_wrap">&#8203;</span>See our <span class="crane_product">Crane Index</span> or <span class="bold">craneindexes.<span class="word_wrap">&#8203;</span>xlsx</span> history file for more on our averages.)</p>
+
+           
+           
+          
+      
+
+      
+      
+      
+
+    
+
+            </div>
+        
+            <div class="information_instance">                
+                <h2 class="information_header"><div class="news_date">
+                <span class="date_month">Jul</span>            <span class="date_day">08</span>
+                </div>&nbsp;</h2>
+                
+
+
+
+
+    
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+
+    
+      
+    
+    
+       
+           
+              <p>The <span class="bold">July</span> issue of our flagship <span class="crane_product">Money Fund Intelligence</span> newsletter, which was sent out to subscribers Monday morning, features the articles: &quot;<span class="bold">AFP Liquidity Survey: Banks, MMFs, T-<span class="word_wrap">&#8203;</span>Bills Kings of Cash</span>,&quot; which breaks down the <span class="bold">latest trends in corporate cash</span>; &quot;<span class="bold">Money Fund Symposium '<span class="word_wrap">&#8203;</span>24: Records, 5%, Big Prime Shift</span>,&quot; which quotes from our recent <span class="institution"><a class="websnapr" href="https://cranedata.com/publications/mfsymposium-2024">Money Fund Symposium</a></span> in <span class="bold">Pittsburgh</span>; and, &quot;<span class="bold">ICI Worldwide: MMFs Rise to $<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>4 Tril. in Q1'<span class="word_wrap">&#8203;</span>24; US, China</span>,&quot; which reviews the latest figures on <span class="bold">money fund markets outside of the U.<span class="word_wrap">&#8203;</span>S</span>. We also sent out our <span class="crane_product">MFI XLS</span> spreadsheet Monday a.<span class="word_wrap">&#8203;</span>m., and we'<span class="word_wrap">&#8203;</span>ve updated our <span class="crane_product">Money Fund Wisdom</span> database with 6/<span class="word_wrap">&#8203;</span>30/<span class="word_wrap">&#8203;</span>24 data. Our July <span class="crane_product">Money Fund Portfolio Holdings</span> are scheduled to ship on Wednesday, July 10, and our July <span class="crane_product">Bond Fund Intelligence</span> is scheduled to go out on Monday, July 15. (<span class="bold">Note</span>: <span class="bold">We may not be publishing</span> our latest <span class="bold">Form N-<span class="word_wrap">&#8203;</span>MFP files and revisions</span> on <span class="bold">Tuesday, July 9</span>. The <span class="bold">SEC has changed the format</span> of these files as their <span class="bold">new regulations go into effect</span>, so <span class="bold">it may take us a number of weeks to revise our programs and collections</span>. We'<span class="word_wrap">&#8203;</span>ll keep you posted!)</p>
+<p>MFI'<span class="word_wrap">&#8203;</span>s &quot;<span class="bold">AFP</span>&quot; article says, &quot;<span class="word_wrap">&#8203;</span>We wrote late last month on the '<span class="institution"><a class="websnapr" href="https://www.afponline.org/training-resources/resources/survey-research-economic-data/Details/liquidity-survey">2024 AFP Liquidity Survey</a></span>.' (<span class="word_wrap">&#8203;</span>See our <span class="bold">June 24 News</span>, '<span class="institution"><a class="websnapr" href="https://cranedata.com/archives/all-articles/10366/">AFP 2024 Liquidity Survey: Cash Still King Among Corporates, Increasing</a></span>.') Below, <span class="bold">we excerpt from `<span class="word_wrap">&#8203;</span>some of the highlights of the annual survey of corporate investors' cash habits</span>. Discussing '<span class="bold">Current Allocations of Short-<span class="word_wrap">&#8203;</span>Term Investments</span>,' AFP says, '<span class="word_wrap">&#8203;</span>Companies maintain their investments in relatively few vehicles. <span class="bold">Organizations invest in an average 2.<span class="word_wrap">&#8203;</span>7 vehicles for their cash and short-<span class="word_wrap">&#8203;</span>term investments</span> -- unchanged from the average in 2023. <span class="bold">Most organizations continue to allocate a large share of their short-<span class="word_wrap">&#8203;</span>term investment balances -- an average of 83% -- in safe and liquid investment vehicles: bank deposits, money market funds (<span class="word_wrap">&#8203;</span>MMFs) and Treasury securities</span>. This result is <span class="bold">four percentage points higher</span> than the 79% reported in 2023 -- and the <span class="bold">highest percentage on record</span> since AFP began tracking the data.'&quot;</p>
+<p>It continues, &quot;<span class="word_wrap">&#8203;</span>They explain, '<span class="bold">The typical organization currently maintains 47% of its short-<span class="word_wrap">&#8203;</span>term investments in bank deposits</span>. This allocation is the same as reported last year (<span class="word_wrap">&#8203;</span>2023) but is 8 percentage points lower than the 55% reported in 2022, and lower than both the 52% reported in 2021 and the 51% in 2020. <span class="bold">This year'<span class="word_wrap">&#8203;</span>s allocation is similar to percentages reported in 2019 (<span class="word_wrap">&#8203;</span>46%) and 2018 (<span class="word_wrap">&#8203;</span>49%)</span>.'&quot;</p>
+<p>We write in our <span class="bold">MFS'<span class="word_wrap">&#8203;</span>24</span> article, &quot;<span class="bold">Crane Data</span> recently hosted its <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Money Fund Symposium conference</a></span> <span class="bold">in Pittsburgh</span>, where <span class="bold">almost 600 money market professionals</span> discussed <span class="bold">rates, pending reforms, asset inflows and a number of other hot topics in cash</span>. The opening session, '<span class="bold">Keynote: Fifty Years of Managing Money Funds</span>' featured <span class="bold">Federated Hermes'</span> CEO <span class="person">Chris Donahue</span>, who comments, '<span class="bold">Liquidity for me is the Eighth Wonder of the World, and money market funds make it that way</span>.... Money market funds enable the capital markets to flow, enable cities to grow, enable wildlife to flourish. You know, the Irish said that Guinness was Mother'<span class="word_wrap">&#8203;</span>s milk. <span class="bold">I contend it'<span class="word_wrap">&#8203;</span>s money market funds</span>.' (<span class="bold">Note</span>: Conference materials and recordings are available in our '<span class="institution"><a class="websnapr" href="https://cranedata.com/publications/mfsymposium-2024">Money Fund Symposium 2024 Download Center</a></span>.')&quot;</p>
+<p>It tells us, &quot;<span class="person">Laurie Brignac</span> of <span class="bold">Invesco</span>, was asked about <span class="bold">Money Fund Reforms</span> during the '<span class="bold">Major Money Fund Issues 2024</span>' segment. She comments, '<span class="bold">I think everybody in the room is painfully aware of the reforms and everything that'<span class="word_wrap">&#8203;</span>s kind of going into that</span>.... It'<span class="word_wrap">&#8203;</span>s unfortunate, not surprising, seeing some of the transitions, the liquidations and things like that. <span class="bold">We actually just filed today, so we will be liquidating our prime institutional funds</span>, which is really sad because one of them is our oldest money market fund. It is 43 years old, so not quite 50.... <span class="bold">But unfortunately, the mandatory liquidity fee is just not something that'<span class="word_wrap">&#8203;</span>s going to be tenable to a lot of clients</span>. So, we made that decision.'&quot;</p>
+<p>Our &quot;<span class="bold">ICI Worldwide</span>&quot; piece says, &quot;<span class="word_wrap">&#8203;</span>The <span class="bold">Investment Company Institute</span> published, '<span class="institution"><a class="websnapr" href="https://www.ici.org/statistical-report/ww_q1_24">Worldwide Regulated Open-<span class="word_wrap">&#8203;</span>Fund Assets and Flows, First Quarter 2024</a></span>,' which shows that <span class="bold">money fund assets globally decreased $<span class="word_wrap">&#8203;</span>35.<span class="word_wrap">&#8203;</span>6 billion, or -<span class="word_wrap">&#8203;</span>0.<span class="word_wrap">&#8203;</span>3%, in Q1'<span class="word_wrap">&#8203;</span>24 to $<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>405 trillion</span>. But the series excluded <span class="bold">Australia'<span class="word_wrap">&#8203;</span>s 6th largest $<span class="word_wrap">&#8203;</span>286.<span class="word_wrap">&#8203;</span>7 billion</span>, so <span class="bold">assets would have increased by $<span class="word_wrap">&#8203;</span>236.<span class="word_wrap">&#8203;</span>8 billion (<span class="word_wrap">&#8203;</span>or 2.<span class="word_wrap">&#8203;</span>3%) with Australia included</span>. Increases were <span class="bold">led by a sharp jump in money funds in U.<span class="word_wrap">&#8203;</span>S. and China</span>, while <span class="bold">Luxembourg and Mexico also rose</span>. Meanwhile, money funds in <span class="bold">Ireland, Chile and Japan</span> were lower. <span class="bold">MMF assets worldwide increased by $<span class="word_wrap">&#8203;</span>944.<span class="word_wrap">&#8203;</span>5 billion, or 10.<span class="word_wrap">&#8203;</span>0%, in the 12 months through 3/<span class="word_wrap">&#8203;</span>31/<span class="word_wrap">&#8203;</span>24, and money funds in the U.<span class="word_wrap">&#8203;</span>S. represent 57.<span class="word_wrap">&#8203;</span>5% of worldwide assets</span>.&quot;</p>
+<p>It continues, &quot;<span class="word_wrap">&#8203;</span>ICI says, '<span class="bold">On a US dollar-<span class="word_wrap">&#8203;</span>denominated basis, equity fund assets increased by 4.<span class="word_wrap">&#8203;</span>1% to $<span class="word_wrap">&#8203;</span>33.<span class="word_wrap">&#8203;</span>08 trillion</span> at the end of the first quarter of 2024. <span class="bold">Bond fund assets increased by 0.<span class="word_wrap">&#8203;</span>8% to $<span class="word_wrap">&#8203;</span>13.<span class="word_wrap">&#8203;</span>00 trillion in the first quarter</span>. Balanced/<span class="word_wrap">&#8203;</span>mixed fund assets increased by 0.<span class="word_wrap">&#8203;</span>5% to $<span class="word_wrap">&#8203;</span>7.<span class="word_wrap">&#8203;</span>33 trillion in the first quarter, while <span class="bold">money market fund assets decreased by 0.<span class="word_wrap">&#8203;</span>3% globally to $<span class="word_wrap">&#8203;</span>10.<span class="word_wrap">&#8203;</span>41 trillion</span>.'&quot;</p>
+<p>MFI also includes the <span class="bold">News</span> brief, &quot;<span class="bold">MMF Assets Retake Record in July</span>. ICI'<span class="word_wrap">&#8203;</span>s latest weekly '<span class="institution"><a class="websnapr" href="https://www.ici.org/research/stats/mmf">Money Market Fund Assets</a></span>' show <span class="bold">assets jumping by over $<span class="word_wrap">&#8203;</span>50 billion to a record $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>154 trillion</span>. Assets have <span class="bold">risen in 10 of the last 11 weeks</span>, increasing by $<span class="word_wrap">&#8203;</span>185.<span class="word_wrap">&#8203;</span>5 billion (<span class="word_wrap">&#8203;</span>or 3.<span class="word_wrap">&#8203;</span>1%) since April 24. <span class="bold">MMF assets are up by $<span class="word_wrap">&#8203;</span>267 billion, or 5.<span class="word_wrap">&#8203;</span>6%, YTD in 2024 (<span class="word_wrap">&#8203;</span>through 7/<span class="word_wrap">&#8203;</span>2/<span class="word_wrap">&#8203;</span>24)</span>. <span class="bold">Crane Data'<span class="word_wrap">&#8203;</span>s</span> separate <span class="crane_product">Money Fund Intelligence Daily</span> series shows <span class="bold">money fund assets rising by $<span class="word_wrap">&#8203;</span>61.<span class="word_wrap">&#8203;</span>7 billion in July, through 7/<span class="word_wrap">&#8203;</span>2, to a record $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>551 trillion</span>. (<span class="word_wrap">&#8203;</span>Our <span class="crane_product">MFI XLS</span> shows <span class="bold">assets up $<span class="word_wrap">&#8203;</span>11.<span class="word_wrap">&#8203;</span>8 billion in June</span> to a <span class="bold">record $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>487 trillion</span>.)&quot;</p>
+<p>Another News brief, &quot;<span class="bold">Invesco Files to Liquidate Prime Inst MMFs; UBS MF Converting to Retail</span>,&quot; says, &quot;<span class="word_wrap">&#8203;</span>An <span class="institution"><a class="websnapr" href="https://www.sec.gov/Archives/edgar/data/205007/000119312524159257/d840754d497.htm">SEC filing</a></span> for <span class="bold">Invesco Liquid Assets Portfolio</span> and <span class="bold">Invesco STIC Prime Portfolio</span> tells us, '<span class="word_wrap">&#8203;</span>On <span class="bold">June 11, 2024, the Board of Trustees of Short-<span class="word_wrap">&#8203;</span>Term Investments Trust approved a Plan of Liquidation</span> and Dissolution, which <span class="bold">authorizes the termination, liquidation and dissolution of the Funds</span>.' In related news, <span class="institution"><a class="websnapr" href="https://www.sec.gov/Archives/edgar/data/1060517/000119312524158404/d759733d497.htm">UBS Select Prime Preferred Fund</a></span> announced that <span class="bold">the fund will change to Retail</span>.'&quot;</p>
+<p>A third News brief, &quot;<span class="bold">BlackRock Liquidates TempFund, LEAF</span>,&quot; tells readers, &quot;<span class="institution"><a class="websnapr" href="https://www.sec.gov/Archives/edgar/data/97098/000119312524157381/d809829d497.htm">BlackRock also filed</a></span> to <span class="bold">liquidate 2 of its 3 Prime Institutional money funds</span>, bringing <span class="bold">the number of Prime Inst MMFs liquidating or converting to Government to 12 to date</span> (<span class="word_wrap">&#8203;</span>with total assets of <span class="bold">$<span class="word_wrap">&#8203;</span>245.<span class="word_wrap">&#8203;</span>8 billion, or 38.<span class="word_wrap">&#8203;</span>7%</span> the <span class="bold">$<span class="word_wrap">&#8203;</span>635.<span class="word_wrap">&#8203;</span>8 billion in Prime Inst MMFs</span>).&quot;</p>
+<p>A sidebar, &quot;<span class="bold">Fidelity Intl Tokenizes MMF</span>,&quot; says, &quot;<span class="bold">CoinDesk</span> writes, '<span class="institution"><a class="websnapr" href="https://www.coindesk.com/business/2024/06/10/fidelity-international-tokenizes-money-market-fund-on-jpmorgans-blockchain/">Fidelity International Tokenizes Money Market Fund on JPMorgan'<span class="word_wrap">&#8203;</span>s Blockchain</a></span>,' which says, '<span class="bold">Fidelity International ... has tokenized shares in a money market fund (<span class="word_wrap">&#8203;</span>MMF) using JPMorgan'<span class="word_wrap">&#8203;</span>s Ethereum-<span class="word_wrap">&#8203;</span>based private blockchain network, Onyx Digital Assets</span>. Tokenization occurred near instantaneously through connectivity between the fund'<span class="word_wrap">&#8203;</span>s transfer agent (<span class="word_wrap">&#8203;</span>JPMorgan'<span class="word_wrap">&#8203;</span>s transfer agency business) and <span class="bold">Tokenized Collateral Network</span> ... said Fidelity International, a separate entity to U.<span class="word_wrap">&#8203;</span>S.-<span class="word_wrap">&#8203;</span>based <span class="bold">FMR</span>.'&quot;</p>
+<p><span class="bold">Our July MFI XLS, with June 30 data, shows total assets increased $<span class="word_wrap">&#8203;</span>11.<span class="word_wrap">&#8203;</span>8 billion to $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>487 trillion</span>, after increasing $<span class="word_wrap">&#8203;</span>79.<span class="word_wrap">&#8203;</span>7 billion in May, decreasing $<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>6 billion in April, $<span class="word_wrap">&#8203;</span>66.<span class="word_wrap">&#8203;</span>7 billion in March, increasing $<span class="word_wrap">&#8203;</span>50.<span class="word_wrap">&#8203;</span>0 billion in February, $<span class="word_wrap">&#8203;</span>87.<span class="word_wrap">&#8203;</span>0 billion in January, $<span class="word_wrap">&#8203;</span>24.<span class="word_wrap">&#8203;</span>5 billion in December and $<span class="word_wrap">&#8203;</span>219.<span class="word_wrap">&#8203;</span>8 billion in November. Assets decreased $<span class="word_wrap">&#8203;</span>39.<span class="word_wrap">&#8203;</span>3 billion in October, but increased $<span class="word_wrap">&#8203;</span>77.<span class="word_wrap">&#8203;</span>8 billion in September, $<span class="word_wrap">&#8203;</span>104.<span class="word_wrap">&#8203;</span>2 billion in August and $<span class="word_wrap">&#8203;</span>21.<span class="word_wrap">&#8203;</span>0 billion in July.</p>
+<p><span class="bold">Our broad Crane Money Fund Average 7-<span class="word_wrap">&#8203;</span>Day Yield was down 1 bp at 5.<span class="word_wrap">&#8203;</span>02%, and our Crane 100 Money Fund Index (<span class="word_wrap">&#8203;</span>the 100 largest taxable funds) was down 1 bp to 5.<span class="word_wrap">&#8203;</span>13% in June</span>. On a <span class="bold">Gross Yield Basis (<span class="word_wrap">&#8203;</span>7-<span class="word_wrap">&#8203;</span>Day)</span> (<span class="word_wrap">&#8203;</span>before expenses are taken out), the Crane MFA and the Crane 100 averaged 5.<span class="word_wrap">&#8203;</span>40% and 5.<span class="word_wrap">&#8203;</span>39%, respectively. <span class="bold">Charged Expenses averaged 0.<span class="word_wrap">&#8203;</span>38% and 0.<span class="word_wrap">&#8203;</span>26%</span> for the Crane MFA and the Crane 100. (<span class="word_wrap">&#8203;</span>We'<span class="word_wrap">&#8203;</span>ll revise expenses once we upload the <span class="bold">SEC'<span class="word_wrap">&#8203;</span>s Form N-<span class="word_wrap">&#8203;</span>MFP</span> data for 6/<span class="word_wrap">&#8203;</span>30/<span class="word_wrap">&#8203;</span>24, though this may take some time as we adjust to the new N-<span class="word_wrap">&#8203;</span>MFP format.) <span class="bold">The average WAM (<span class="word_wrap">&#8203;</span>weighted average maturity)</span> for the Crane MFA was 34 days (<span class="word_wrap">&#8203;</span>unchanged) and the Crane 100 WAM was down 1 bp from previous month at 34 days. (<span class="word_wrap">&#8203;</span>See our <span class="crane_product">Crane Index</span> or <span class="bold">craneindexes.<span class="word_wrap">&#8203;</span>xlsx</span> history file for more on our averages.)</p>
+
+           
+           
+          
+      
+
+      
+      
+      
+
+    
+
+            </div>
+        
+            <div class="information_instance">                
+                <h2 class="information_header"><div class="news_date">
+                <span class="date_month">Jun</span>            <span class="date_day">07</span>
+                </div>&nbsp;</h2>
+                
+
+
+
+
+    
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+
+    
+      
+    
+    
+       
+           
+              <p>The <span class="bold">June</span> issue of our flagship <span class="crane_product">Money Fund Intelligence</span> newsletter, which was sent out to subscribers Friday morning, features the articles: &quot;<span class="bold">Allspring, UBS, Dreyfus, DWS All File Plans to Leave Prime</span>,&quot; which covers the <span class="bold">continued exodus from Prime Institutional MMFs</span>; &quot;<span class="bold">ICI 2024 Fact Book Shows Money Fund Trends in '<span class="word_wrap">&#8203;</span>23</span>,&quot; which quotes from <span class="bold">ICI'<span class="word_wrap">&#8203;</span>s annual compilation of fund statistics</span>; and, &quot;<span class="bold">Money Funds Largest Buyers of T-<span class="word_wrap">&#8203;</span>Bills Says JPM; Berkshire</span>,&quot; which looks at <span class="bold">holders of Treasuries</span>. We also sent out our <span class="crane_product">MFI XLS</span> spreadsheet Friday a.<span class="word_wrap">&#8203;</span>m., and we'<span class="word_wrap">&#8203;</span>ve updated our <span class="crane_product">Money Fund Wisdom</span> database with 5/<span class="word_wrap">&#8203;</span>31/<span class="word_wrap">&#8203;</span>24 data. Our June <span class="crane_product">Money Fund Portfolio Holdings</span> are scheduled to ship on Tuesday, June 11, and our June <span class="crane_product">Bond Fund Intelligence</span> is scheduled to go out on Monday, June 17. (<span class="bold">Note</span>: <span class="bold">Register ASAP</span> for our <span class="institution"><a class="websnapr" href="https://www.cranesmfsymposium.com/">Money Fund Symposium</a></span> next week in <span class="bold">Pittsburgh</span>, <span class="bold">June 12-<span class="word_wrap">&#8203;</span>14</span>. <span class="bold">We hope you'<span class="word_wrap">&#8203;</span>ll join us</span>!)</p>
+<p>MFI'<span class="word_wrap">&#8203;</span>s &quot;<span class="bold">Prime Exit</span>&quot; article says, “<span class="bold">Another batch of Prime Institutional money market funds filed to liquidate or convert to Government in May, bringing the total of Prime exits to 10 to date. Allspring</span>, formerly the <span class="bold">Wells Fargo Funds, is the latest to announce an exit</span> ahead of the SEC'<span class="word_wrap">&#8203;</span>s pending emergency mandatory liquidity fee rules (<span class="word_wrap">&#8203;</span>which go into effect October 2). A <span class="bold">Product Alert</span> titled, '<span class="bold">Allspring to Merge Two Money Market Funds</span>' tells us, '<span class="bold">The Allspring Funds Board of Trustees has approved the merger of the [$<span class="word_wrap">&#8203;</span>3.<span class="word_wrap">&#8203;</span>1 billion] Allspring Heritage Money Market Fund into the Allspring Government Money Market Fund</span>. The merger is expected to take place at the close of business on or around <span class="bold">August 16, 2024</span>.&quot;</p>
+<p>The piece continues, &quot;<span class="word_wrap">&#8203;</span>It adds, '<span class="word_wrap">&#8203;</span>Note that the <span class="bold">Service Class of the Heritage Money Market Fund will merge into the Administrator Class of the Government Money Market Fund</span>, and the <span class="bold">Administrator Class of the Heritage Money Market Fund will merge into the Institutional Class of the Government Money Market Fund</span>.' (<span class="word_wrap">&#8203;</span>See the <span class="bold">Prospectus Supplement</span> for the <span class="institution"><a class="websnapr" href="https://www.sec.gov/Archives/edgar/data/1081400/000108140024000301/heritagemoneymarket.htm">Allspring Institutional Money Market Funds</a></span>.)&quot;</p>
+<p>We write in our <span class="bold">ICI 2024 Fact Book</span> article, “<span class="word_wrap">&#8203;</span>The <span class="institution"><a class="websnapr" href="https://www.ici.org/">Investment Company Institute</a></span> released its '<span class="institution"><a class="websnapr" href="https://www.icifactbook.org/">2024 Investment Company Fact Book</a></span>’ an <span class="bold">annual compilation of statistics and commentary on the mutual fund space</span>. Subtitled, '<span class="bold">A Review of Trends and Activities in the Investment Company Industry</span>,' the latest edition tells us, '<span class="bold">Worldwide net sales of money market funds totaled $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>5 trillion in 2023, up from $<span class="word_wrap">&#8203;</span>161 billion in 2022</span> (<span class="word_wrap">&#8203;</span>Figure 1.<span class="word_wrap">&#8203;</span>7). The increase in worldwide demand for money market funds was spread across all geographical regions but was primarily driven by a substantial increase in net inflows in the United States. <span class="bold">Investor demand for money market funds in the United States increased from $<span class="word_wrap">&#8203;</span>1 billion in 2022 to $<span class="word_wrap">&#8203;</span>1.<span class="word_wrap">&#8203;</span>1 trillion in 2023</span>. In the <span class="bold">Asia-<span class="word_wrap">&#8203;</span>Pacific region</span>, money market funds experienced net inflows of $<span class="word_wrap">&#8203;</span>136 billion in 2023, about even with the net inflows of $<span class="word_wrap">&#8203;</span>132 billion in 2022.'&quot;</p>
+<p>ICI continues, &quot;<span class="word_wrap">&#8203;</span>It explains, '<span class="word_wrap">&#8203;</span>Investors use money market funds because they are professionally managed, tightly regulated vehicles with holdings limited to high-<span class="word_wrap">&#8203;</span>quality, short-<span class="word_wrap">&#8203;</span>term debt instruments &lt;<span class="word_wrap">&#8203;</span>b:&gt;`<span class="word_wrap">&#8203;</span>_. As such, they are highly liquid, attractive, cash-<span class="word_wrap">&#8203;</span>like alternatives to bank deposits. <span class="bold">[<span class="word_wrap">&#8203;</span>D]<span class="word_wrap">&#8203;</span>emand for money market funds is dependent upon their yields and interest rate risk exposure relative to other high-<span class="word_wrap">&#8203;</span>quality fixed-<span class="word_wrap">&#8203;</span>income securities</span>.'&quot;</p>
+<p>Our &quot;<span class="bold">Treasury Bills</span>&quot; piece says, &quot;<span class="word_wrap">&#8203;</span>J.<span class="word_wrap">&#8203;</span>P. Morgan'<span class="word_wrap">&#8203;</span>s most recent '<span class="word_wrap">&#8203;</span>Short-<span class="word_wrap">&#8203;</span>Term Market Outlook And Strategy' writes that, '<span class="bold">Yes, T-<span class="word_wrap">&#8203;</span>bill demand should remain robust</span>.' They comment, '<span class="word_wrap">&#8203;</span>While the outcome of the upcoming November election remains highly uncertain, <span class="bold">the one thing we know is that the US fiscal deficit will remain large in the coming years</span>, regardless of who wins. As our Treasury strategists note, given Treasury'<span class="word_wrap">&#8203;</span>s current net coupon borrowing capacity and their estimates of the budget deficit forecasts over the medium term, Treasury will likely remain underfunded in FY26 and beyond.... <span class="bold">Reading between the lines, it appears there is a possibility that the T-<span class="word_wrap">&#8203;</span>bill share of the market could migrate above the current recommended range over time</span>.'&quot;</p>
+<p>It tells us, &quot;<span class="word_wrap">&#8203;</span>The piece continues, '<span class="word_wrap">&#8203;</span>If so, we believe the markets will have no issues digesting the additional T-<span class="word_wrap">&#8203;</span>bill supply, with demand remaining robust. <span class="bold">Indeed, even as T-<span class="word_wrap">&#8203;</span>bill outstandings have grown by $<span class="word_wrap">&#8203;</span>2tn over the past year, the impact on T-<span class="word_wrap">&#8203;</span>bill/<span class="word_wrap">&#8203;</span>SOFR spreads has been marginal thanks to the available pool of liquidity at the ON RRP, underscoring the sheer amount of demand for T-<span class="word_wrap">&#8203;</span>bills in the current market environment</span>.... Perhaps more importantly, <span class="bold">when we look at the buyer base of the T-<span class="word_wrap">&#8203;</span>bill market, we see the demand from several key buyers remaining substantial, if not expanding, in the near term</span>.'&quot;</p>
+<p>MFI also includes the <span class="bold">News</span> brief, &quot;<span class="bold">MMF Assets Rebound in May</span>.&quot; It states, &quot;<span class="bold">Money fund assets jumped $<span class="word_wrap">&#8203;</span>79.<span class="word_wrap">&#8203;</span>7 billion to $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>466 trillion in May (<span class="word_wrap">&#8203;</span>after falling $<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>6 billion in April and $<span class="word_wrap">&#8203;</span>68.<span class="word_wrap">&#8203;</span>5B in March)</span>. Year-<span class="word_wrap">&#8203;</span>to-<span class="word_wrap">&#8203;</span>date, MMFs are up by $<span class="word_wrap">&#8203;</span>147.<span class="word_wrap">&#8203;</span>3 billion, or 2.<span class="word_wrap">&#8203;</span>3%. <span class="bold">Over 12 months, money funds have risen by $<span class="word_wrap">&#8203;</span>611.<span class="word_wrap">&#8203;</span>3 billion, or 10.<span class="word_wrap">&#8203;</span>4%</span>.&quot;</p>
+<p>Another News brief, &quot;<span class="bold">Citi'<span class="word_wrap">&#8203;</span>s Williams on Impact from MMF Reforms: No Big Deal; Assets Higher</span>. <span class="bold">Citi Research</span> recently published a research piece titled, '<span class="institution"><a class="websnapr" href="https://cranedata.com/archives/all-articles/10321/">Short-<span class="word_wrap">&#8203;</span>End Notes Impact from MMF reform and AUM expectations</a></span>,' which tells us, '<span class="bold">Do not expect a repeat of 2016 this October</span>.' Author <span class="bold">Jason Williams</span> writes, '<span class="bold">We'<span class="word_wrap">&#8203;</span>ve gotten multiple questions on the front-<span class="word_wrap">&#8203;</span>end impact due to the full implementation of the new money market fund reform, specifically the SEC'<span class="word_wrap">&#8203;</span>s liquidity fee which is set to turn on in October</span>.'&quot;</p>
+<p>A sidebar, &quot;<span class="bold">DWS ESG Fund Liquidating</span>,&quot; says, &quot;<span class="word_wrap">&#8203;</span>A <span class="bold">Prospectus Supplement</span> filing for the <span class="bold">$<span class="word_wrap">&#8203;</span>505 million</span> <span class="institution"><a class="websnapr" href="https://www.sec.gov/Archives/edgar/data/863209/000008805324000416/st_prosaistkr24-43.htm">DWS ESG Liquidity Fund</a></span>  tells us, '<span class="bold">Upon the recommendation of DWS Investment Management Americas, Inc., the investment advisor for DWS ESG Liquidity Fund, the Board of Trustees of Investors Cash Trust has authorized, on behalf of the fund, the fund'<span class="word_wrap">&#8203;</span>s termination and liquidation, which will be effective on or about August 14, 2024</span>. Accordingly, the fund will redeem all of its outstanding shares on the Liquidation Date. <span class="bold">The liquidation will be effected according to a Plan of Liquidation and Termination</span>. The costs of the liquidation, including the mailing of notification to shareholders, will be borne by the fund but reimbursed by the Advisor, after taking into account applicable contractual expense caps.'&quot;</p>
+<p><span class="bold">Our June MFI XLS, with May 31 data, shows total assets increased $<span class="word_wrap">&#8203;</span>79.<span class="word_wrap">&#8203;</span>7 billion to $<span class="word_wrap">&#8203;</span>6.<span class="word_wrap">&#8203;</span>466 trillion</span>, after decreasing $<span class="word_wrap">&#8203;</span>17.<span class="word_wrap">&#8203;</span>6 billion in April, $<span class="word_wrap">&#8203;</span>66.<span class="word_wrap">&#8203;</span>7 billion in March, increasing $<span class="word_wrap">&#8203;</span>50.<span class="word_wrap">&#8203;</span>0 billion in February, $<span class="word_wrap">&#8203;</span>87.<span class="word_wrap">&#8203;</span>0 billion in January, $<span class="word_wrap">&#8203;</span>24.<span class="word_wrap">&#8203;</span>5 billion in December and $<span class="word_wrap">&#8203;</span>219.<span class="word_wrap">&#8203;</span>8 billion in November. Assets decreased $<span class="word_wrap">&#8203;</span>39.<span class="word_wrap">&#8203;</span>3 billion in October, but increased $<span class="word_wrap">&#8203;</span>77.<span class="word_wrap">&#8203;</span>8 billion in September, $<span class="word_wrap">&#8203;</span>104.<span class="word_wrap">&#8203;</span>2 billion in August, $<span class="word_wrap">&#8203;</span>21.<span class="word_wrap">&#8203;</span>0 billion in July and $<span class="word_wrap">&#8203;</span>20.<span class="word_wrap">&#8203;</span>3 billion in June.</p>
+<p><span class="bold">Our broad Crane Money Fund Average 7-<span class="word_wrap">&#8203;</span>Day Yield was unchanged at 5.<span class="word_wrap">&#8203;</span>03%, and our Crane 100 Money Fund Index (<span class="word_wrap">&#8203;</span>the 100 largest taxable funds) was up 1 bp to 5.<span class="word_wrap">&#8203;</span>14% in May</span>. On a <span class="bold">Gross Yield Basis (<span class="word_wrap">&#8203;</span>7-<span class="word_wrap">&#8203;</span>Day)</span> (<span class="word_wrap">&#8203;</span>before expenses are taken out), the Crane MFA and the Crane 100 averaged 5.<span class="word_wrap">&#8203;</span>40% and 5.<span class="word_wrap">&#8203;</span>41%, respectively. <span class="bold">Charged Expenses averaged 0.<span class="word_wrap">&#8203;</span>37% and 0.<span class="word_wrap">&#8203;</span>27%</span> for the Crane MFA and the Crane 100. (<span class="word_wrap">&#8203;</span>We'<span class="word_wrap">&#8203;</span>ll revise expenses on Monday once we upload the <span class="bold">SEC'<span class="word_wrap">&#8203;</span>s Form N-<span class="word_wrap">&#8203;</span>MFP</span> data for 5/<span class="word_wrap">&#8203;</span>31/<span class="word_wrap">&#8203;</span>24.) <span class="bold">The average WAM (<span class="word_wrap">&#8203;</span>weighted average maturity)</span> for the Crane MFA was 34 days (<span class="word_wrap">&#8203;</span>down 1 bp from previous month) and the Crane 100 WAM was unchanged at 35 days. (<span class="word_wrap">&#8203;</span>See our <span class="crane_product">Crane Index</span> or <span class="bold">craneindexes.<span class="word_wrap">&#8203;</span>xlsx</span> history file for more on our averages.)</p>
+
+           
+           
+          
+      
+
+      
+      
+      
+
+    
+
+            </div>
+        
+        <div class="information_more"></div>
+    </div>
+  
+
+                
+                
+                
+                                     
+                
+              
+              
+              
+
+              
+                    <!-- base_right_offer.html -->
+
+      
+      <!--
+      <div id="google_ad">
+      <div>
+<script type="text/javascript">
+-->
+<!--
+google_ad_client = "pub-7371625923727326";
+google_ad_width = 234;
+google_ad_height = 60;
+google_ad_format = "234x60_as";
+google_ad_type = "text_image";
+google_ad_channel ="";
+google_color_border = "ffffff";
+google_color_bg = "ffffff";
+google_color_link = "777777";
+google_color_text = "555555";
+google_color_url = "999999";
+//-->
+<!--
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js" >
+</script>
+</div>
+</div>
+-->
+      
+              
+            </div>
+          
+       </div>
+       <!-- end middle_body -->
+  <div style="clear:both"></div>
+      <div id="footer_wrapper">
+        
+         <!-- footer for block "footer" in base.html -->
+
+
+        <div id="footer">
+          <span class="info">E-mail: <a href="mailto:%69%6E%66%6F%40%63%72%61%6E%65%64%61%74%61%2E%63%6F%6D"><span>&#105;</span><span>&#110;</span><span>&#102;</span><span>&#111;</span><span>&#064;</span><span>&#099;</span><span>&#114;</span><span>&#097;</span><span>&#110;</span><span>&#101;</span><span>&#100;</span><span>&#097;</span><span>&#116;</span><span>&#097;</span><span>&#046;</span><span>&#099;</span><span>&#111;</span><span>&#109;</span></a> Phone: 1-508-439-4419</span>
+          <span id="rights">&copy; 2024 Crane Data LLC. All rights reserved.</span>
+        </div>
+
+        
+      </div>
+
+   <!-- body -->
+
+</div> <!-- wrapper -->
+</body>
+</html>
